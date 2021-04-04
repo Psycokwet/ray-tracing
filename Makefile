@@ -1,12 +1,17 @@
-NAME		=	rt
-BONUS		=	bonus	
-MAKE_LIBFT	=	makelibft
-LIBFTPATH	=	libft/
-LIBFT_AR	=	libft/libft.a
+NAME				=	rt
+BONUS				=	bonus	
+MAKE_LIBFT			=	makelibft
+LIBSPATH			=	libs/
+LIBFTPATH			=	libft/
+LIBFT_AR			=	libft.a
+LIBMLX_AR			= 	libmlx.a
 
 SRC_PATH			= ./
 OBJ_PATH			= bin/
 LIBFT_PATH			= libft/
+LIBMLX_UNIX_PATH	= minilibx-linux/
+
+INC		= -I./libs/mlx
 
 OBJ_PATHS_INIT			=	$(addprefix $(OBJ_PATH),$(SETTERS_PATH) 		\
 													$(WRITERS_PATH) 		\
@@ -30,7 +35,7 @@ CC			=	clang
 
 CFLAGS		+=	-W -Wall -Wextra -Werror -g3 -pedantic 		## '+=' allow to keep default flags.
 
-LDFLAGS		=	-L$(LIBFTPATH) -lft
+LDFLAGS		=	-L$(addprefix $(LIBSPATH), $(LIBFTPATH)) -lft -L$(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)) -lm -lbsd -lX11 -lXext $(addprefix $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)), $(LIBMLX_AR))
 
 RM			= 	rm -f
 
@@ -41,20 +46,20 @@ endif
 
 all					:	 $(OBJ_PATHS_INIT) $(MAKE_LIBFT) $(NAME)
 
-$(LIBFT_PATH)  		:
-	git clone https://github.com/Psycokwet/libft.git $(LIBFT_PATH)
+$(addprefix $(LIBSPATH), $(LIBFT_PATH))  		:
+	git clone https://github.com/Psycokwet/libft.git $(addprefix $(LIBSPATH), $(LIBFT_PATH))
 
-$(MAKE_LIBFT)		: $(LIBFT_PATH)
-	$(MAKE) -C $(LIBFT_PATH)
+$(MAKE_LIBFT)		: $(addprefix $(LIBSPATH), $(LIBFT_PATH))
+	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH))
 
 $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(HEADERS_FILES)
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS)  $(INC) 
 
 $(OBJ_PATHS_INIT)	:
 	mkdir -p  $@  
 
-$(NAME)			: 	$(OBJ)  $(LIBFT_AR)
-	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
+$(NAME)			: 	$(OBJ)  $(addprefix $(LIBSPATH), $(addprefix $(LIBFTPATH),$(LIBFT_AR)))
+	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)  $(INC) 
 
 $(BONUS)		: all
 		
@@ -63,11 +68,11 @@ clean_local		:									## delete all .o
 
 clean			:									## delete all .o
 	$(RM) $(OBJ) $(OBJBONUS)
-	$(MAKE) -C $(LIBFT_PATH) clean	
+	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH)) clean	
 
 fclean			:	clean_local							## clean + delete executable
 	$(RM) $(NAMETEST) $(NAME)
-	$(MAKE) -C $(LIBFT_PATH) fclean					
+	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH)) fclean					
 
 re				:	fclean all							## delete all .o and recompile all. Must use when editing a .h
 
