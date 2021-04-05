@@ -11,18 +11,21 @@ OBJ_PATH			= bin/
 LIBFT_PATH			= libft/
 LIBMLX_UNIX_PATH	= minilibx-linux/
 
-INC		= -I./libs/mlx
+COLORS_PATH = colors/
+EXAMPLE_PATH = example/
 
-OBJ_PATHS_INIT			=	$(addprefix $(OBJ_PATH),$(SETTERS_PATH) 		\
-													$(WRITERS_PATH) 		\
-													$(CONVERTS_PATH)		\
-													$(PREPARE_FLAGS_PATH)	\
-													$(NBR_MANAGEMENT_PATH)	\
-													$(COMMANDS_PATH))
+OBJ_PATHS_INIT			=	$(addprefix $(OBJ_PATH),$(COLORS_PATH) 		\
+													$(EXAMPLE_PATH))
 OBJ_PATHS_INIT			+= 	$(OBJ_PATH)
 ## No need for a \ on the last line
-HEADERS_FILES				=	main.h
+HEADERS_FILES				=	cub3d.h
 SRC_FILES					=	main.c
+COLORS_FILES				=	get_opposite.c 	\
+								add_shade.c 	\
+								create_trgb.c
+
+SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))
+
 
 OBJREGULAR_FILES	= 	$(SRC_FILES:.c=.o)			## get all .o names from .c names
 
@@ -45,6 +48,7 @@ ifeq ($(OS), Linux)
 endif
 
 all					:	 $(OBJ_PATHS_INIT) $(MAKE_LIBFT) $(NAME)
+
 
 $(addprefix $(LIBSPATH), $(LIBFT_PATH))  		:
 	git clone https://github.com/Psycokwet/libft.git $(addprefix $(LIBSPATH), $(LIBFT_PATH))

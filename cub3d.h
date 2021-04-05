@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/05 15:08:28 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:34:33 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,13 @@
 # define MASK_R 0x00FF0000
 # define MASK_G 0x0000FF00
 # define MASK_B 0x000000FF
+
+/* 
+** ------ COLORS --------
+** */
+
+int	add_shade(double dist, int trgb);
+int	get_opposite(int trgb);
+int	create_trgb(int t, int r, int g, int b);
 
 #endif
