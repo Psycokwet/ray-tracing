@@ -21,5 +21,5 @@ void	check_save_arg(t_env *env, int argc, char const *argv[]){
 		printf("Error, the second argument doesn't fit.\n %s", USAGE);
 		exit(1);
 	}
-	env->save = 1;
+	env->conf.save = 1;
 }

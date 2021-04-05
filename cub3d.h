@@ -30,6 +30,7 @@
 # define MASK_B 0x000000FF
 
 # define MAP_ARG "MAP.cub"
+# define MAP_EXT ".cub"
 # define SAVE_ARG "--save"
 # define USAGE "Usage : MAP.cub [--save]"
 
@@ -42,8 +43,15 @@ typedef struct  s_data {
 }               t_data;
 
 
+typedef struct		s_conf
+{
+    int             save;
+    char*           map_src;
+}	                t_conf;
+
 typedef struct		s_env
 {
+    t_conf          conf;
 	// t_conf			*conf;
 	// t_map			*map;
 	// t_rndr			*rndr;
@@ -59,8 +67,6 @@ typedef struct		s_env
 	// int				strafe_left;
 	// int				strafe_right;
 	// int				sprite;
-    int             save;
-    char*           map;
 }					t_env;
 
 
@@ -84,5 +90,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 void	args_parse(t_env *env, int argc, char const *argv[]);
 void	check_save_arg(t_env *env, int argc, char const *argv[]);
+void	set_src_map(t_env *env, char const *argv[]);
 
 #endif
