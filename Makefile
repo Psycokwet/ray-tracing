@@ -6,7 +6,7 @@ LIBFTPATH			=	libft/
 LIBFT_AR			=	libft.a
 LIBMLX_AR			= 	libmlx.a
 
-SRC_PATH			= ./
+SRC_PATH			= ./srcs/
 OBJ_PATH			= bin/
 LIBFT_PATH			= libft/
 LIBMLX_UNIX_PATH	= minilibx-linux/

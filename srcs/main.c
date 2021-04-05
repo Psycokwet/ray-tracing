@@ -6,11 +6,11 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2020/10/22 19:23:15 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:06:21 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../cub3d.h"
 #include <stdio.h>
 
 int main(int argc, char const *argv[])
