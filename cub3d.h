@@ -42,6 +42,27 @@ typedef struct  s_data {
 }               t_data;
 
 
+typedef struct		s_env
+{
+	// t_conf			*conf;
+	// t_map			*map;
+	// t_rndr			*rndr;
+	// t_data			img;
+	// t_data			tex[4];
+	// t_sprite		sp;
+	// void			*mlx;
+	// void			*win;
+	// int				left;
+	// int				right;
+	// int				up;
+	// int				down;
+	// int				strafe_left;
+	// int				strafe_right;
+	// int				sprite;
+    int             save;
+    char*           map;
+}					t_env;
+
 
 /*
 ** COLORS
@@ -61,6 +82,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 ** FILES
 */
 
-void	args_parse(int argc, char const *argv[]);
+void	args_parse(t_env *env, int argc, char const *argv[]);
+void	check_save_arg(t_env *env, int argc, char const *argv[]);
 
 #endif

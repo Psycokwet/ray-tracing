@@ -13,8 +13,9 @@
 #include "../cub3d.h"
 
 int	main(int argc, char const *argv[]){
-	printf("%s",argv[2]);
-	args_parse(argc, argv);
+    t_env env;
+	ft_bzero(&env, sizeof(t_env));
+	args_parse(&env, argc, argv);
 	return (0);
 }
 

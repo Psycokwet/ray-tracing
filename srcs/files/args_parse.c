@@ -12,7 +12,7 @@
 
 #include "../../cub3d.h"
 
-void	args_parse(int argc, char const *argv[]){
+void	args_parse(t_env *env, int argc, char const *argv[]){
 	const char * name = argv[0];
 
 	if(argc > 3){
@@ -24,7 +24,7 @@ void	args_parse(int argc, char const *argv[]){
 		exit(1);
 	}
 	if(argc == 3){
-		check_save_arg(argv);
+		check_save_arg(env, argc, argv);
 	}
 
 }
