@@ -61,8 +61,43 @@ int is_map(t_env * env, const char **params){
 	return EXIT_CODE_NOT_FOUND;
 }
 
+int parse_r_value(char* arg){
+	int tmp;
+	char * checker;
+	int checker_length;
+
+	if(arg == NULL)
+		return (-EXIT_FAILURE);
+	tmp = ft_atoi(arg);
+	checker = ft_itoa(tmp);
+	checker_length = ft_strlen(checker);
+	if (!(ft_strncmp(arg, checker,
+		checker_length) == 0 && ft_strlen(arg) == checker_length))
+		return (-EXIT_FAILURE);
+	return (tmp);
+}
+
 int set_resolution(t_env * env, const char **params){
-	// return EXIT_CODE_FOUND;
+
+	int tmp_height;
+	int tmp_width;
+	if (ft_strncmp(params[0], env->r.code,
+		env->r.size) == 0 && ft_strlen(params[0]) == env->r.size)
+	{
+		tmp_height = parse_r_value(params[1]);
+		if(tmp_height < 0)
+			return (-EXIT_FAILURE);
+		tmp_width = parse_r_value(params[2]);
+		if(tmp_width < 0)
+			return (-EXIT_FAILURE);
+		if(params[3] != NULL || env->r.is_set == 1)
+			return (-EXIT_FAILURE);
+
+		env->r.height = tmp_height;
+		env->r.width = tmp_width;
+		env->r.is_set = 1;
+		return EXIT_CODE_FOUND;
+	}
 	return EXIT_CODE_NOT_FOUND;
 }
 
@@ -145,6 +180,7 @@ int	parse_file(t_env *env){
 	ret = -RETURN_FAILURE;
     init_srcs(env);
 	init_colors(env);
+	env->r = (t_resolution){"R", 1, -1, -1, -1};
     if ((fd = open(env->conf.map_src, O_RDONLY)) < 0)
     {
         printf("failed to open the map for reading\n");

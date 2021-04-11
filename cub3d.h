@@ -84,6 +84,15 @@ typedef struct			s_colors
 	int					is_set;
 }						t_colors;
 
+typedef struct			s_resolution
+{
+	char*				code;
+	int					size;
+	int					width;
+	int					height;
+	int					is_set;
+}						t_resolution;
+
 # define MAX_SRCS 5
 # define MAX_COLORS 2
 
@@ -92,6 +101,7 @@ typedef struct		s_env
     t_conf          conf;
 	t_srcs			g_srcs[MAX_SRCS];
 	t_colors		g_colors[MAX_COLORS];
+	t_resolution	r;
 	
 	// t_conf			*conf;
 	// t_map			*map;
@@ -154,6 +164,7 @@ int	parse_file(t_env *env);
 int parse_map(t_env *env, int fd, char *line);
 void	freeArray(char **splitted);
 void free_env(t_env *env);
+int parse_r_value(char* arg);
 
 
 
