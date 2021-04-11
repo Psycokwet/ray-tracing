@@ -152,6 +152,8 @@ void	init_srcs(t_env *env);
 void	init_colors(t_env *env);
 int	parse_file(t_env *env);
 int parse_map(t_env *env, int fd, char *line);
+void	freeArray(char **splitted);
+void free_env(t_env *env);
 
 
 

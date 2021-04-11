@@ -32,5 +32,6 @@ void	args_parse(t_env *env, int argc, char const *argv[]){
 		exit (-RETURN_FAILURE);
 	}
 		printf("ok %s\n", env->g_srcs[0].src);
+		free_env(env);
 	
 }

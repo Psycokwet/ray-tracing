@@ -49,7 +49,7 @@ int	set_srcs(t_env * env, const char **params)
 				ret = -EXIT_FAILURE;
 				break;
 			}
-			env->g_srcs[i].src = params[1];
+			env->g_srcs[i].src = ft_strdup(params[1]);
 			ret = EXIT_CODE_FOUND;
 		}
 	}
@@ -73,13 +73,24 @@ int set_colorsFC(t_env * env, const char **params){
 }
 
 
+void	freeArray(char **splitted){
+	int i;
+
+	i = 0;
+	for(i = 0; splitted[i] != NULL;i++){
+		free(splitted[i]);
+		splitted[i] = NULL;
+	}
+	free(splitted);
+}
+
 int		parse_line(t_env *datas, char *line)
 {
 	int ret;
 	int command_id;
 	char **splitted;
 
-	ret = -EXIT_FAILURE;
+	ret = -EXIT_CODE_NOT_FOUND;
 	command_id = MAX_PARSING;
 	splitted = ft_split(line, ' ');
 	if(!splitted[0]){
@@ -89,10 +100,26 @@ int		parse_line(t_env *datas, char *line)
 	while (--command_id >= 0)
 	{
 		ret = g_parsings[command_id].parser(datas, splitted);
-		if (ret != EXIT_CODE_NOT_FOUND)
-			return (ret);
+		if (ret != EXIT_CODE_NOT_FOUND){
+			break;
+		}
 	}
-	return (EXIT_CODE_NOT_FOUND);
+	freeArray(splitted);
+	splitted = NULL;
+	return (ret);
+}
+
+void free_env(t_env *env){
+	int i;
+
+	i = 0;
+	while(i < MAX_SRCS){
+		if(env->g_srcs[i].src != NULL)
+			free(env->g_srcs[i].src);
+		env->g_srcs[i].src = NULL;
+		i++;
+	}
+	env->conf.map_src = NULL;
 }
 
 void	init_srcs(t_env *env){
