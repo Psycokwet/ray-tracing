@@ -28,7 +28,11 @@ COLORS_FILES				=	get_opposite.c 	\
 IMG_FILES					=	my_mlx_pixel_put.c
 FILES_FILES					=	args_parse.c	\
 								check_save_arg.c \
-								set_src_map.c
+								set_src_map.c\
+								get_next_line.c\
+								get_next_line_utils.c\
+								parse_map.c
+
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))
 SRC_FILES += $(addprefix $(IMG_PATH), $(IMG_FILES))
@@ -44,7 +48,7 @@ OBJ 		= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 CC			=	clang
 
-CFLAGS		+=	-W -Wall -Wextra #-Werror -g3 -pedantic 		## '+=' allow to keep default flags.
+CFLAGS		+=	-W -Wall -Wextra -D BUFFER_SIZE=32 #-Werror -g3 -pedantic 		## '+=' allow to keep default flags.
 
 LDFLAGS		=	-L$(addprefix $(LIBSPATH), $(LIBFTPATH)) -lft -L$(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)) -lm -lbsd -lX11 -lXext $(addprefix $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)), $(LIBMLX_AR))
 

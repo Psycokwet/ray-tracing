@@ -19,7 +19,7 @@ void	check_save_arg(t_env *env, int argc, char const *argv[]){
 	s2 =  ft_strlen(argv[2]);
 	if(ft_memcmp(SAVE_ARG, argv[2], s2) != 0 || s1 != s2){
 		printf("Error, the second argument doesn't fit.\n %s", USAGE);
-		exit(1);
+		exit(EXIT_ARGS_FAILURE);
 	}
 	env->conf.save = 1;
 }
