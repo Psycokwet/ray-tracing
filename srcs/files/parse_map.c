@@ -61,7 +61,7 @@ int is_map(t_env * env, const char **params){
 	return EXIT_CODE_NOT_FOUND;
 }
 
-int parse_r_value(char* arg){
+int parse_value(char* arg){
 	int tmp;
 	char * checker;
 	int checker_length;
@@ -72,8 +72,11 @@ int parse_r_value(char* arg){
 	checker = ft_itoa(tmp);
 	checker_length = ft_strlen(checker);
 	if (!(ft_strncmp(arg, checker,
-		checker_length) == 0 && ft_strlen(arg) == checker_length))
+		checker_length) == 0 && ft_strlen(arg) == checker_length)){
+		free(checker);
 		return (-EXIT_FAILURE);
+	}
+	free(checker);
 	return (tmp);
 }
 
@@ -84,10 +87,10 @@ int set_resolution(t_env * env, const char **params){
 	if (ft_strncmp(params[0], env->r.code,
 		env->r.size) == 0 && ft_strlen(params[0]) == env->r.size)
 	{
-		tmp_height = parse_r_value(params[1]);
+		tmp_height = parse_value(params[1]);
 		if(tmp_height < 0)
 			return (-EXIT_FAILURE);
-		tmp_width = parse_r_value(params[2]);
+		tmp_width = parse_value(params[2]);
 		if(tmp_width < 0)
 			return (-EXIT_FAILURE);
 		if(params[3] != NULL || env->r.is_set == 1)
@@ -101,10 +104,54 @@ int set_resolution(t_env * env, const char **params){
 	return EXIT_CODE_NOT_FOUND;
 }
 
+int get_colors_from_line(const char *line){
+	char **splitted;
+	int rgb[3];
+	int i;
+	int ret = EXIT_SUCCESS;
+
+	i = 0;
+	splitted = ft_split(line, ',');
+	if(!splitted[0]){
+		free(splitted);
+		return (-EXIT_FAILURE);
+	}
+	while(i < 3){
+		rgb[i] = parse_value(splitted[0]);
+		if(rgb[i] < 0){
+			ret = (-EXIT_FAILURE);
+			break;
+		}
+		i++;
+	}
+	freeArray(splitted);
+	splitted = NULL;
+	if(ret == EXIT_SUCCESS)
+		return create_trgb(0, rgb[0], rgb[1], rgb[2]);
+	return ret;
+}
+
 int set_colorsFC(t_env * env, const char **params){
 
-	// return EXIT_CODE_FOUND;
-	return EXIT_CODE_NOT_FOUND;
+	int i;
+	int color;
+	int ret;
+
+	ret = EXIT_CODE_NOT_FOUND;
+	i = MAX_COLORS;
+	char * code = params[0];
+	while (--i >= 0)
+	{
+		if (ft_strncmp(code, env->g_colors[i].code,
+			env->g_colors[i].size) == 0 && ft_strlen(code) == env->g_colors[i].size)
+		{
+			if(params[1] == NULL || params[2] != NULL || env->g_colors[i].is_set == 1 || (color = get_colors_from_line(params[1])) < 0)
+				return (-EXIT_FAILURE);
+			env->g_colors[i].color = color;
+			env->g_colors[i].is_set = 1;
+		}
+	}
+	return (ret);
 }
 
 
@@ -181,6 +228,8 @@ int	parse_file(t_env *env){
     init_srcs(env);
 	init_colors(env);
 	env->r = (t_resolution){"R", 1, -1, -1, -1};
+	env->g_colors[CODE_FLOOR] = (t_colors){"F", 1, -1, -1};
+	env->g_colors[CODE_CEILING] = (t_colors){"C", 1, -1, -1};
     if ((fd = open(env->conf.map_src, O_RDONLY)) < 0)
     {
         printf("failed to open the map for reading\n");
@@ -193,8 +242,9 @@ int	parse_file(t_env *env){
 			ret = parse_map(env, line, fd);
 			break;
 		}
-		else if(0 > ret){
-        	printf("-> %s\n", line);
+		else if(RETURN_SUCCES > ret){
+        	printf("cleaning -> %s\n", line);
+			get_next_line(-1, NULL);
 			break;
 		}
 		else {

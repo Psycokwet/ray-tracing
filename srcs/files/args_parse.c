@@ -28,10 +28,11 @@ void	args_parse(t_env *env, int argc, char const *argv[]){
 		check_save_arg(env, argc, argv);
 	if(parse_file(env) < RETURN_SUCCES){
 		printf("Error, while reading the file %s\n", env->g_srcs[0].src);
-		
+		free_env(env);
 		exit (-RETURN_FAILURE);
 	}
-		printf("ok %s %d\n", env->g_srcs[0].src, env->r.width);
-		free_env(env);
+	//tmp to change
+	printf("ok %s %d %d\n", env->g_srcs[0].src, env->r.width, env->g_colors[0].color);
+	free_env(env);
 	
 }

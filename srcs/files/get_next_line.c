@@ -89,12 +89,13 @@ int				get_next_line(int fd, char **line)
 	int						cut_line_n_ret;
 	int						return_value;
 	char					*buffer;
-
+	
+	buffer = NULL;
 	return_value = -EXIT_FAILURE;
-	if (!line)
+	if (!line || BUFFER_SIZE <= 0 || fd < 0){
+		gnl_cleaning(return_value, &current_wip, buffer);
 		return (-EXIT_FAILURE);
-	if (BUFFER_SIZE <= 0 || fd < 0)
-		return (-EXIT_FAILURE);
+	}
 	set_current_wip(&current_wip, fd);
 	if (current_wip.line_wip)
 	{

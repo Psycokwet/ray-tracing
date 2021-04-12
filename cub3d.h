@@ -80,6 +80,7 @@ typedef struct			s_srcs
 typedef struct			s_colors
 {
 	char*				code;
+	int					size;
 	int					color;
 	int					is_set;
 }						t_colors;
@@ -164,7 +165,7 @@ int	parse_file(t_env *env);
 int parse_map(t_env *env, int fd, char *line);
 void	freeArray(char **splitted);
 void free_env(t_env *env);
-int parse_r_value(char* arg);
+int parse_value(char* arg);
 
 
 
