@@ -60,7 +60,7 @@ void *mlx_init()
   for (NSRunningApplication * app in [NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.finder"])
     {
       [app activateWithOptions:NSApplicationActivateIgnoringOtherApps];
-      break;
+      break ;
     }
   usleep(100000);
   ProcessSerialNumber psn = { 0, kCurrentProcess };

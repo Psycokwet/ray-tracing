@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/05 17:13:51 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/13 10:24:56 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ typedef struct  s_data {
 typedef struct		s_conf
 {
     int             save;
-    char*           map_src;
+    const char		*map_src;
 }	                t_conf;
 
 typedef struct			s_srcs
 {
 	char*				code;
-	int					size;
+	unsigned int		size;
 	char*				src;
 }						t_srcs;
 
 typedef struct			s_colors
 {
 	char*				code;
-	int					size;
+	unsigned int		size;
 	int					color;
 	int					is_set;
 }						t_colors;
@@ -88,7 +88,7 @@ typedef struct			s_colors
 typedef struct			s_resolution
 {
 	char*				code;
-	int					size;
+	unsigned int		size;
 	int					width;
 	int					height;
 	int					is_set;
@@ -151,21 +151,21 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 */
 
 void	args_parse(t_env *env, int argc, char const *argv[]);
-void	check_save_arg(t_env *env, int argc, char const *argv[]);
-void	set_src_map(t_env *env, char const *argv[]);
-
-int	set_srcs(t_env * env, const char **params);
-int is_map(t_env * env, const char **params);
-int set_resolution(t_env * env, const char **params);
-int set_colorsFC(t_env * env, const char **params);
-int		parse_line(t_env *datas, char *line);
-void	init_srcs(t_env *env);
+void	check_save_arg(t_env *env, char const *argv[]);
+void	free_array(char **splitted);
+void	free_env(t_env *env);
+int		get_colors_from_line(const char *line);
 void	init_colors(t_env *env);
-int	parse_file(t_env *env);
-int parse_map(t_env *env, int fd, char *line);
-void	freeArray(char **splitted);
-void free_env(t_env *env);
-int parse_value(char* arg);
+void	init_srcs(t_env *env);
+int		is_map(t_env *env, const char **params);
+int		parse_file(t_env *env);
+int		parse_line(t_env *datas, char *line);
+int		parse_map(t_env *env, int fd, char *line);
+int		parse_value(char const *arg);
+int		set_colors_fc(t_env *env, const char **params);
+int		set_resolution(t_env *env, const char **params);
+void	set_src_map(t_env *env, char const *argv[]);
+int		set_srcs(t_env *env, const char **params);
 
 
 

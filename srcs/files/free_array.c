@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_save_arg.c                                   :+:      :+:    :+:   */
+/*   free_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:22:08 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/13 10:20:43 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include "get_next_line.h"
 
-void	check_save_arg(t_env *env, char const *argv[])
+void	free_array(char **splitted)
 {
-	int s1;
-	int s2;
+	int i;
 
-	s1 = ft_strlen(SAVE_ARG);
-	s2 = ft_strlen(argv[2]);
-	if (ft_memcmp(SAVE_ARG, argv[2], s2) != 0 || s1 != s2)
+	i = 0;
+	while (splitted[i] != NULL)
 	{
-		printf("Error, the second argument doesn't fit.\n%s\n", USAGE);
-		exit(EXIT_ARGS_FAILURE);
+		i++;
+		free(splitted[i]);
+		splitted[i] = NULL;
 	}
-	env->conf.save = 1;
+	free(splitted);
 }

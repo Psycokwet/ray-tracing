@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_save_arg.c                                   :+:      :+:    :+:   */
+/*   parse_value.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:22:08 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/13 10:24:44 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	check_save_arg(t_env *env, char const *argv[])
+int	parse_value(char const *arg)
 {
-	int s1;
-	int s2;
+	int		tmp;
+	char	*checker;
+	int		checker_length;
 
-	s1 = ft_strlen(SAVE_ARG);
-	s2 = ft_strlen(argv[2]);
-	if (ft_memcmp(SAVE_ARG, argv[2], s2) != 0 || s1 != s2)
+	if (arg == NULL)
+		return (-EXIT_FAILURE);
+	tmp = ft_atoi(arg);
+	checker = ft_itoa(tmp);
+	checker_length = ft_strlen(checker);
+	if (!(ft_strncmp(arg, checker,
+		checker_length) == 0 && ft_strlen(arg) == checker_length))
 	{
-		printf("Error, the second argument doesn't fit.\n%s\n", USAGE);
-		exit(EXIT_ARGS_FAILURE);
+		free(checker);
+		return (-EXIT_FAILURE);
 	}
-	env->conf.save = 1;
+	free(checker);
+	return (tmp);
 }

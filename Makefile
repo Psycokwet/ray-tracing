@@ -28,10 +28,22 @@ COLORS_FILES				=	get_opposite.c 	\
 IMG_FILES					=	my_mlx_pixel_put.c
 FILES_FILES					=	args_parse.c	\
 								check_save_arg.c \
-								set_src_map.c\
-								get_next_line.c\
+								free_array.c\
+								free_env.c\
+								get_colors_from_line.c\
 								get_next_line_utils.c\
-								parse_map.c
+								get_next_line.c\
+								init_colors.c\
+								init_srcs.c\
+								is_map.c\
+								parse_file.c\
+								parse_line.c\
+								parse_map.c\
+								parse_value.c\
+								set_colors_fc.c\
+								set_resolution.c\
+								set_src_map.c\
+								set_srcs.c
 
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))

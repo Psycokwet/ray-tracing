@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_save_arg.c                                   :+:      :+:    :+:   */
+/*   set_resolution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:22:08 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/13 10:21:12 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include "get_next_line.h"
 
-void	check_save_arg(t_env *env, char const *argv[])
+int	set_resolution(t_env *env, const char **params)
 {
-	int s1;
-	int s2;
+	int tmp_height;
+	int tmp_width;
 
-	s1 = ft_strlen(SAVE_ARG);
-	s2 = ft_strlen(argv[2]);
-	if (ft_memcmp(SAVE_ARG, argv[2], s2) != 0 || s1 != s2)
+	if (ft_strncmp(params[0], env->r.code,
+		env->r.size) == 0 && ft_strlen(params[0]) == env->r.size)
 	{
-		printf("Error, the second argument doesn't fit.\n%s\n", USAGE);
-		exit(EXIT_ARGS_FAILURE);
+		tmp_height = parse_value(params[1]);
+		if (tmp_height < 0)
+			return (-EXIT_FAILURE);
+		tmp_width = parse_value(params[2]);
+		if (tmp_width < 0)
+			return (-EXIT_FAILURE);
+		if (params[3] != NULL || env->r.is_set == 1)
+			return (-EXIT_FAILURE);
+		env->r.height = tmp_height;
+		env->r.width = tmp_width;
+		env->r.is_set = 1;
+		return (EXIT_CODE_FOUND);
 	}
-	env->conf.save = 1;
+	return (EXIT_CODE_NOT_FOUND);
 }

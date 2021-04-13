@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:38:18 by scarboni          #+#    #+#             */
-/*   Updated: 2020/06/25 15:23:00 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/13 10:21:05 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,11 @@ int				get_next_line(int fd, char **line)
 	int						cut_line_n_ret;
 	int						return_value;
 	char					*buffer;
-	
+
 	buffer = NULL;
 	return_value = -EXIT_FAILURE;
-	if (!line || BUFFER_SIZE <= 0 || fd < 0){
+	if (!line || BUFFER_SIZE <= 0 || fd < 0)
+	{
 		gnl_cleaning(return_value, &current_wip, buffer);
 		return (-EXIT_FAILURE);
 	}
