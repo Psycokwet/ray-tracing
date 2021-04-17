@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/17 16:28:48 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/17 18:34:33 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@
 # define MAP_EXT				".cub"
 # define SAVE_ARG				"--save"
 # define USAGE					"Usage : MAP.cub [--save]"
-# define AUTHORIZED_ON_MAP		"10 2NOES"
+# define AUTHORIZED_ON_MAP		"10 "
+# define AUTHORIZED_ON_MAP_DIR	"NOES"
+# define AUTHORIZED_ON_MAP_MOB	"2"
 
 # define CODE_WE				0
 # define CODE_NO				1
@@ -94,6 +96,21 @@ typedef struct			s_resolution
 	int					is_set;
 }						t_resolution;
 
+
+typedef struct			s_position
+{
+	int					x;//i
+	int					y;//j
+}						t_position;
+
+typedef struct			s_start
+{
+	t_position			pos;
+	int					is_set;
+	char				dir;
+}						t_start;
+
+
 # define MAX_SRCS 5
 # define MAX_COLORS 2
 
@@ -104,6 +121,7 @@ typedef struct		s_env
 	t_colors		g_colors[MAX_COLORS];
 	t_resolution	r;
 	char			**map_array;
+	t_start			player_start;
 	
 	// t_conf			*conf;
 	// t_map			*map;
