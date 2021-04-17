@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/17 16:57:15 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/17 20:09:47 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,18 @@ void	free_env(t_env *env)
 		env->g_srcs[i].src = NULL;
 		i++;
 	}
-	if(env->map_array)
-		free_array(env->map_array);
+	if(env->map_array.lines){
+		i = 0;
+		while (i < env->map_array.size)
+		{
+			if (env->map_array.lines[i] != NULL){
+				if (env->map_array.lines[i]->line != NULL)
+					free(env->map_array.lines[i]->line);
+				free(env->map_array.lines[i]);
+			}
+			i++;
+		}
+		free(env->map_array.lines);
+	}
 	env->conf.map_src = NULL;
 }

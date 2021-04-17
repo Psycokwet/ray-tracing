@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/17 18:41:38 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/17 20:12:11 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct			s_map_parsing
 #define MAX_MAP_PARSING 3
 static const t_map_parsing g_map_parsings[3] = {
 	(t_map_parsing){AUTHORIZED_ON_MAP, NULL},
-	(t_map_parsing){AUTHORIZED_ON_MAP_DIR, &id_dir},
 	(t_map_parsing){AUTHORIZED_ON_MAP_MOB, &id_mob},
+	(t_map_parsing){AUTHORIZED_ON_MAP_DIR, &id_dir},
 };
 
 int test_line_for_map(char *line, t_env *env)
@@ -51,11 +51,10 @@ int test_line_for_map(char *line, t_env *env)
 	{
 		while (j < MAX_MAP_PARSING)
 		{
-
 			ret = ft_strchr(g_map_parsings[j].authorized_chars, line[i]);
-			if(ret != NULL){
-				if(g_map_parsings[j].parser)
-					if(g_map_parsings[j].parser(i, j, line[i], env) < EXIT_SUCCESS)
+			if (ret != NULL){
+				if (g_map_parsings[j].parser)
+					if (g_map_parsings[j].parser(i, j, line[i], env) < EXIT_SUCCESS)
 						return (-EXIT_FAILURE);
 				break;
 			}
@@ -67,17 +66,21 @@ int test_line_for_map(char *line, t_env *env)
 		j = 0;
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (i);
 }
 
 int	parse_map_int(t_env *env, int fd, char *line, int i, int ret_gnl)
 {
 	char *nextLine;
+	int line_size;
+	t_map_line *tmp;
 
+	line_size = 0;
 	nextLine = NULL;
 	if(!line) 
-		return (-EXIT_FAILURE); 
-	else if (test_line_for_map(line, env) != EXIT_SUCCESS)
+		return (-EXIT_FAILURE);
+	line_size = test_line_for_map(line, env);
+	if (line_size < EXIT_SUCCESS)
 	{
 		free(line);
 		return (-EXIT_FAILURE);
@@ -91,15 +94,21 @@ int	parse_map_int(t_env *env, int fd, char *line, int i, int ret_gnl)
 				free(line);
 				return (-EXIT_FAILURE);
 			}
-			env->map_array[i] = line;
+			tmp = (t_map_line*)malloc(sizeof(t_map_line));
+			if(tmp == NULL)
+				return (-EXIT_FAILURE);
+			tmp->line = line;
+			tmp->size = line_size;
+			env->map_array.lines[i] = tmp;
+			// env->map_array[i] = (t_map_line*)malloc(sizeof(t_map_line));;
 		}
 	}
 	else if(ret_gnl == 0)
 	{
-		env->map_array = (char**)malloc(sizeof(char*) * (i+1));
-		if(env->map_array == NULL)
+		env->map_array.lines = (t_map_line**)malloc(sizeof(t_map_line*) * (i));
+		if(env->map_array.lines == NULL)
 			return (-EXIT_FAILURE);
-		env->map_array[i] = NULL;
+		env->map_array.size = i;
 		free(line);
 	}
 	else{
@@ -113,7 +122,7 @@ int	parse_map(t_env *env, int fd, char *line)
 {
 	int ret;
 	
-	env->map_array = NULL;
+	env->map_array.size = -1;
 	ret = parse_map_int(env, fd, ft_strdup(line), 0, 1);
 	if(ret < EXIT_SUCCESS)
 		return (ret);

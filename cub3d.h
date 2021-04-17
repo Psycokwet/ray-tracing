@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/17 18:34:33 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/17 20:11:59 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct			s_resolution
 	int					is_set;
 }						t_resolution;
 
-
 typedef struct			s_position
 {
 	int					x;//i
@@ -110,6 +109,17 @@ typedef struct			s_start
 	char				dir;
 }						t_start;
 
+typedef struct			s_map_line
+{
+	char				*line;
+	unsigned int		size;
+}						t_map_line;
+
+typedef struct			s_map_array
+{
+	t_map_line			**lines;
+	int					size;
+}						t_map_array;
 
 # define MAX_SRCS 5
 # define MAX_COLORS 2
@@ -120,7 +130,7 @@ typedef struct		s_env
 	t_srcs			g_srcs[MAX_SRCS];
 	t_colors		g_colors[MAX_COLORS];
 	t_resolution	r;
-	char			**map_array;
+	t_map_array		map_array;
 	t_start			player_start;
 	
 	// t_conf			*conf;
