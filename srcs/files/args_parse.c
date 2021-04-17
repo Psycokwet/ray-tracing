@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:22:27 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/17 17:40:52 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,15 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 		check_save_arg(env, argv);
 	if (parse_file(env) < RETURN_SUCCES)
 	{
-		printf("Error, while reading the file %s\n", env->g_srcs[0].src);
+		printf("Error, while reading the file\n");
 		free_env(env);
 		exit(-RETURN_FAILURE);
 	}
 	//tmp to change
 	printf("ok %s %d %d\n", env->g_srcs[0].src, env->r.width, env->g_colors[0].color);
+
+	if(env->map_array != NULL)
+		for(int i = 0; env->map_array[i] != NULL; i++)
+			printf("RESULT %s, %d\n", env->map_array[i], i);
 	free_env(env);
 }

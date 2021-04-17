@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:20:55 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/17 17:45:37 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,21 @@ int	parse_file(t_env *env)
 		ret = parse_line(env, line);
 		if (ret == EXIT_CODE_MAP_FOUND)
 		{
-			ret = parse_map(env, line, fd);
+			ret = parse_map(env, fd, line);
 			break ;
 		}
-		else if (RETURN_SUCCES > ret)
-		{
-			printf("cleaning -> %s\n", line);
-			get_next_line(-1, NULL);
+		else if (ret < RETURN_SUCCES)
 			break ;
-		}
 		else
 		{
 			printf("-> %s\n", line);
 			free(line);
 		}
+	}
+	if (ret < RETURN_SUCCES )
+	{
+		printf("cleaning -> %s\n", line);
+		get_next_line(-1, NULL);
 	}
 	free(line);
 	close(fd);

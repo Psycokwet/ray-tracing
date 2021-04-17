@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:24:56 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/17 16:28:48 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct		s_env
 	t_srcs			g_srcs[MAX_SRCS];
 	t_colors		g_colors[MAX_COLORS];
 	t_resolution	r;
+	char			**map_array;
 	
 	// t_conf			*conf;
 	// t_map			*map;

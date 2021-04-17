@@ -60,7 +60,7 @@ OBJ 		= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 CC			=	clang
 
-CFLAGS		+=	-W -Wall -Wextra -D BUFFER_SIZE=32 #-Werror -g3 -pedantic 		## '+=' allow to keep default flags.
+CFLAGS		+=	-W -Wall -Wextra -D BUFFER_SIZE=32 -g3 #-Werror  -pedantic 		## '+=' allow to keep default flags.
 
 LDFLAGS		=	-L$(addprefix $(LIBSPATH), $(LIBFTPATH)) -lft -L$(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)) -lm -lbsd -lX11 -lXext $(addprefix $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)), $(LIBMLX_AR))
 

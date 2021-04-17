@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:25:34 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/17 17:06:34 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	set_colors_fc(t_env *env, const char **params)
 				return (-EXIT_FAILURE);
 			env->g_colors[i].color = color;
 			env->g_colors[i].is_set = 1;
+			ret = EXIT_CODE_FOUND;
+			break;
 		}
 	}
 	return (ret);
