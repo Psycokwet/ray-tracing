@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/17 20:11:59 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/18 15:39:35 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@
 # define MAP_EXT				".cub"
 # define SAVE_ARG				"--save"
 # define USAGE					"Usage : MAP.cub [--save]"
+# define WALL					"1"
+# define INSIDE_MAX_TYPE		6
+# define INSIDE					"02NWES"
 # define AUTHORIZED_ON_MAP		"10 "
 # define AUTHORIZED_ON_MAP_DIR	"NOES"
 # define AUTHORIZED_ON_MAP_MOB	"2"

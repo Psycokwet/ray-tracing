@@ -6,98 +6,57 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/17 22:33:40 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/18 16:02:06 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-
-int is_blank(char c)
+int is_inside(char c)
 {
-	return (c == ' ' || c == 0 || (c > 8 && c < 14) ? 1: 0);
-}
-
-static int	skip_blanks(const char *str)
-{
-	int i;
-
-	i = 0;
-	while (is_blank(str[i]) == 1)
-		i++;
-	return (i);
-}
-
-static int	skip_blanks_up_to_down(t_env *env, unsigned int column)
-{
-	int i;
-
-	i = 0;
-	while (i < env->map_array.size )
+			// printf("is_insid\n");
+	int i = 0;
+	while (i < INSIDE_MAX_TYPE)
 	{
-		while(env->map_array.lines[i]->size < column)
-			i++;
-		if(is_blank(env->map_array.lines[i]->line[column]) != 1)
-			break;
+		if(INSIDE[i] == c){
+
+			// printf("skip_chars_down_to_up IS IN %d:%d\n", INSIDE[i], c);
+			return 1;
+		}
 		i++;
 	}
-	return (i);
-}
-
-static int	skip_blanks_down_to_up(t_env *env, unsigned int column)
-{
-	int i;
-
-	i = env->map_array.size - 1;
-	while (i >= 0)
-	{
-		while(env->map_array.lines[i]->size < column)
-			i--;
-		if(is_blank(env->map_array.lines[i]->line[column]) != 1)
-			break;
-		i--;
-	}
-	return (i);
-}
-
-
-
-static int	skip_blanks_reverse(const char *str, unsigned int size)
-{
-	int i;
-
-	i = size -1;
-	while (i > 0 && is_blank(str[i]) == 1)
-		i--;
-	return (i);
+	// printf("is_insid NOPE, %c\n", c);
+	return 0;
 }
 
 int		check_map_for_holes(t_env *env)
 {
-	unsigned int i;
-	unsigned int max_width;
+	unsigned int line;
+	unsigned int column;
 
-	i = 0;
-	max_width = 0;
-	while(env->map_array.size > i){
-		if(!(env->map_array.lines[i]->line[skip_blanks(env->map_array.lines[i]->line)] == '1' && env->map_array.lines[i]->line[skip_blanks_reverse(env->map_array.lines[i]->line, env->map_array.lines[i]->size)] == '1'))
-		{
-			printf("ERRORe %d:%c:%c\n",i, env->map_array.lines[i]->line[skip_blanks(env->map_array.lines[i]->line)], env->map_array.lines[i]->line[skip_blanks_reverse(env->map_array.lines[i]->line, env->map_array.lines[i]->size)] );
+	line = 0;
+	column = 0;
+	while(env->map_array.size > line){
+		while(env->map_array.lines[line]->size > column){
+			if(is_inside(env->map_array.lines[line]->line[column]) == 1){
+				if(line > 0 && is_inside(env->map_array.lines[line - 1]->line[column]) == 0 && env->map_array.lines[line - 1]->line[column] != '1')
+					return (-EXIT_FAILURE);
+				if(line + 1 < env->map_array.size && is_inside(env->map_array.lines[line + 1]->line[column]) == 0 && env->map_array.lines[line + 1]->line[column] != '1')
+					return (-EXIT_FAILURE);
+				if(column > 0 && is_inside(env->map_array.lines[line]->line[column - 1]) == 0 && env->map_array.lines[line]->line[column - 1] != '1')
+					return (-EXIT_FAILURE);
+				if(column + 1 < env->map_array.lines[line]->size  && is_inside(env->map_array.lines[line]->line[column + 1]) == 0  && env->map_array.lines[line]->line[column + 1] != '1')
+					return (-EXIT_FAILURE);
+			}
+			column++;
 		}
-		if(env->map_array.lines[i]->size > max_width)
-			max_width = env->map_array.lines[i]->size;
-		i++;
+		column=0;
+		line++;
 	}
-	i = 0;
-	while(max_width > i){
-		if(!(env->map_array.lines[skip_blanks_up_to_down(env, i)]->line[i] == '1' && env->map_array.lines[skip_blanks_down_to_up(env, i)]->line[i] == '1'))
-		{
-			printf("ERROReuh %s %d:%c:%d\n",env->map_array.lines[skip_blanks_down_to_up(env, i)]->line, i,  env->map_array.lines[skip_blanks_up_to_down(env, i)]->line[i],  env->map_array.lines[skip_blanks_down_to_up(env, i)]->line[i]  );
-		}
-			// printf("nope :(ERROR %c\n", env->map_array.lines[i]->line[skip_blanks(env->map_array.lines[i]->line)]);
-		i++;
-	}
+	return (EXIT_SUCCESS);
 }
+
+
 
 
 void	args_parse(t_env *env, int argc, char const *argv[])
@@ -125,10 +84,16 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 		exit(-RETURN_FAILURE);
 	}
 	//tmp to change
-	check_map_for_holes(env);
+	if(check_map_for_holes(env) < EXIT_SUCCESS)
+	{
+		printf("Error, the map contains holes\n");
+		free_env(env);
+		exit(-RETURN_FAILURE);
+	}
 	printf("ok %s %d %d %d\n", env->g_srcs[0].src, env->r.width, env->g_colors[0].color, env->map_array.size);
 
 		for(int i = 0; env->map_array.size > i; i++)
 			printf("RESULT %s, %u %d\n", env->map_array.lines[i]->line, env->map_array.lines[i]->size, i);
-	free_env(env);
+	
+		free_env(env);
 }
