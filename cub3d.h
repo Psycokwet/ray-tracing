@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/18 15:39:35 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:32:04 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define EXIT_CODE_FOUND		1
 # define EXIT_CODE_NOT_FOUND	0
 
-# define EXIT_ARGS_FAILURE		1
-# define EXIT_MLX_FAILURE		2
+# define EXIT_ARGS_FAILURE		2
+# define EXIT_MLX_FAILURE		3
 # define EXIT_NORMAL			0
 
 # define B_SHIFT_T				24
@@ -198,7 +198,6 @@ int		set_colors_fc(t_env *env, const char **params);
 int		set_resolution(t_env *env, const char **params);
 void	set_src_map(t_env *env, char const *argv[]);
 int		set_srcs(t_env *env, const char **params);
-
-
+void	quit_app(t_env *env, const char *message, int code);
 
 #endif

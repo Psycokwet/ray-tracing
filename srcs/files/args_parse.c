@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/18 16:02:06 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:38:27 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,16 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 	}
 	if (argc < 2)
 	{
-		printf("Error, there is not enought arguments.\n%s\n", USAGE);
+		printf("Error, there is not enough arguments.\n%s\n", USAGE);
 		exit(EXIT_ARGS_FAILURE);
 	}
 	set_src_map(env, argv);
 	if (argc == 3)
 		check_save_arg(env, argv);
 	if (parse_file(env) < RETURN_SUCCES)
-	{
-		printf("Error, while reading the file\n");
-		free_env(env);
-		exit(-RETURN_FAILURE);
-	}
-	//tmp to change
+		quit_app(env, "Error, while reading the file", -EXIT_ARGS_FAILURE);
 	if(check_map_for_holes(env) < EXIT_SUCCESS)
-	{
-		printf("Error, the map contains holes\n");
-		free_env(env);
-		exit(-RETURN_FAILURE);
-	}
+		quit_app(env, "Error, the map contains holes", -EXIT_FAILURE);
 	printf("ok %s %d %d %d\n", env->g_srcs[0].src, env->r.width, env->g_colors[0].color, env->map_array.size);
 
 		for(int i = 0; env->map_array.size > i; i++)

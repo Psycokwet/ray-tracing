@@ -6,12 +6,33 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/17 17:45:37 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:52:12 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 #include "get_next_line.h"
+
+int	init_env(t_env *env)
+{
+	init_srcs(env);
+	init_colors(env);
+	env->r = (t_resolution){"R", 1, -1, -1, -1};
+	env->g_colors[CODE_FLOOR] = (t_colors){"F", 1, -1, -1};
+	env->g_colors[CODE_CEILING] = (t_colors){"C", 1, -1, -1};
+}
+
+int	open_map(t_env *env)
+{
+	int		fd;
+
+	if ((fd = open(env->conf.map_src, O_RDONLY)) < 0)
+	{
+		printf("failed to open the map for reading\n");
+		exit(EXIT_ARGS_FAILURE);
+	}
+	return (fd);
+}
 
 int	parse_file(t_env *env)
 {
@@ -20,16 +41,8 @@ int	parse_file(t_env *env)
 	int		ret;
 
 	ret = -RETURN_FAILURE;
-	init_srcs(env);
-	init_colors(env);
-	env->r = (t_resolution){"R", 1, -1, -1, -1};
-	env->g_colors[CODE_FLOOR] = (t_colors){"F", 1, -1, -1};
-	env->g_colors[CODE_CEILING] = (t_colors){"C", 1, -1, -1};
-	if ((fd = open(env->conf.map_src, O_RDONLY)) < 0)
-	{
-		printf("failed to open the map for reading\n");
-		exit(EXIT_ARGS_FAILURE);
-	}
+	init_env(env);
+	fd = open_map(env);
 	while (get_next_line(fd, &line) > 0)
 	{
 		ret = parse_line(env, line);
@@ -41,16 +54,10 @@ int	parse_file(t_env *env)
 		else if (ret < RETURN_SUCCES)
 			break ;
 		else
-		{
-			printf("-> %s\n", line);
 			free(line);
-		}
 	}
-	if (ret < RETURN_SUCCES )
-	{
-		printf("cleaning -> %s\n", line);
+	if (ret < RETURN_SUCCES)
 		get_next_line(-1, NULL);
-	}
 	free(line);
 	close(fd);
 	return (ret);
