@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 18:12:28 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:13:03 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char const *argv[]){
     t_env env;
+
 	ft_bzero(&env, sizeof(t_env));
 	args_parse(&env, argc, argv);
 	return (0);
