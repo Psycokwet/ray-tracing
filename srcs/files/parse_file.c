@@ -6,23 +6,21 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 15:52:12 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:20:31 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 #include "get_next_line.h"
 
-int	init_env(t_env *env)
+void	init_env(t_env *env)
 {
 	init_srcs(env);
 	init_colors(env);
 	env->r = (t_resolution){"R", 1, -1, -1, -1};
-	env->g_colors[CODE_FLOOR] = (t_colors){"F", 1, -1, -1};
-	env->g_colors[CODE_CEILING] = (t_colors){"C", 1, -1, -1};
 }
 
-int	open_map(t_env *env)
+int		open_map(t_env *env)
 {
 	int		fd;
 
@@ -34,7 +32,7 @@ int	open_map(t_env *env)
 	return (fd);
 }
 
-int	parse_file(t_env *env)
+int		parse_file(t_env *env)
 {
 	int		fd;
 	char	*line;

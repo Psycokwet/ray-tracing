@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 18:08:07 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:15:59 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		is_inside(char c)
 
 int		check_map_for_holes(t_env *env)
 {
-	unsigned int line;
-	unsigned int column;
+	int line;
+	int column;
 
 	line = 0;
 	column = 0;

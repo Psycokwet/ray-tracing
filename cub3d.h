@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 18:07:39 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:22:18 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct			s_start
 typedef struct			s_map_line
 {
 	char				*line;
-	unsigned int		size;
+	int		size;
 }						t_map_line;
 
 typedef struct			s_map_array
@@ -155,7 +155,7 @@ typedef struct		s_env
 
 typedef struct			s_parsing
 {
-	int					(*parser)(const char *, t_env *);
+	int					(*parser)(t_env *, const char **);
 }						t_parsing;
 
 /*

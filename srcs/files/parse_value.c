@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:24:44 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:25:25 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	parse_value(char const *arg)
 {
-	int		tmp;
-	char	*checker;
-	int		checker_length;
+	int				tmp;
+	char			*checker;
+	unsigned int	checker_length;
 
 	if (arg == NULL)
 		return (-EXIT_FAILURE);

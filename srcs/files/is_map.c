@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 17:35:11 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:19:30 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int	is_map(t_env *env, const char **params)
 {
+	(void)env;
+	(void)params;
 	return (EXIT_CODE_MAP_FOUND);
 }

@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:21:03 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:24:11 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		parse_line(t_env *datas, char *line)
 	}
 	while (--command_id >= 0)
 	{
-		ret = g_parsings[command_id].parser(datas, splitted);
+		ret = g_parsings[command_id].parser(datas, (const char **)splitted);
 		if (ret != EXIT_CODE_NOT_FOUND)
 			break ;
 	}
