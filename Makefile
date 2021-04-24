@@ -45,7 +45,8 @@ FILES_FILES					=	args_parse.c	\
 								set_colors_fc.c\
 								set_resolution.c\
 								set_src_map.c\
-								set_srcs.c
+								set_srcs.c\
+								test_line_for_map.c
 COMMON_FILES				=	quit_app.c 
 
 

@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 15:32:04 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:21:10 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,20 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 ** ************************************************************************** **
 */
 
+typedef struct			s_map_parsing
+{
+	char const			*authorized_chars;
+	int					(*parser)(int i, int j, char c, t_env *);
+}						t_map_parsing;
+
+typedef struct			s_map_rec_datas
+{
+	int					fd;
+	char				*line;
+	int					i;
+	int					ret_gnl;
+}						t_map_rec_datas;
+
 void	args_parse(t_env *env, int argc, char const *argv[]);
 void	check_save_arg(t_env *env, char const *argv[]);
 void	free_array(char **splitted);
@@ -192,12 +206,23 @@ void	init_srcs(t_env *env);
 int		is_map(t_env *env, const char **params);
 int		parse_file(t_env *env);
 int		parse_line(t_env *datas, char *line);
+int		parse_map_int(t_env *env, t_map_rec_datas datas);
 int		parse_map(t_env *env, int fd, char *line);
 int		parse_value(char const *arg);
 int		set_colors_fc(t_env *env, const char **params);
 int		set_resolution(t_env *env, const char **params);
 void	set_src_map(t_env *env, char const *argv[]);
 int		set_srcs(t_env *env, const char **params);
+int		test_line_for_map(char *line, t_env *env);
+
+
+/*
+** ************************************************************************** **
+** 									COMMON                                    **
+** ************************************************************************** **
+*/
+
 void	quit_app(t_env *env, const char *message, int code);
+
 
 #endif
