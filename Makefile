@@ -15,10 +15,12 @@ COLORS_PATH 	= colors/
 IMG_PATH		= img/
 FILES_PATH		= files/
 COMMON_PATH		= common/
+GAME_PATH		= game/
 
 OBJ_PATHS_INIT			=	$(addprefix $(OBJ_PATH),$(COLORS_PATH) 	\
 													$(IMG_PATH) 	\
 													$(COMMON_PATH) 	\
+													$(GAME_PATH) 	\
 													$(FILES_PATH))
 OBJ_PATHS_INIT			+= 	$(OBJ_PATH)
 ## No need for a \ on the last line
@@ -48,12 +50,14 @@ FILES_FILES					=	args_parse.c	\
 								set_srcs.c\
 								test_line_for_map.c
 COMMON_FILES				=	quit_app.c 
+GAME_FILES					=	start_cub_3d.c 
 
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))
 SRC_FILES += $(addprefix $(IMG_PATH), $(IMG_FILES))
 SRC_FILES += $(addprefix $(FILES_PATH), $(FILES_FILES))
 SRC_FILES += $(addprefix $(COMMON_PATH), $(COMMON_FILES))
+SRC_FILES += $(addprefix $(GAME_PATH), $(GAME_FILES))
 
 
 OBJREGULAR_FILES	= 	$(SRC_FILES:.c=.o)			## get all .o names from .c names
