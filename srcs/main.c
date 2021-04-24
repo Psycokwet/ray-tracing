@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/05 17:20:18 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:12:28 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char const *argv[]){
 }
 
 
-/*B5h5bwhyFY2kAZm
+/*
     void    *mlx;
     void    *mlx_win;
     t_data  img;
