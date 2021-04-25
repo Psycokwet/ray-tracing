@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 18:09:42 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:18:17 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,10 @@ void	free_env(t_env *env)
 		free(env->map_array.lines);
 	}
 	env->conf.map_src = NULL;
+	if (env->mlx)
+	{
+		mlx_destroy_display(env->mlx);
+		free(env->mlx);
+		env->mlx = NULL;
+	}
 }

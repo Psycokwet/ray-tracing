@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/25 20:07:14 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:17:48 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		quit_cub3d(t_env *env)
 	printf("QUITTING ! \n");
 	// mlx_destroy_image(env->mlx, game->screen.ptr);
 	mlx_destroy_window(env->mlx, env->win);
-	free_env(env);
+	// free_env(env);
 }
 
 int		close_window(t_env *env)
@@ -97,14 +97,14 @@ void	start_cub_3d(t_env *env)
     env->mlx = mlx_init(); //mlx_destroy_display
 
     env->win = mlx_new_window(env->mlx, env->r.width, env->r.height, "Hello world!");
-    // mlx_key_hook(env->win, key_hook, env);
-    t_data  img;
+    // // mlx_key_hook(env->win, key_hook, env);
+    // t_data  img;
 
-    img.img = mlx_new_image(env->mlx, env->r.width, env->r.height);
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-                                 &img.endian);
-    my_mlx_pixel_put(&img, env->r.width-1, env->r.height, MASK_R); //de 0 a width -1 ou a height -1
-    mlx_put_image_to_window(env->mlx, env->win, img.img, 0, 0);
+    // img.img = mlx_new_image(env->mlx, env->r.width, env->r.height);
+    // img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+    //                              &img.endian);
+    // my_mlx_pixel_put(&img, env->r.width-1, env->r.height, MASK_R); //de 0 a width -1 ou a height -1
+    // mlx_put_image_to_window(env->mlx, env->win, img.img, 0, 0);
 
 	// mlx_hook(env->win, DestroyNotify, StructureNotifyMask, key_hook, (void *)0);
 
@@ -114,22 +114,5 @@ void	start_cub_3d(t_env *env)
 	mlx_loop_hook(env->mlx, game_loop, env);
     mlx_loop(env->mlx);
 
-
-	// // mlx_destroy_window(env->mlx, env->win);
-	// // free(env->win);
-	// mlx_destroy_window(env->mlx, env->win);
-	
-	// free_env(env);
-	// env->win = NULL;
-	// mlx_destroy_display(env->mlx);
-	// free(env->mlx);
-	
-	// free_env(env);
-	// // debug
-	// printf("ok %s %d %d %d\n", env->g_srcs[0].src, env->r.width,
-	// env->g_colors[0].color, env->map_array.size);
-	// for(int i = 0; env->map_array.size > i; i++)
-	// 	printf("RESULT %s, %u %d\n", env->map_array.lines[i]->line,
-	// 	env->map_array.lines[i]->size, i);
-	// free_env(env);
+	free_env(env);
 }
