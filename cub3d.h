@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 18:22:18 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:01:33 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
+# include <stdbool.h>
 
 # define RETURN_SUCCES			0
 # define RETURN_FAILURE			1
@@ -127,6 +128,34 @@ typedef struct			s_map_array
 # define MAX_SRCS 5
 # define MAX_COLORS 2
 
+
+
+
+#define XK_Escape						0xff1b
+#define ESCAPE_ID						0
+#define XK_Left							0xff51  /* Move left, left arrow */
+#define ROTATE_LEFT_ID					1  /* Move left, left arrow */
+#define XK_Right						0xff53  /* Move right, right arrow */
+#define ROTATE_RIGHT_ID					2  /* Move right, right arrow */
+#define XK_a							0x0061  /* U+0061 LATIN SMALL LETTER A */
+#define GO_LEFT_A_ID					3  /* U+0061 LATIN SMALL LETTER A */
+#define XK_d							0x0064  /* U+0064 LATIN SMALL LETTER D */
+#define GO_RIGTH_D_ID					4  /* U+0064 LATIN SMALL LETTER D */
+#define XK_s							0x0073  /* U+0073 LATIN SMALL LETTER S */
+#define GO_BACK_S_ID					5  /* U+0073 LATIN SMALL LETTER S */
+#define XK_w							0x0077  /* U+0077 LATIN SMALL LETTER W */
+#define GO_FRONT_W_ID					6  /* U+0077 LATIN SMALL LETTER W */
+
+
+typedef struct			s_actions
+{
+	int					is_asked;
+	int					keycode;
+	int					(*fun)(void *);
+}						t_action;
+
+# define MAX_ACTIONS 7
+
 typedef struct		s_env
 {
     t_conf          conf;
@@ -136,6 +165,9 @@ typedef struct		s_env
 	t_map_array		map_array;
 	t_start			player_start;
 	
+    void			*mlx;
+    void			*win;
+	t_action		actions[MAX_ACTIONS];
 	// t_conf			*conf;
 	// t_map			*map;
 	// t_rndr			*rndr;

@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 18:15:59 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/24 22:13:52 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,4 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 		quit_app(env, "Error, while reading the file", -EXIT_ARGS_FAILURE);
 	if (check_map_for_holes(env) < EXIT_SUCCESS)
 		quit_app(env, "Error, the map contains holes", -EXIT_FAILURE);
-	start_cub_3d(env);
 }
