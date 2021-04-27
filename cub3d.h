@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/25 20:01:33 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:23:45 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct			s_actions
 }						t_action;
 
 # define MAX_ACTIONS 7
+# define MAX_IMGS 7
 
 typedef struct		s_env
 {
@@ -168,6 +169,7 @@ typedef struct		s_env
     void			*mlx;
     void			*win;
 	t_action		actions[MAX_ACTIONS];
+	t_data			imgs[MAX_IMGS];
 	// t_conf			*conf;
 	// t_map			*map;
 	// t_rndr			*rndr;

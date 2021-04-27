@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 22:13:52 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:16:34 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ int		check_map_for_holes(t_env *env)
 	return (EXIT_SUCCESS);
 }
 
+int	check_min_dimension(t_env *env)
+{
+	if (env->r.width <= 0)
+		return (-EXIT_FAILURE);
+	if (env->r.height <= 0)
+		return (-EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 void	args_parse(t_env *env, int argc, char const *argv[])
 {
 	const char *name;
@@ -77,4 +86,6 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 		quit_app(env, "Error, while reading the file", -EXIT_ARGS_FAILURE);
 	if (check_map_for_holes(env) < EXIT_SUCCESS)
 		quit_app(env, "Error, the map contains holes", -EXIT_FAILURE);
+	if (check_min_dimension(env) < EXIT_SUCCESS)
+		quit_app(env, "Error, the width or height are null", -EXIT_FAILURE);
 }

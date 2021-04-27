@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/25 20:17:48 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:09:27 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int             key_release(int keycode, t_env *env)
 	int i;
 
 	i = -1;
-	while (i++ < MAX_PARSING)
+	while (i++ < MAX_PARSING - 1)
 		if (keycode == env->actions[i].keycode)
 		{
 			env->actions[i].is_asked = 1;
@@ -76,12 +76,14 @@ int		game_loop(t_env *env)
 	return (0);
 }
 
-int mock_actions_fun(void *v_env){
+int mock_actions_fun(void *v_env)
+{
 	t_env *env = (t_env*)v_env;
 	printf("supposed to act\n");
 }
 
-void	init_actions(t_env *env){
+void	init_actions(t_env *env)
+{
 	env->actions[ESCAPE_ID] = (t_action){0, XK_Escape, &quit_cub3d};
 	env->actions[ROTATE_LEFT_ID] = (t_action){0, XK_Left, &mock_actions_fun};
 	env->actions[ROTATE_RIGHT_ID] = (t_action){0, XK_Right, &mock_actions_fun};
@@ -90,21 +92,45 @@ void	init_actions(t_env *env){
 	env->actions[GO_BACK_S_ID] = (t_action){0, XK_s, &mock_actions_fun};
 	env->actions[GO_FRONT_W_ID] = (t_action){0, XK_w, &mock_actions_fun};
 }
+
+void	init_imgs(t_env *env)
+{
+	int i;
+
+	i = -1;
+	while (i++ < MAX_IMGS - 1)
+		env->imgs[i] = (t_data){NULL, NULL, -1, -1, -1};
+}
+
+void	correct_max_dimension(t_env *env)
+{
+	int sizex;
+	int sizey;
+
+	sizex = 0;
+	sizey = 0;
+	mlx_get_screen_size(env->mlx, &sizex, &sizey);
+	if(sizex < env->r.width)
+		env->r.width = sizex;
+	if(sizey < env->r.height)
+		env->r.height = sizey;
+}
+
 void	start_cub_3d(t_env *env)
 {
 	init_actions(env);
+	init_imgs(env);
 
-    env->mlx = mlx_init(); //mlx_destroy_display
+    env->mlx = mlx_init();
+	correct_max_dimension(env);
 
     env->win = mlx_new_window(env->mlx, env->r.width, env->r.height, "Hello world!");
-    // // mlx_key_hook(env->win, key_hook, env);
-    // t_data  img;
 
-    // img.img = mlx_new_image(env->mlx, env->r.width, env->r.height);
-    // img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-    //                              &img.endian);
-    // my_mlx_pixel_put(&img, env->r.width-1, env->r.height, MASK_R); //de 0 a width -1 ou a height -1
-    // mlx_put_image_to_window(env->mlx, env->win, img.img, 0, 0);
+    env->imgs[0].img = mlx_new_image(env->mlx, env->r.width, env->r.height);
+    env->imgs[0].addr = mlx_get_data_addr(env->imgs[0].img, &env->imgs[0].bits_per_pixel, &env->imgs[0].line_length,
+                                 &env->imgs[0].endian);
+    my_mlx_pixel_put(&env->imgs[0], env->r.width-1, env->r.height-1, MASK_R); //de 0 a width -1 ou a height -1
+    mlx_put_image_to_window(env->mlx, env->win, env->imgs[0].img, 0, 0);
 
 	// mlx_hook(env->win, DestroyNotify, StructureNotifyMask, key_hook, (void *)0);
 

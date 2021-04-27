@@ -6,12 +6,11 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/25 20:18:17 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/04/25 23:08:15 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-#include "get_next_line.h"
 
 void	free_env(t_env *env)
 {
@@ -41,6 +40,14 @@ void	free_env(t_env *env)
 		free(env->map_array.lines);
 	}
 	env->conf.map_src = NULL;
+
+	i = 0;
+	while (i < MAX_IMGS)
+	{
+		if (env->imgs[i].img != NULL)
+			mlx_destroy_image(env->mlx, env->imgs[i].img);
+		i++;
+	}
 	if (env->mlx)
 	{
 		mlx_destroy_display(env->mlx);
