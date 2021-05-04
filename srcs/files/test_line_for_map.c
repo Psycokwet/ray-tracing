@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 18:27:49 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/05/04 22:34:51 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,17 @@ int		id_dir(int i, int j, char c, t_env *env)
 {
 	if (env->player_start.is_set == 1)
 		return (-EXIT_FAILURE);
-	env->player_start = (t_start){(t_position){i, j }, 1, c};
+	env->player_start = (t_start){(t_coordinates){i + 0.5F, j + 0.5F}, 1, c};
+	if (c == DIR_WEST)
+		env->direction = (t_coordinates){-1, 0};
+	else if (c == DIR_NORTH)
+		env->direction = (t_coordinates){0, -1};
+	else if (c == DIR_SOUTH)
+		env->direction = (t_coordinates){0, 1};
+	else if (c == DIR_EAST)
+		env->direction = (t_coordinates){1, 0};
+	else
+		return (-EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -37,9 +47,9 @@ int		id_mob(int i, int j, char c, t_env *env)
 #define MAX_MAP_PARSING 3
 
 static const t_map_parsing g_map_parsings[3] = {
-	(t_map_parsing){AUTHORIZED_ON_MAP, NULL},
-	(t_map_parsing){AUTHORIZED_ON_MAP_MOB, &id_mob},
-	(t_map_parsing){AUTHORIZED_ON_MAP_DIR, &id_dir},
+	(t_map_parsing){AUTHORIZED_ON_MAP, NULL, -1},
+	(t_map_parsing){AUTHORIZED_ON_MAP_MOB, &id_mob, -1},
+	(t_map_parsing){AUTHORIZED_ON_MAP_DIR, &id_dir, '0'},
 };
 
 char	*test_line_for_map_int(char *line, t_env *env, int i)
@@ -58,6 +68,8 @@ char	*test_line_for_map_int(char *line, t_env *env, int i)
 				if (g_map_parsings[j].parser(i, j, line[i], env)
 				< EXIT_SUCCESS)
 					return (NULL);
+			if (g_map_parsings[j].replace != -1)
+				line[i] = g_map_parsings[j].replace;
 			break ;
 		}
 		j++;

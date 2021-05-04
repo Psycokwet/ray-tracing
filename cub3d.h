@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/25 20:23:45 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/05/05 00:00:30 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libs/libft/libft.h"
 # include "libs/minilibx-linux/mlx.h"
 # include "libs/minilibx-linux/mlx_int.h"
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -50,7 +51,11 @@
 # define INSIDE_MAX_TYPE		6
 # define INSIDE					"02NWES"
 # define AUTHORIZED_ON_MAP		"10 "
-# define AUTHORIZED_ON_MAP_DIR	"NOES"
+# define AUTHORIZED_ON_MAP_DIR	"NWES"
+# define DIR_NORTH				'N'
+# define DIR_WEST				'W'
+# define DIR_EAST				'E'
+# define DIR_SOUTH				'S'
 # define AUTHORIZED_ON_MAP_MOB	"2"
 
 # define CODE_WE				0
@@ -61,6 +66,16 @@
 
 # define CODE_FLOOR				1
 # define CODE_CEILING			0
+
+# define MAX_DEGREES			360
+# define FOV					90
+# define ROTATE_DIV				50000
+# define RUN_STEP				0.3
+# define QUOTIENT_MOVE			1
+
+# ifndef M_PI
+#  define M_PI					3.14159265358979323846
+# endif
 
 typedef struct  s_data {
     void        *img;
@@ -100,15 +115,27 @@ typedef struct			s_resolution
 	int					is_set;
 }						t_resolution;
 
-typedef struct			s_position
+typedef struct			s_coordinates
 {
-	int					x;//i
-	int					y;//j
-}						t_position;
+	float				x;//i
+	float				y;//j
+}						t_coordinates;
+
+typedef struct			s_cartesian_vector
+{
+	t_coordinates		dir;
+}						t_cartesian_vector;
+
+typedef struct			s_polar_vector
+{
+	float				angle;
+	float				size;
+}						t_polar_vector;
+
 
 typedef struct			s_start
 {
-	t_position			pos;
+	t_coordinates		pos;
 	int					is_set;
 	char				dir;
 }						t_start;
@@ -128,9 +155,6 @@ typedef struct			s_map_array
 # define MAX_SRCS 5
 # define MAX_COLORS 2
 
-
-
-
 #define XK_Escape						0xff1b
 #define ESCAPE_ID						0
 #define XK_Left							0xff51  /* Move left, left arrow */
@@ -145,7 +169,7 @@ typedef struct			s_map_array
 #define GO_BACK_S_ID					5  /* U+0073 LATIN SMALL LETTER S */
 #define XK_w							0x0077  /* U+0077 LATIN SMALL LETTER W */
 #define GO_FRONT_W_ID					6  /* U+0077 LATIN SMALL LETTER W */
-
+#define ACTUALLY_RUN					7
 
 typedef struct			s_actions
 {
@@ -154,7 +178,7 @@ typedef struct			s_actions
 	int					(*fun)(void *);
 }						t_action;
 
-# define MAX_ACTIONS 7
+# define MAX_ACTIONS 8
 # define MAX_IMGS 7
 
 typedef struct		s_env
@@ -165,11 +189,14 @@ typedef struct		s_env
 	t_resolution	r;
 	t_map_array		map_array;
 	t_start			player_start;
-	
+	t_coordinates	next_pos;
+	t_coordinates	current_pos;
     void			*mlx;
     void			*win;
 	t_action		actions[MAX_ACTIONS];
 	t_data			imgs[MAX_IMGS];
+	float			fov_angle;
+	t_coordinates	direction;
 	// t_conf			*conf;
 	// t_map			*map;
 	// t_rndr			*rndr;
@@ -185,6 +212,7 @@ typedef struct		s_env
 	// int				strafe_left;
 	// int				strafe_right;
 	// int				sprite;
+	int				count;
 }					t_env;
 
 typedef struct			s_parsing
@@ -220,6 +248,7 @@ typedef struct			s_map_parsing
 {
 	char const			*authorized_chars;
 	int					(*parser)(int i, int j, char c, t_env *);
+	int					replace;
 }						t_map_parsing;
 
 typedef struct			s_map_rec_datas

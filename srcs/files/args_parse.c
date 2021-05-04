@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/27 18:16:34 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/05/04 22:25:31 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		check_map_for_holes(t_env *env)
 	return (EXIT_SUCCESS);
 }
 
-int	check_min_dimension(t_env *env)
+int		check_min_dimension(t_env *env)
 {
 	if (env->r.width <= 0)
 		return (-EXIT_FAILURE);
