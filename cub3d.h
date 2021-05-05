@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/05/05 09:32:41 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/05/05 12:46:08 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@
 # define MAX_DEGREES			360
 # define FOV					90
 # define ROTATE_DIV				50000
-# define RUN_STEP				0.3
+# define RUN_STEP				0.00005F
+# define WALL_HIT_BOX			0.3
 # define QUOTIENT_MOVE			1
 
 # ifndef M_PI
@@ -178,8 +179,8 @@ typedef struct			s_actions
 	int					(*fun)(void *);
 }						t_action;
 
-# define MAX_SRCS 5
-# define MAX_COLORS 2
+# define MAX_SRCS		5
+# define MAX_COLORS		2
 # define MAX_ACTIONS	8
 # define MAX_IMGS		7
 # define MAX_TEX		4
@@ -192,7 +193,7 @@ typedef struct		s_env
 	t_resolution	r;
 	t_map_array		map_array;
 	t_start			player_start;
-	t_coordinates	next_pos;
+	t_coordinates	try_to_run_dir;
 	t_coordinates	current_pos;
     void			*mlx;
     void			*win;

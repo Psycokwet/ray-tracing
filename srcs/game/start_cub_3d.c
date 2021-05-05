@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/05/05 09:42:08 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:31:39 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,37 +181,71 @@ int rotate_rigth(t_env *env)
 
 int run_up(t_env *env)
 {
-	env->next_pos.y-= QUOTIENT_MOVE;
+	env->try_to_run_dir.y-= QUOTIENT_MOVE;
 	env->actions[ACTUALLY_RUN].is_asked = 1;
 	return (EXIT_SUCCESS);
 }
 
 int run_down(t_env *env)
 {
-	env->next_pos.y+= QUOTIENT_MOVE;
+	env->try_to_run_dir.y+= QUOTIENT_MOVE;
 	env->actions[ACTUALLY_RUN].is_asked = 1;
 	return (EXIT_SUCCESS);
 }
 
 int run_right(t_env *env)
 {
-	env->next_pos.x+= QUOTIENT_MOVE;
+	env->try_to_run_dir.x+= QUOTIENT_MOVE;
 	env->actions[ACTUALLY_RUN].is_asked = 1;
 	return (EXIT_SUCCESS);
 }
 
 int run_left(t_env *env)
 {
-	env->next_pos.x-= QUOTIENT_MOVE;
+	env->try_to_run_dir.x-= QUOTIENT_MOVE;
 	env->actions[ACTUALLY_RUN].is_asked = 1;
 	return (EXIT_SUCCESS);
 }
 
+
+
+t_coordinates calc_run_dir(t_env *env)
+{
+	t_coordinates	run_dir;
+	float			pi_quotient;
+
+	pi_quotient = ((env->try_to_run_dir.x != 0 ? -(env->try_to_run_dir.x - 1): 
+	0) + (env->try_to_run_dir.y != 0 ? (-env->try_to_run_dir.y + 2): 0));
+	if(env->try_to_run_dir.x == +1 && env->try_to_run_dir.y == -1)
+		pi_quotient = 7;
+	run_dir.x = env->direction.x;
+	run_dir.y = env->direction.y;
+	rotation(&run_dir, (pi_quotient * M_PI) / (float) ((env->try_to_run_dir.y
+	 != 0 && env->try_to_run_dir.x != 0) ? 4: 2));
+
+	return (run_dir);
+}
+
 int actually_run(t_env *env)
 {
-	printf("RUNNING %f:%f\n", env->next_pos.x, env->next_pos.y);
-	env->next_pos = (t_coordinates){0, 0};
+// 	printf("RUNNING %f:%f\n", env->current_pos.x, env->current_pos.y);
+// 	printf("DURECTION %f:%f\n", env->direction.x, env->direction.y);
+// 	printf("try_to_run_dir %f:%f\n", env->try_to_run_dir.x, env->try_to_run_dir.y);
+
 	env->actions[ACTUALLY_RUN].is_asked = 0;
+
+	t_coordinates run_dir = calc_run_dir(env);
+	t_coordinates new_pos = (t_coordinates){env->current_pos.x + run_dir.x * RUN_STEP, env->current_pos.y + run_dir.y * RUN_STEP};
+
+	if(env->map_array.lines[(int)(new_pos.y + (env->try_to_run_dir.y * WALL_HIT_BOX))]->line[(int)(env->current_pos.x)] != '1') // (new_pos.x + (env->try_to_run_dir.x * WALL_HIT_BOX)))
+	{
+		// printf("%c\n", env->map_array.lines[(int)(new_pos.y + (env->try_to_run_dir.y * WALL_HIT_BOX))]->line[(int)(env->current_pos.x)]);
+		env->current_pos.y = new_pos.y;
+	}
+	if(env->map_array.lines[(int)(env->current_pos.y)]->line[(int)(new_pos.x + (env->try_to_run_dir.x * WALL_HIT_BOX))] != '1') // 
+		env->current_pos.x = new_pos.x;
+	// printf("RUNNING NEW POS %f:%f\n", new_pos.x, new_pos.y);
+	env->try_to_run_dir = (t_coordinates){0, 0};
 	return (EXIT_SUCCESS);
 }
 
@@ -254,7 +288,6 @@ void	init_fov(t_env *env)
 {
 	env->fov_angle = FOV * M_PI / (MAX_DEGREES / 2);
 }
-
 
 int	init_textures(t_env *env)
 {
