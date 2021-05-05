@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/05/05 00:11:00 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/05/05 09:42:08 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,28 @@ void	init_fov(t_env *env)
 }
 
 
+int	init_textures(t_env *env)
+{
+	int i;
+
+	i = 0;
+	while (i < MAX_TEX)
+	{
+		env->textures[i].img = mlx_xpm_file_to_image(env->mlx,
+		env->g_srcs[i].src, &env->textures[i].w, &env->textures[i].h);
+		if(!env->textures[i].img)
+			return (-EXIT_FAILURE);
+		env->textures[i].addr = mlx_get_data_addr(env->textures[i].img,
+		&env->textures[i].bits_per_pixel, &env->textures[i].line_length,
+		&env->textures[i].endian);
+		if(!env->textures[i].img)
+			return (-EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+
 void	start_cub_3d(t_env *env)
 {
 	init_actions(env);
@@ -264,6 +286,12 @@ void	start_cub_3d(t_env *env)
 	env->count = 0;
     env->mlx = mlx_init();
 	correct_max_dimension(env);
+	if (init_textures(env) != EXIT_SUCCESS){
+		printf("Error encountered while initializing textures, the files may not exist\n");
+		free_env(env);
+		exit(-EXIT_FAILURE);
+	}
+
 	env->current_pos = env->player_start.pos;
 
     env->win = mlx_new_window(env->mlx, env->r.width, env->r.height, "Hello world!");

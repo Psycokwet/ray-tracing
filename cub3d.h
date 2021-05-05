@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/05/05 00:00:30 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/05/05 09:32:41 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct  s_data {
     int         bits_per_pixel;
     int         line_length;
     int         endian;
+	int			w;
+	int			h;
 }               t_data;
 
 typedef struct		s_conf
@@ -152,8 +154,6 @@ typedef struct			s_map_array
 	int					size;
 }						t_map_array;
 
-# define MAX_SRCS 5
-# define MAX_COLORS 2
 
 #define XK_Escape						0xff1b
 #define ESCAPE_ID						0
@@ -178,8 +178,11 @@ typedef struct			s_actions
 	int					(*fun)(void *);
 }						t_action;
 
-# define MAX_ACTIONS 8
-# define MAX_IMGS 7
+# define MAX_SRCS 5
+# define MAX_COLORS 2
+# define MAX_ACTIONS	8
+# define MAX_IMGS		7
+# define MAX_TEX		4
 
 typedef struct		s_env
 {
@@ -195,6 +198,7 @@ typedef struct		s_env
     void			*win;
 	t_action		actions[MAX_ACTIONS];
 	t_data			imgs[MAX_IMGS];
+	t_data			textures[MAX_TEX];
 	float			fov_angle;
 	t_coordinates	direction;
 	// t_conf			*conf;

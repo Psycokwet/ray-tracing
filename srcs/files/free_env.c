@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/25 23:08:15 by scarboni         ###   ########.fr       */
+/*   Updated: 2021/05/05 09:41:49 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ void	free_env(t_env *env)
 	{
 		if (env->imgs[i].img != NULL)
 			mlx_destroy_image(env->mlx, env->imgs[i].img);
+		i++;
+	}
+	i = 0;
+	while (i < MAX_TEX)
+	{
+		if (env->textures[i].img != NULL)
+			mlx_destroy_image(env->mlx, env->textures[i].img);
 		i++;
 	}
 	if (env->mlx)
