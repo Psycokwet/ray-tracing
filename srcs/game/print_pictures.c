@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/07 12:23:52 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:27:12 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	print_img(t_env *env)
 	env->imgs[i].addr = mlx_get_data_addr(env->imgs[i].img, \
 	&env->imgs[i].bits_per_pixel, &env->imgs[i].line_length, \
 	&env->imgs[i].endian);
+	draw_ceiling_floor(env->imgs, env);
 	mlx_put_image_to_window(env->mlx, env->win, env->imgs[i].img, 0, 0);
 }
