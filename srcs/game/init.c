@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:54:24 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/07 10:20:09 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 12:18:49 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ void	init_imgs(t_env *env)
 
 	i = -1;
 	while (i++ < MAX_IMGS - 1)
-		env->imgs[i] = (t_data){NULL, NULL, -1, -1, -1};
+		env->imgs[i] = (t_data){NULL, NULL, -1, -1, -1, -1, -1};
 }

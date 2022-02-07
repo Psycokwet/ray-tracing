@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:56:02 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/07 10:07:11 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 12:16:33 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ int	key_press(int keycode, t_env *env)
 	return (keycode);
 }
 
-int	quit_cub3d(t_env *env)
+int	quit_cub3d(void *v_env)
 {
+	t_env	*env;
+
+	env = (t_env *)v_env;
 	printf("QUITTING ! \n");
 	mlx_destroy_window(env->mlx, env->win);
+	return (0);
 }
 
 int	close_window(t_env *env)

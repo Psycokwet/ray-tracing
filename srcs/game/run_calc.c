@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_calc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:58:55 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/07 10:33:13 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 12:16:13 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ t_coordinates	calc_run_dir(t_env *env)
 	return (run_dir);
 }
 
-int	actually_run(t_env *env)
+int	actually_run(void *v_env)
 {
+	t_env			*env;
 	t_coordinates	run_dir;
 	t_coordinates	new_pos;
 
+	env = (t_env *)v_env;
 	run_dir = calc_run_dir(env);
 	new_pos = (t_coordinates){env->current_pos.x + \
 	run_dir.x * RUN_STEP, env->current_pos.y + run_dir.y * RUN_STEP};

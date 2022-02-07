@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 11:05:46 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 12:22:11 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@
 # define MAX_TEX		4
 # define MAX_PARSING	4
 # define MAX_MAP_PARSING 3
-# define DestroyNotify 33
+# define DestroyNotify_FIX 33
 
 typedef struct	s_data {
 	void	*img;
@@ -187,7 +187,6 @@ typedef struct			s_polar_vector
 typedef struct			s_start
 {
 	t_coordinates		pos;
-	t_coordinates		direction;
 	int					is_set;
 	char				dir;
 }						t_start;
@@ -308,7 +307,7 @@ int		test_line_for_map(char *line, t_env *env);
 void	quit_app(t_env *env, const char *message, int code);
 int		key_release(int keycode, t_env *env);
 int		key_press(int keycode, t_env *env);
-int		quit_cub3d(t_env *env);
+int		quit_cub3d(void *v_env);
 int		close_window(t_env *env);
 
 /*
@@ -317,15 +316,20 @@ int		close_window(t_env *env);
 ** ************************************************************************** **
 */
 
+void	print_img(t_env *env);
+void	init_actions(t_env *env);
+void	init_imgs(t_env *env);
+void	init_fov(t_env *env);
+int		init_textures(t_env *env);
 void	start_cub_3d(t_env *env);
-void	rotation(t_cartesian_vector *vector, float angle);
-int		rotate_left(t_env *env);
-int		rotate_rigth(t_env *env);
-int		actually_run(t_env *env);
+void	rotation(t_coordinates *vector, float angle);
+int		rotate_left(void *v_env);
+int		rotate_rigth(void *v_env);
+int		actually_run(void *v_env);
 int		mock_actions_fun(void *v_env);
-int		run_up(t_env *env);
-int		run_down(t_env *env);
-int		run_right(t_env *env);
-int		run_left(t_env *env);
+int		run_up(void *v_env);
+int		run_down(void *v_env);
+int		run_right(void *v_env);
+int		run_left(void *v_env);
 
 #endif
