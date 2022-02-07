@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 16:24:42 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/07 10:59:39 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 11:38:32 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ typedef struct s_gnllist
 	struct s_gnllist	*next;
 }		t_gnllist;
 
-int		get_next_line(int fd, char **line);
-int		create_next_line(char ***line, t_gnllist **curr, \
+int			get_next_line(int fd, char **line);
+int			create_next_line(char ***line, t_gnllist **curr, \
 	int ret, t_gnllist **head);
 t_gnllist	*lstadd_back(t_gnllist **alst, int fd);
 t_gnllist	*ft_list_return_if(t_gnllist **head, int fd);
-int		ft_newline_chr(char *s);
-size_t	ft_strlen(const char *s);
-char	*ft_strdupcat(char *s1, char *s2, char **save);
-char	*ft_strndup(const char *str, size_t len);
-char	*ft_strtrimgnl(char *s1);
-int		free_curr(t_gnllist **head, t_gnllist **curr, int res);
+int			ft_newline_chr(char *s);
+size_t		ft_strlen(const char *s);
+char		*ft_strdupcat(char *s1, char *s2, char **save);
+char		*ft_strndup(const char *str, size_t len);
+char		*ft_strtrimgnl(char *s1);
+int			free_curr(t_gnllist **head, t_gnllist **curr, int res);
 
 #endif

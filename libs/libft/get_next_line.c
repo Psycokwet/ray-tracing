@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 16:24:23 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/07 10:51:33 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 11:38:48 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_gnllist	*ft_list_return_if(t_gnllist **head, int fd)
 
 int	create_next_line(char ***line, t_gnllist **curr, int ret, t_gnllist **head)
 {
-	int		nl;
+	int	nl;
 
 	if (ret >= 0)
 	{
@@ -95,8 +95,8 @@ int	get_next_line(int fd, char **line)
 {
 	static t_gnllist	*head;
 	t_gnllist			*curr;
-	char			*buffer;
-	int				ret;
+	char				*buffer;
+	int					ret;
 
 	buffer = ft_strndup("", BUFFER_SIZE);
 	if (fd < 0 || !line || read(fd, buffer, 0) < 0 || BUFFER_SIZE <= 0)
