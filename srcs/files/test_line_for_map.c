@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   test_line_for_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 17:55:07 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 19:39:00 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	id_dir(int i, int j, char c, t_env *env)
+int	id_dir(int x, int y, char c, t_env *env)
 {
 	if (env->player_start.is_set == 1)
 		return (-EXIT_FAILURE);
-	env->player_start = (t_start){(t_coordinates){i + 0.5F, j - 0.5F}, 1, c};
+	env->player_start = (t_start){(t_coordinates){x + 0.5F, y + 0.5F}, 1, c};
 	if (c == DIR_WEST)
 		env->direction = (t_coordinates){-1, 0};
 	else if (c == DIR_NORTH)
@@ -45,44 +45,44 @@ static const t_map_parsing	g_map_parsings[3] = {
 	(t_map_parsing){AUTHORIZED_ON_MAP_DIR, &id_dir, '0'},
 };
 
-char	*test_line_for_map_int(char *line, t_env *env, int i)
-{
-	int		j;
-	char	*ret;
-
-	ret = NULL;
-	j = 0;
-	while (j < MAX_MAP_PARSING)
-	{
-		ret = ft_strchr(g_map_parsings[j].authorized_chars, line[i]);
-		if (ret != NULL)
-		{
-			if (g_map_parsings[j].parser)
-				if (g_map_parsings[j].parser(i, j, line[i], env) \
-				< EXIT_SUCCESS)
-					return (NULL);
-			if (g_map_parsings[j].replace != -1)
-				line[i] = g_map_parsings[j].replace;
-			break ;
-		}
-		j++;
-	}
-	return (ret);
-}
-
-int	test_line_for_map(char *line, t_env *env)
+char	*test_line_for_map_int(char *line, t_env *env, int x, int y)
 {
 	int		i;
 	char	*ret;
 
-	i = 0;
 	ret = NULL;
-	while (line[i])
+	i = 0;
+	while (i < MAX_MAP_PARSING)
 	{
-		ret = test_line_for_map_int(line, env, i);
-		if (ret == NULL)
-			return (-EXIT_FAILURE);
+		ret = ft_strchr(g_map_parsings[i].authorized_chars, line[y]);
+		if (ret != NULL)
+		{
+			if (g_map_parsings[i].parser)
+				if (g_map_parsings[i].parser(x, y, line[y], env) \
+				< EXIT_SUCCESS)
+					return (NULL);
+			if (g_map_parsings[i].replace != -1)
+				line[y] = g_map_parsings[i].replace;
+			break ;
+		}
 		i++;
 	}
-	return (i);
+	return (ret);
+}
+
+int	test_line_for_map(char *line, t_env *env, int x)
+{
+	int		y;
+	char	*ret;
+
+	y = 0;
+	ret = NULL;
+	while (line[y])
+	{
+		ret = test_line_for_map_int(line, env, x, y);
+		if (ret == NULL)
+			return (-EXIT_FAILURE);
+		y++;
+	}
+	return (y);
 }

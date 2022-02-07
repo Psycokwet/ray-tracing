@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 15:32:10 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 19:40:23 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ int		set_colors_fc(t_env *env, const char **params);
 int		set_resolution(t_env *env, const char **params);
 void	set_src_map(t_env *env, char const *argv[]);
 int		set_srcs(t_env *env, const char **params);
-int		test_line_for_map(char *line, t_env *env);
+int		test_line_for_map(char *line, t_env *env, int x);
 
 
 /*

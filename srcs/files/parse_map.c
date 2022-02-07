@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 10:57:27 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 19:25:58 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	parse_map_int(t_env *env, t_map_rec_datas datas)
 	line_size = 0;
 	if (!datas.line)
 		return (-EXIT_FAILURE);
-	line_size = test_line_for_map(datas.line, env);
+	line_size = test_line_for_map(datas.line, env, datas.i);
 	if (line_size < EXIT_SUCCESS)
 		return (simple_free_and_return(datas.line, -EXIT_FAILURE));
 	else if (datas.line[0])

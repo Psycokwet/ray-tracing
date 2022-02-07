@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_cub_3d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 17:13:15 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 19:09:04 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	correct_max_dimension(t_env *env)
 
 void	start_cub_3d(t_env *env)
 {
+	printf("HELLO \n%f:%f\n", env->player_start.pos.x, env->player_start.pos.y);
+	printf("HELLO \n%f:%f\n", env->current_pos.x, env->current_pos.y);
 	init_actions(env);
 	init_imgs(env);
 	init_fov(env);
