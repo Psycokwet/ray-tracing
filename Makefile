@@ -1,5 +1,5 @@
-NAME				=	rt
-BONUS				=	bonus	
+NAME				=	cub3D
+BONUS				=	bonus
 MAKE_LIBFT			=	makelibft
 LIBSPATH			=	libs/
 LIBFTPATH			=	libft/
@@ -49,8 +49,14 @@ FILES_FILES					=	args_parse.c	\
 								set_src_map.c\
 								set_srcs.c\
 								test_line_for_map.c
-COMMON_FILES				=	quit_app.c 
-GAME_FILES					=	start_cub_3d.c 
+COMMON_FILES				=	quit_app.c
+GAME_FILES					=	start_cub_3d.c \
+								events.c \
+								init.c \
+								printf_pictures.c \
+								rotations.c \
+								run_calc.c \
+								run.c
 
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))
@@ -69,7 +75,7 @@ OBJ 		= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 CC			=	clang
 
-CFLAGS		+=	-W -Wall -Wextra -D BUFFER_SIZE=32 -g3 #-Werror  -pedantic 		## '+=' allow to keep default flags.
+CFLAGS		+=	-W -Wall -Wextra -g -D BUFFER_SIZE=32 -g3 #-Werror  -pedantic 		## '+=' allow to keep default flags.
 
 LDFLAGS		=	-L$(addprefix $(LIBSPATH), $(LIBFTPATH)) -lft -L$(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)) -lm -lbsd -lX11 -lXext $(addprefix $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)), $(LIBMLX_AR))
 
@@ -90,28 +96,28 @@ $(MAKE_LIBFT)		: $(addprefix $(LIBSPATH), $(LIBFT_PATH))
 	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH))
 
 $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(HEADERS_FILES)
-	$(CC) -o $@ -c $< $(CFLAGS)  $(INC) 
+	$(CC) -o $@ -c $< $(CFLAGS)  $(INC)
 
 $(OBJ_PATHS_INIT)	:
-	mkdir -p  $@  
+	mkdir -p  $@
 
 $(NAME)			: 	$(OBJ)  $(addprefix $(LIBSPATH), $(addprefix $(LIBFTPATH),$(LIBFT_AR)))
-	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)  $(INC) 
+	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)  $(INC)
 
 $(BONUS)		: all
-		
+
 clean_local		:									## delete all .o
 	$(RM) $(OBJ) $(OBJBONUS)
 
 clean			:									## delete all .o
 	$(RM) $(OBJ) $(OBJBONUS)
-	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH)) clean	
+	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH)) clean
 
 fclean			:	clean_local							## clean + delete executable
 	$(RM) $(NAMETEST) $(NAME)
-	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH)) fclean					
+	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH)) fclean
 
 re				:	fclean all							## delete all .o and recompile all. Must use when editing a .h
 
 .PHONY			:	all bonus clean fclean re
-## voir dependances plus tard 
+## voir dependances plus tard

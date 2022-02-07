@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_save_arg.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:22:08 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 08:52:11 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	check_save_arg(t_env *env, char const *argv[])
 {
-	int s1;
-	int s2;
+	int	s1;
+	int	s2;
 
 	s1 = ft_strlen(SAVE_ARG);
 	s2 = ft_strlen(argv[2]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 18:20:31 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 09:42:40 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ void	init_env(t_env *env)
 	env->r = (t_resolution){"R", 1, -1, -1, -1};
 }
 
-int		open_map(t_env *env)
+int	open_map(t_env *env)
 {
-	int		fd;
+	int	fd;
 
-	if ((fd = open(env->conf.map_src, O_RDONLY)) < 0)
+	fd = open(env->conf.map_src, O_RDONLY);
+	if (fd < 0)
 	{
 		printf("failed to open the map for reading\n");
 		exit(EXIT_ARGS_FAILURE);
@@ -32,7 +33,7 @@ int		open_map(t_env *env)
 	return (fd);
 }
 
-int		parse_file(t_env *env)
+int	parse_file(t_env *env)
 {
 	int		fd;
 	char	*line;

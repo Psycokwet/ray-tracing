@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_srcs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 15:47:11 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 09:41:04 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 int	set_srcs(t_env *env, const char **params)
 {
-	int			i;
-	int			ret;
+	int	i;
+	int	ret;
 
 	ret = EXIT_CODE_NOT_FOUND;
 	i = MAX_SRCS;
 	while (--i >= 0)
 	{
-		if (ft_strncmp(params[0], env->g_srcs[i].code, env->g_srcs[i].size) == 0
-		&& ft_strlen(params[0]) == env->g_srcs[i].size)
+		if (ft_strncmp(params[0], env->g_srcs[i].code, env->g_srcs[i].size) \
+		== 0 && ft_strlen(params[0]) == env->g_srcs[i].size)
 		{
 			if (env->g_srcs[i].src != NULL)
 			{

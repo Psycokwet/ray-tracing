@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   args_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/05/04 22:25:31 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 09:36:31 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int		is_inside(char c)
+static int	in(char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < INSIDE_MAX_TYPE)
@@ -26,36 +26,36 @@ int		is_inside(char c)
 	return (0);
 }
 
-int		check_map_for_holes(t_env *env)
+int	check_map_for_holes(t_env *env)
 {
-	int line;
-	int column;
+	int			l;
+	int			c;
+	t_map_line	**li;
 
-	line = 0;
-	column = 0;
-	while (env->map_array.size > line)
+	li = env->map_array.lines;
+	l = 0;
+	while (++l < env->map_array.size)
 	{
-		while (env->map_array.lines[line]->size > column)
-			if ((is_inside(env->map_array.lines[line]->line[column]) == 1) &&
-			((line > 0 && is_inside(env->map_array.lines[line - 1]->line[column
-			]) == 0 && env->map_array.lines[line - 1]->line[column] != '1') || (
-			line + 1 < env->map_array.size && is_inside(env->map_array.lines[
-			line + 1]->line[column]) == 0 && env->map_array.lines[line + 1]->
-			line[column] != '1') || (column > 0 && is_inside(env->map_array.
-			lines[line]->line[column - 1]) == 0 && env->map_array.lines[line]->
-			line[column - 1] != '1') || (column + 1 <= env->map_array.lines[line
-			]->size && is_inside(env->map_array.lines[line]->line[column + 1])
-			== 0 && env->map_array.lines[line]->line[column + 1] != '1')))
+		c = 0;
+		while (li[l]->size > c)
+		{
+			if ((in(li[l]->line[c]) == 1) && ((l > 0 \
+				&& in(li[l - 1]->line[c]) == 0 && li[l - 1]->line[c] != '1') \
+				|| (l + 1 < env->map_array.size \
+				&& in(li[l + 1]->line[c]) == 0 \
+				&& li[l + 1]->line[c] != '1') \
+				|| (c > 0 && in(li[l]->line[c - 1]) == 0 \
+				&& li[l]->line[c - 1] != '1') || (c + 1 <= li[l]->size \
+				&& in(li[l]->line[c + 1]) == 0 \
+				&& li[l]->line[c + 1] != '1')))
 				return (-EXIT_FAILURE);
-			else
-				column++;
-		column = 0;
-		line++;
+			c++;
+		}
 	}
 	return (EXIT_SUCCESS);
 }
 
-int		check_min_dimension(t_env *env)
+int	check_min_dimension(t_env *env)
 {
 	if (env->r.width <= 0)
 		return (-EXIT_FAILURE);
@@ -64,9 +64,33 @@ int		check_min_dimension(t_env *env)
 	return (EXIT_SUCCESS);
 }
 
+int	make_map_char(t_env *env)
+{
+	int	i;
+
+	env->map_char = malloc(sizeof(char *) * (env->map_array.size + 1));
+	if (!env->map_char)
+		return (EXIT_FAILURE);
+	i = 0;
+	while (i < env->map_array.size)
+	{
+		env->map_char[i] = ft_strdup(env->map_array.lines[i]->line);
+		i++;
+	}
+	env->map_char[i] = NULL;
+	i = 0;
+	printf("MAP CHAR :\n");
+	while (i < env->map_array.size)
+	{
+		printf("%s\n", env->map_char[i]);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 void	args_parse(t_env *env, int argc, char const *argv[])
 {
-	const char *name;
+	const char	*name;
 
 	name = argv[0];
 	if (argc > 3)
@@ -88,4 +112,6 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 		quit_app(env, "Error, the map contains holes", -EXIT_FAILURE);
 	if (check_min_dimension(env) < EXIT_SUCCESS)
 		quit_app(env, "Error, the width or height are null", -EXIT_FAILURE);
+	if (make_map_char(&(*env)) < EXIT_SUCCESS)
+		quit_app(env, "Malloc failed.", -EXIT_FAILURE);
 }

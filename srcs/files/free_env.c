@@ -3,27 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/05/05 09:41:49 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 08:55:54 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	free_env(t_env *env)
+static void	free_map(t_env *env)
 {
-	int i;
+	int	i;
 
-	i = 0;
-	while (i < MAX_SRCS)
-	{
-		if (env->g_srcs[i].src != NULL)
-			free(env->g_srcs[i].src);
-		env->g_srcs[i].src = NULL;
-		i++;
-	}
 	if (env->map_array.lines)
 	{
 		i = 0;
@@ -40,6 +32,12 @@ void	free_env(t_env *env)
 		free(env->map_array.lines);
 	}
 	env->conf.map_src = NULL;
+	free_strs(env->map_char);
+}
+
+static void	free_text(t_env *env)
+{
+	int	i;
 
 	i = 0;
 	while (i < MAX_IMGS)
@@ -55,6 +53,22 @@ void	free_env(t_env *env)
 			mlx_destroy_image(env->mlx, env->textures[i].img);
 		i++;
 	}
+}
+
+void	free_env(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (i < MAX_SRCS)
+	{
+		if (env->g_srcs[i].src != NULL)
+			free(env->g_srcs[i].src);
+		env->g_srcs[i].src = NULL;
+		i++;
+	}
+	free_map(&(*env));
+	free_text(&(*env));
 	if (env->mlx)
 	{
 		mlx_destroy_display(env->mlx);

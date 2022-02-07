@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/05/05 12:46:08 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 10:04:47 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,46 @@
 #  define M_PI					3.14159265358979323846
 # endif
 
-typedef struct  s_data {
-    void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-	int			w;
-	int			h;
-}               t_data;
+# define XK_Escape						0xff1b
+# define ESCAPE_ID						0
+# define XK_Left							0xff51  /* Move left, left arrow */
+# define ROTATE_LEFT_ID					1  /* Move left, left arrow */
+# define XK_Right						0xff53  /* Move right, right arrow */
+# define ROTATE_RIGHT_ID					2  /* Move right, right arrow */
+# define XK_a							0x0061  /* U+0061 LATIN SMALL LETTER A */
+# define GO_LEFT_A_ID					3  /* U+0061 LATIN SMALL LETTER A */
+# define XK_d							0x0064  /* U+0064 LATIN SMALL LETTER D */
+# define GO_RIGTH_D_ID					4  /* U+0064 LATIN SMALL LETTER D */
+# define XK_s							0x0073  /* U+0073 LATIN SMALL LETTER S */
+# define GO_BACK_S_ID					5  /* U+0073 LATIN SMALL LETTER S */
+# define XK_w							0x0077  /* U+0077 LATIN SMALL LETTER W */
+# define GO_FRONT_W_ID					6  /* U+0077 LATIN SMALL LETTER W */
+# define ACTUALLY_RUN					7
+
+# define MAX_SRCS		5
+# define MAX_COLORS		2
+# define MAX_ACTIONS	8
+# define MAX_IMGS		7
+# define MAX_TEX		4
+# define MAX_PARSING	4
+# define MAX_MAP_PARSING 3
+# define DestroyNotify 33
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		w;
+	int		h;
+}				t_data;
 
 typedef struct		s_conf
 {
-    int             save;
-    const char		*map_src;
-}	                t_conf;
+	int				save;
+	const char		*map_src;
+}					t_conf;
 
 typedef struct			s_srcs
 {
@@ -118,10 +143,20 @@ typedef struct			s_resolution
 	int					is_set;
 }						t_resolution;
 
+typedef struct			s_texture
+{
+	int					texture_x;
+	int					texture_y;
+	int					texture_color;
+	double				texture_position;
+	t_data				*texture;
+}						t_texture;
+
+
 typedef struct			s_coordinates
 {
-	float				x;//i
-	float				y;//j
+	double				x;
+	double				y;
 }						t_coordinates;
 
 typedef struct			s_cartesian_vector
@@ -129,16 +164,29 @@ typedef struct			s_cartesian_vector
 	t_coordinates		dir;
 }						t_cartesian_vector;
 
+typedef struct			s_ray
+{
+	t_coordinates		dir;
+	t_coordinates		side_dist;
+	t_coordinates		delta_dist;
+	double				perp_wall_dist;
+	double				wall_x;
+	int					step_X;
+	int					step_Y;
+
+}						t_ray;
+
 typedef struct			s_polar_vector
 {
-	float				angle;
-	float				size;
+	double				angle;
+	double				size;
 }						t_polar_vector;
 
 
 typedef struct			s_start
 {
 	t_coordinates		pos;
+	t_coordinates		direction;
 	int					is_set;
 	char				dir;
 }						t_start;
@@ -146,7 +194,7 @@ typedef struct			s_start
 typedef struct			s_map_line
 {
 	char				*line;
-	int		size;
+	int					size;
 }						t_map_line;
 
 typedef struct			s_map_array
@@ -155,23 +203,6 @@ typedef struct			s_map_array
 	int					size;
 }						t_map_array;
 
-
-#define XK_Escape						0xff1b
-#define ESCAPE_ID						0
-#define XK_Left							0xff51  /* Move left, left arrow */
-#define ROTATE_LEFT_ID					1  /* Move left, left arrow */
-#define XK_Right						0xff53  /* Move right, right arrow */
-#define ROTATE_RIGHT_ID					2  /* Move right, right arrow */
-#define XK_a							0x0061  /* U+0061 LATIN SMALL LETTER A */
-#define GO_LEFT_A_ID					3  /* U+0061 LATIN SMALL LETTER A */
-#define XK_d							0x0064  /* U+0064 LATIN SMALL LETTER D */
-#define GO_RIGTH_D_ID					4  /* U+0064 LATIN SMALL LETTER D */
-#define XK_s							0x0073  /* U+0073 LATIN SMALL LETTER S */
-#define GO_BACK_S_ID					5  /* U+0073 LATIN SMALL LETTER S */
-#define XK_w							0x0077  /* U+0077 LATIN SMALL LETTER W */
-#define GO_FRONT_W_ID					6  /* U+0077 LATIN SMALL LETTER W */
-#define ACTUALLY_RUN					7
-
 typedef struct			s_actions
 {
 	int					is_asked;
@@ -179,15 +210,9 @@ typedef struct			s_actions
 	int					(*fun)(void *);
 }						t_action;
 
-# define MAX_SRCS		5
-# define MAX_COLORS		2
-# define MAX_ACTIONS	8
-# define MAX_IMGS		7
-# define MAX_TEX		4
-
 typedef struct		s_env
 {
-    t_conf          conf;
+	t_conf			conf;
 	t_srcs			g_srcs[MAX_SRCS];
 	t_colors		g_colors[MAX_COLORS];
 	t_resolution	r;
@@ -195,29 +220,18 @@ typedef struct		s_env
 	t_start			player_start;
 	t_coordinates	try_to_run_dir;
 	t_coordinates	current_pos;
-    void			*mlx;
-    void			*win;
+	char			**map_char;
+	void			*mlx;
+	void			*win;
 	t_action		actions[MAX_ACTIONS];
 	t_data			imgs[MAX_IMGS];
 	t_data			textures[MAX_TEX];
-	float			fov_angle;
+	double			fov_angle;
 	t_coordinates	direction;
-	// t_conf			*conf;
-	// t_map			*map;
-	// t_rndr			*rndr;
-	// t_data			img;
-	// t_data			tex[4];
-	// t_sprite		sp;
-	// void			*mlx;
-	// void			*win;
-	// int				left;
-	// int				right;
-	// int				up;
-	// int				down;
-	// int				strafe_left;
-	// int				strafe_right;
-	// int				sprite;
+	t_coordinates	plane;
 	int				count;
+	int				draw_start;
+	int				draw_end;
 }					t_env;
 
 typedef struct			s_parsing
@@ -291,6 +305,10 @@ int		test_line_for_map(char *line, t_env *env);
 */
 
 void	quit_app(t_env *env, const char *message, int code);
+int		key_release(int keycode, t_env *env);
+int		key_press(int keycode, t_env *env);
+int		quit_cub3d(t_env *env);
+int		close_window(t_env *env);
 
 /*
 ** ************************************************************************** **
@@ -299,5 +317,14 @@ void	quit_app(t_env *env, const char *message, int code);
 */
 
 void	start_cub_3d(t_env *env);
+void	rotation(t_cartesian_vector *vector, float angle);
+int		rotate_left(t_env *env);
+int		rotate_rigth(t_env *env);
+int		actually_run(t_env *env);
+int		mock_actions_fun(void *v_env);
+int		run_up(t_env *env);
+int		run_down(t_env *env);
+int		run_right(t_env *env);
+int		run_left(t_env *env);
 
 #endif

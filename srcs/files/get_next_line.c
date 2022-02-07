@@ -3,109 +3,119 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 10:38:18 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/13 10:21:05 by scarboni         ###   ########.fr       */
+/*   Created: 2021/05/28 16:24:23 by chbadad           #+#    #+#             */
+/*   Updated: 2021/05/30 16:44:07 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int				append_buffer(t_fd_read_wip *fd_wip, char *buffer,
-				ssize_t ret_read)
+t_list	*ft_lstadd_front(t_list **alst, t_list *new, int fd)
 {
-	char *tmp;
+	new->fd = fd;
+	new->save = ft_strndup("", 0);
+	new->temp = NULL;
+	new->next = *alst;
+	*alst = new;
+	return (new);
+}
 
-	tmp = NULL;
-	if (!fd_wip->line_wip)
-	{
-		fd_wip->size = ret_read;
-		fd_wip->line_wip = ft_strdup(buffer);
-		if (!fd_wip->line_wip)
-			return (-EXIT_FAILURE);
-	}
+int	free_curr(t_list **head, t_list **curr, int res)
+{
+	t_list	*temp;
+
+	if ((*head) == (*curr))
+		(*head) = (*curr)->next;
 	else
 	{
-		tmp = (char*)malloc(sizeof(char) *
-		(unsigned long)(fd_wip->size + ret_read + 1));
-		if (!tmp)
-			return (-EXIT_FAILURE);
-		ft_strlcpy(tmp, fd_wip->line_wip, (size_t)(fd_wip->size + 1));
-		ft_strlcpy(tmp + fd_wip->size, buffer, (unsigned long)ret_read + 1);
-		free(fd_wip->line_wip);
-		fd_wip->line_wip = tmp;
-		fd_wip->size += ret_read;
+		temp = (*head);
+		while (temp->next != *curr)
+			temp = temp->next;
+		temp->next = (*curr)->next;
 	}
-	return (APPEND_SUCCES);
+	free((*curr)->save);
+	free(*curr);
+	*curr = NULL;
+	return (res);
 }
 
-int				read_full_line(t_fd_read_wip *fd_wip, char **line, char *buffer)
+t_list	*ft_list_return_if(t_list **head, int fd)
 {
-	int		cut_line_n_ret;
+	t_list	*begin_list;
 
-	cut_line_n_ret = 1;
-	while (fd_wip->last_ret_read)
+	if (!(*head))
 	{
-		fd_wip->last_ret_read = read(fd_wip->fd, buffer, BUFFER_SIZE);
-		if (fd_wip->last_ret_read < 0)
-			return (-EXIT_FAILURE);
-		buffer[fd_wip->last_ret_read] = '\0';
-		if (append_buffer(fd_wip, buffer, fd_wip->last_ret_read) == -1)
-			return (-EXIT_FAILURE);
-		cut_line_n_ret = cut_line_n(line, fd_wip);
-		if (cut_line_n_ret != LINE_NOT_COMPLETE)
-			return (cut_line_n_ret);
+		*head = malloc(sizeof(t_list));
+		if (!*head)
+			return (NULL);
+		(*head)->fd = fd;
+		(*head)->save = ft_strndup("", 0);
+		(*head)->next = NULL;
 	}
-	*line = fd_wip->line_wip;
-	fd_wip->line_wip = NULL;
-	return (EXIT_READ_CLOSED);
-}
-
-void			set_current_wip(t_fd_read_wip *current_wip, int fd)
-{
-	if ((current_wip->fd == fd) && (current_wip->line_wip))
-		return ;
-	if (current_wip->line_wip)
-		free(current_wip->line_wip);
-	*current_wip = (struct s_fd_read_wip){fd, INIT_RET_READ, 0, NULL};
-}
-
-static void		gnl_cleaning(int const return_value,
-				t_fd_read_wip *current_wip, char *buffer)
-{
-	if ((return_value != EXIT_READ_OPEN) && (current_wip->line_wip))
+	begin_list = (*head);
+	while (begin_list && begin_list->fd != fd)
+		begin_list = begin_list->next;
+	if (!begin_list)
 	{
-		free(current_wip->line_wip);
-		current_wip->line_wip = NULL;
+		begin_list = malloc(sizeof(t_list));
+		if (!begin_list)
+			return (NULL);
+		ft_lstadd_front(&(*head), begin_list, fd);
 	}
-	if (buffer)
+	return (begin_list);
+}
+
+int	create_next_line(char ***line, t_list **curr, int ret, t_list **head)
+{
+	int		nl;
+
+	if (ret >= 0)
+	{
+		nl = ft_newline_chr((*curr)->save);
+		if (ret > 0 || (nl != -1 && ret == 0))
+			**line = ft_strndup((*curr)->save, nl);
+		else
+			**line = ft_strndup((*curr)->save, ft_strlen((*curr)->save));
+		(*curr)->temp = ft_strtrim((*curr)->save);
+		free((*curr)->save);
+		(*curr)->save = ft_strndup((*curr)->temp, ft_strlen((*curr)->temp));
+		free((*curr)->temp);
+		if (ret == 0 && (*curr)->save[0] == 0 && nl == -1)
+			return (free_curr(&(*head), &(*curr), EOF_REACHED));
+		else
+			return (LINE_READ);
+	}
+	else
+		return (free_curr(&(*head), &(*curr), ERROR));
+}
+
+int	get_next_line(int fd, char **line)
+{
+	static t_list	*head;
+	t_list			*curr;
+	char			*buffer;
+	int				ret;
+
+	buffer = ft_strndup("", BUFFER_SIZE);
+	if (fd < 0 || !line || read(fd, buffer, 0) < 0 || BUFFER_SIZE <= 0)
+	{
 		free(buffer);
-}
-
-int				get_next_line(int fd, char **line)
-{
-	static t_fd_read_wip	current_wip;
-	int						cut_line_n_ret;
-	int						return_value;
-	char					*buffer;
-
-	buffer = NULL;
-	return_value = -EXIT_FAILURE;
-	if (!line || BUFFER_SIZE <= 0 || fd < 0)
-	{
-		gnl_cleaning(return_value, &current_wip, buffer);
-		return (-EXIT_FAILURE);
+		return (ERROR);
 	}
-	set_current_wip(&current_wip, fd);
-	if (current_wip.line_wip)
+	curr = ft_list_return_if(&head, fd);
+	ret = BUFFER_SIZE;
+	while (ret > 0 && curr->save[0] != '\n')
 	{
-		cut_line_n_ret = cut_line_n(line, &current_wip);
-		if (cut_line_n_ret != LINE_NOT_COMPLETE)
-			return (cut_line_n_ret);
+		ret = read(fd, buffer, BUFFER_SIZE);
+		buffer[ret] = '\0';
+		curr->temp = ft_strdupcat(curr->save, buffer, &curr->save);
+		curr->save = ft_strndup(curr->temp, ft_strlen(curr->temp));
+		free(curr->temp);
+		if (ft_newline_chr(curr->save) != -1)
+			break ;
 	}
-	if ((buffer = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return_value = read_full_line(&current_wip, line, buffer);
-	gnl_cleaning(return_value, &current_wip, buffer);
-	return (return_value);
+	free(buffer);
+	return (create_next_line(&line, &curr, ret, &head));
 }

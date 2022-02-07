@@ -3,50 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 11:14:23 by scarboni          #+#    #+#             */
-/*   Updated: 2020/06/23 22:27:17 by scarboni         ###   ########.fr       */
+/*   Created: 2021/05/28 16:24:42 by chbadad           #+#    #+#             */
+/*   Updated: 2021/05/30 16:44:21 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
-# include <stddef.h>
-# include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+# define LINE_READ 1
+# define EOF_REACHED 0
+# define ERROR -1
 # include <stdlib.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <unistd.h>
 
-typedef struct	s_fd_read_wip
+typedef struct s_list
 {
-	int			fd;
-	ssize_t		last_ret_read;
-	ssize_t		size;
-	char		*line_wip;
-}				t_fd_read_wip;
+	int				fd;
+	char			*save;
+	char			*temp;
+	struct s_list	*next;
+}		t_list;
 
-# define EXIT_READ_OPEN		1
-# define EXIT_READ_CLOSED	0
-
-# define APPEND_SUCCES		0
-
-# define LINE_NOT_COMPLETE	2
-
-# define INIT_RET_READ		-2
-
-# define ENDL_FOUND			1
-# define ENDL_NOT_FOUND		0
-
-int				ft_strchr_gnl(const char *s, int c, ssize_t *indice);
-char			*ft_strdup(const char *src);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t			ft_strlen(const char *s);
-int				cut_line_n(char **line, t_fd_read_wip *fd_wip);
-int				append_buffer(t_fd_read_wip *fd_wip, char *buffer,
-ssize_t ret_read);
-int				read_full_line(t_fd_read_wip *fd_wip, char **line,
-				char *buffer);
-void			set_current_wip(t_fd_read_wip *current_wip, int fd);
-int				get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line);
+int		create_next_line(char ***line, t_list **curr, int ret, t_list **head);
+t_list	*ft_lstadd_back(t_list **alst, int fd);
+t_list	*ft_list_return_if(t_list **head, int fd);
+int		ft_newline_chr(char *s);
+size_t	ft_strlen(const char *s);
+char	*ft_strdupcat(char *s1, char *s2, char **save);
+char	*ft_strndup(const char *str, size_t len);
+char	*ft_strtrim(char *s1);
+int		free_curr(t_list **head, t_list **curr, int res);
 
 #endif

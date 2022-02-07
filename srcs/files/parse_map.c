@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/24 17:20:41 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 09:12:11 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	parse_map_int1(t_env *env, t_map_rec_datas *datas, int line_size)
 	datas->ret_gnl = get_next_line(datas->fd, &next_line);
 	if (datas->ret_gnl >= 0)
 	{
-		if (parse_map_int(env, (t_map_rec_datas)
-		{datas->fd, next_line, datas->i + 1, datas->ret_gnl})
+		if (parse_map_int(env, (t_map_rec_datas) \
+		{datas->fd, next_line, datas->i + 1, datas->ret_gnl}) \
 		< EXIT_SUCCESS)
 			return (simple_free_and_return(datas->line, -EXIT_FAILURE));
-		tmp = (t_map_line*)malloc(sizeof(t_map_line));
+		tmp = (t_map_line *)malloc(sizeof(t_map_line));
 		if (tmp == NULL)
 			return (-EXIT_FAILURE);
 		tmp->line = datas->line;
@@ -45,7 +45,7 @@ int	parse_map_int1(t_env *env, t_map_rec_datas *datas, int line_size)
 
 int	parse_map_int(t_env *env, t_map_rec_datas datas)
 {
-	int			line_size;
+	int	line_size;
 
 	line_size = 0;
 	if (!datas.line)
@@ -57,8 +57,7 @@ int	parse_map_int(t_env *env, t_map_rec_datas datas)
 		return (parse_map_int1(env, &datas, line_size));
 	else if (datas.ret_gnl == 0)
 	{
-		env->map_array.lines = (t_map_line**)
-		malloc(sizeof(t_map_line*) * (datas.i));
+		env->map_array.lines = malloc(sizeof(t_map_line *) * (datas.i));
 		if (env->map_array.lines == NULL)
 			return (-EXIT_FAILURE);
 		env->map_array.size = datas.i;

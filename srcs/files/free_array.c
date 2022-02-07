@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2021/04/17 17:14:48 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 08:52:31 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	free_array(char **splitted)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (splitted[i] != NULL)
