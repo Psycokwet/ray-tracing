@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 10:58:25 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 17:55:07 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	id_dir(int i, int j, char c, t_env *env)
 {
 	if (env->player_start.is_set == 1)
 		return (-EXIT_FAILURE);
-	env->player_start = (t_start){(t_coordinates){i + 0.5F, j + 0.5F}, 1, c};
+	env->player_start = (t_start){(t_coordinates){i + 0.5F, j - 0.5F}, 1, c};
 	if (c == DIR_WEST)
 		env->direction = (t_coordinates){-1, 0};
 	else if (c == DIR_NORTH)

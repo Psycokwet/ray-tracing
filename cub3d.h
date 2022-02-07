@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 12:22:11 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:32:10 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@
 # define MASK_R					0x00FF0000
 # define MASK_G					0x0000FF00
 # define MASK_B					0x000000FF
+
+# define WIDTH 860
+# define HEIGHT 540
 
 # define MAP_ARG				"MAP.cub"
 # define MAP_EXT				".cub"
@@ -229,6 +232,8 @@ typedef struct		s_env
 	double			fov_angle;
 	t_coordinates	direction;
 	t_coordinates	plane;
+	int				side;
+	int				lineheight;
 	int				count;
 	int				draw_start;
 	int				draw_end;

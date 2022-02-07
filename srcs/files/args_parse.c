@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 09:36:31 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 16:44:49 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 		quit_app(env, "Error, while reading the file", -EXIT_ARGS_FAILURE);
 	if (check_map_for_holes(env) < EXIT_SUCCESS)
 		quit_app(env, "Error, the map contains holes", -EXIT_FAILURE);
-	if (check_min_dimension(env) < EXIT_SUCCESS)
-		quit_app(env, "Error, the width or height are null", -EXIT_FAILURE);
+	// if (check_min_dimension(env) < EXIT_SUCCESS)
+	// 	quit_app(env, "Error, the width or height are null", -EXIT_FAILURE);
 	if (make_map_char(&(*env)) < EXIT_SUCCESS)
 		quit_app(env, "Malloc failed.", -EXIT_FAILURE);
 }

@@ -2,3 +2,6 @@ rt
 bin/*
 cub3D
 raycaster_textured(1).cpp
+.vscode/launch.json
+.vscode/settings.json
+.vscode/settings.json

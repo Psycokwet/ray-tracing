@@ -1,6 +1,18 @@
 {
 	"files.associations": {
 		"get_next_line.h": "c",
-		"cub3d.h": "c"
+		"cub3d.h": "c",
+		"*.tcc": "c",
+		"istream": "c",
+		"streambuf": "c",
+		"vector": "c",
+		"exception": "c",
+		"string_view": "c",
+		"functional": "c",
+		"fstream": "c",
+		"iosfwd": "c",
+		"sstream": "c",
+		"system_error": "c",
+		"string": "c"
 	}
 }

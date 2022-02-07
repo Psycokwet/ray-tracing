@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_cub_3d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 12:02:32 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/07 17:13:15 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	game_loop(t_env *env)
 {
 	int	i;
 
-	if (env->win)
-		print_img(env);
+	// if (env->win)
+	// 	print_img(env);
 	i = -1;
 	while (i++ < MAX_ACTIONS)
 	{
@@ -29,8 +29,8 @@ int	game_loop(t_env *env)
 
 void	correct_max_dimension(t_env *env)
 {
-	env->r.width = 860;
-	env->r.height = 540;
+	env->r.width = WIDTH;
+	env->r.height = HEIGHT;
 }
 
 void	start_cub_3d(t_env *env)

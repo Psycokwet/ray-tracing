@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 10:57:04 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 16:40:10 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	parse_file(t_env *env)
 			ret = parse_map(env, fd, line);
 			break ;
 		}
-		else if (ret < RETURN_SUCCES)
-			break ;
 		else
 			free(line);
+		// else if (ret < RETURN_SUCCES)
+		// 	break ;
 	}
 	if (ret < RETURN_SUCCES)
 		get_next_line(-1, NULL);
