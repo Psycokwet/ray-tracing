@@ -6,12 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 09:50:55 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 10:57:16 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-#include "get_next_line.h"
 
 static const t_parsing	g_parsings[MAX_PARSING] = {
 	(t_parsing){&is_map},

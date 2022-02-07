@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/07 10:18:26 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 10:44:25 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ void	print_img(t_env *env)
 	env->imgs[i].addr = mlx_get_data_addr(env->imgs[i].img, \
 	&env->imgs[i].bits_per_pixel, &env->imgs[i].line_length, \
 	&env->imgs[i].endian);
-	draw_walls(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->imgs[i].img, 0, 0);
 }

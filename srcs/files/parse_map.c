@@ -6,12 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 09:12:11 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 10:57:27 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-#include "get_next_line.h"
 
 int	simple_free_and_return(char *line, int code)
 {

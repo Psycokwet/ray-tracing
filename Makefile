@@ -35,8 +35,6 @@ FILES_FILES					=	args_parse.c	\
 								free_array.c\
 								free_env.c\
 								get_colors_from_line.c\
-								get_next_line_utils.c\
-								get_next_line.c\
 								init_colors.c\
 								init_srcs.c\
 								is_map.c\
@@ -53,7 +51,7 @@ COMMON_FILES				=	quit_app.c
 GAME_FILES					=	start_cub_3d.c \
 								events.c \
 								init.c \
-								printf_pictures.c \
+								print_pictures.c \
 								rotations.c \
 								run_calc.c \
 								run.c

@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 10:04:47 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/07 11:05:46 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "libs/libft/libft.h"
+# include "libs/libft/get_next_line.h"
 # include "libs/minilibx-linux/mlx.h"
 # include "libs/minilibx-linux/mlx_int.h"
 # include <math.h>
