@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 16:19:38 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:13:25 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static const t_parsing	g_parsings[MAX_PARSING] = {
 
 int	cut_line(char *line, char *args[3])
 {
-	char*	cut;
+	char	*cut;
 
 	cut = ft_strchr(line, ' ');
 	if (!cut)
