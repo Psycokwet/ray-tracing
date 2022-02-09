@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors_from_line.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 10:53:37 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 15:35:01 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 int	fill_rgb(int *result, char **splitted)
 {
-	int	i;
-	int	rgb[3];
+	int		i;
+	int		rgb[3];
+	char	*trimmed;
 
 	i = 0;
 	while (i < 3)
 	{
-		rgb[i] = parse_value(splitted[i]);
+		trimmed = ft_strtrim(splitted[i], BLANK_CHARS);
+		if (!trimmed)
+			return (-EXIT_FAILURE);
+		rgb[i] = parse_value(trimmed);
+		free(trimmed);
 		if (rgb[i] < 0)
 			return (-EXIT_FAILURE);
 		i++;

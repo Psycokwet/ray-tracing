@@ -3,38 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   set_srcs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 10:57:58 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 16:20:08 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	set_srcs(t_env *env, const char **params)
+int	set_srcs(t_env *env, char *args[3])
 {
 	int	i;
 	int	ret;
 
 	ret = EXIT_CODE_NOT_FOUND;
 	i = MAX_SRCS;
+	if (!args[0] || !args[1])
+		return (EXIT_CODE_NOT_FOUND);
 	while (--i >= 0)
 	{
-		if (ft_strncmp(params[0], env->g_srcs[i].code, env->g_srcs[i].size) \
-		== 0 && ft_strlen(params[0]) == env->g_srcs[i].size)
+		if (ft_strncmp(args[0], env->g_srcs[i].code, env->g_srcs[i].size) \
+		== 0 && ft_strlen(args[0]) == env->g_srcs[i].size)
 		{
 			if (env->g_srcs[i].src != NULL)
 			{
-				printf("%s is set twice or more times\n", params[0]);
+				printf("%s is set twice or more times\n", args[0]);
 				return (-EXIT_FAILURE);
 			}
-			else if (!params[1] || params[2])
+			else if (!args[1] || args[2])
 			{
-				printf("There is an issue with the source for %s\n", params[0]);
+				printf("There is an issue with the source for %s\n", args[0]);
 				return (-EXIT_FAILURE);
 			}
-			env->g_srcs[i].src = ft_strdup(params[1]);
+			env->g_srcs[i].src = ft_strdup(args[1]);
 			ret = EXIT_CODE_FOUND;
 		}
 	}

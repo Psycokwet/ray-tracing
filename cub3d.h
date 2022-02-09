@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 15:05:19 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 17:03:34 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stddef.h>
 # include <stdbool.h>
 
+#define BLANK_CHARS " \t\r\v\f"
 # define RETURN_SUCCES			0
 # define RETURN_FAILURE			1
 
@@ -239,7 +240,7 @@ typedef struct		s_env
 
 typedef struct			s_parsing
 {
-	int					(*parser)(t_env *, const char **);
+	int					(*parser)(t_env *, char *[3]);
 }						t_parsing;
 
 /*
@@ -289,16 +290,15 @@ int		get_colors_from_line(const char *line);
 void	init_colors(t_env *env);
 void	init_srcs(t_env *env);
 double	init_rad(char c);
-int		is_map(t_env *env, const char **params);
+int		is_map(t_env *env, char *args[3]);
 int		parse_file(t_env *env);
 int		parse_line(t_env *datas, char *line);
 int		parse_map_int(t_env *env, t_map_rec_datas datas);
 int		parse_map(t_env *env, int fd, char *line);
 int		parse_value(char const *arg);
-int		set_colors_fc(t_env *env, const char **params);
-int		set_resolution(t_env *env, const char **params);
+int		set_colors_fc(t_env *env, char *args[3]);
 void	set_src_map(t_env *env, char const *argv[]);
-int		set_srcs(t_env *env, const char **params);
+int		set_srcs(t_env *env, char *args[3]);
 int		test_line_for_map(char *line, t_env *env, int x);
 
 

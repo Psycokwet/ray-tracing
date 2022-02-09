@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 15:38:02 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 17:11:26 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ int	open_map(t_env *env)
 	return (fd);
 }
 
+void	free_gnl(int fd)
+{
+	char	*tmp;
+
+	while (get_next_line(fd, &tmp) > 0)
+	{
+		if (tmp)
+			free(tmp);
+		tmp = NULL;
+	}
+	if (tmp)
+		free(tmp);
+}
+
 int	parse_file(t_env *env)
 {
 	int		fd;
@@ -61,7 +75,7 @@ int	parse_file(t_env *env)
 			free(line);
 	}
 	if (ret < RETURN_SUCCES)
-		get_next_line(-1, NULL);
+		free_gnl(fd);
 	free(line);
 	close(fd);
 	return (ret);
