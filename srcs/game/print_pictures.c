@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/07 18:05:02 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/08 13:24:57 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,23 +107,20 @@ void	wall_hit(t_env *env, t_ray *ray)
 		ray->perp_wall_dist = (ray->side_dist.x - ray->delta_dist.x);
 }
 
-int	get_text_x(t_env *env, t_ray *ray)
+int	get_text_x(t_texture *tex, t_env *env, t_ray *ray)
 {
 	int	text_x;
 
-	text_x = (int)ray->wall_x * (double)env->textures[0].w;
+	text_x = (int)(ray->wall_x * (double)tex->texture->w);
 	if (env->side == 0 && ray->dir.x > 0)
-		text_x = env->textures[0].w - text_x - 1;
+		text_x = tex->texture->w - text_x - 1;
 	if (env->side == 1 && ray->dir.y < 0)
-		text_x = env->textures[0].w - text_x - 1;
+		text_x = tex->texture->w - text_x - 1;
 	return (text_x);
 }
 
 void	lineheight(t_env *env, t_ray *ray)
 {
-	int	pitch;
-
-	pitch = 100;
 	env->lineheight = (int)(HEIGHT / ray->perp_wall_dist);
 	env->draw_start = -env->lineheight / 2 + HEIGHT / 2;
 	if (env->draw_start < 0)
@@ -138,21 +135,39 @@ void	lineheight(t_env *env, t_ray *ray)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
+void	get_texture(t_env *env, t_texture *text, t_ray *ray)
+{
+	if (env->side == 1)
+	{
+		if (ray->dir.y > 0)
+			text->texture = &env->textures[CODE_NO];
+		if (ray->dir.y < 0)
+			text->texture = &env->textures[CODE_SO];
+	}
+	else if (env->side == 0)
+	{
+		if (ray->dir.x > 0)
+			text->texture = &env->textures[CODE_EA];
+		if (ray->dir.x < 0)
+			text->texture = &env->textures[CODE_WE];
+	}
+}
+
 void	texturing(t_data *datas, int x, t_env *env, t_ray *ray)
 {
 	t_texture	tex;
 	double		step;
 	int			y;
 
-	tex.texture = &env->textures[0];
-	tex.texture_x = get_text_x(&(*env), &(*ray));
+	get_texture(&(*env), &tex, &(*ray));
+	tex.texture_x = get_text_x(&tex, &(*env), &(*ray));
 	step = 1.0 * tex.texture->h / env->lineheight;
 	tex.texture_position = (env->draw_start - HEIGHT / 2 + env->lineheight / 2) * step;
 	y = env->draw_start;
 	while (y < env->draw_end)
 	{
 		tex.texture_y = (int)tex.texture_position & (tex.texture->h - 1);
-		tex.texture_color = ((int *)tex.texture->addr)[(tex.texture->line_length / 4) \
+		tex.texture_color = ((int *)tex.texture->addr)[tex.texture->h \
 			* tex.texture_y + tex.texture_x];
 		my_mlx_pixel_put(datas, x, y, tex.texture_color);
 		tex.texture_position += step;
@@ -167,19 +182,19 @@ void	draw_walls(t_data *datas, t_env *env)
 	int				x;
 
 	x = 0;
-	env->plane.x = 0.0;
-	env->plane.y = 0.66;
 	while (x < WIDTH)
 	{
 		cam.x = 2 * x / (double)WIDTH - 1;
 		ray.dir.x = env->direction.x + env->plane.x * cam.x;
 		ray.dir.y = env->direction.y + env->plane.y * cam.x;
-		ray.delta_dist.x = 1e30;
-		ray.delta_dist.y = 1e30;
-		if (ray.dir.x != 0)
-			ray.delta_dist.x = ft_abs(1 / ray.dir.x);
-		if (ray.dir.y != 0)
-			ray.delta_dist.y = ft_abs(1 / ray.dir.y);
+		if (ray.dir.x == 0)
+			ray.delta_dist.x = 100000000000;
+		else
+			ray.delta_dist.x = fabs(1 / ray.dir.x);
+		if (ray.dir.y == 0)
+			ray.delta_dist.y = 100000000000;
+		else
+			ray.delta_dist.y = fabs(1 / ray.dir.y);
 		stepping(&(*env), &ray);
 		wall_hit(&(*env), &ray);
 		lineheight(&(*env), &ray);
@@ -188,7 +203,7 @@ void	draw_walls(t_data *datas, t_env *env)
 	}
 }
 
-void	print_img(t_env *env)
+int	print_img(t_env *env)
 {
 	int	i;
 
@@ -202,4 +217,5 @@ void	print_img(t_env *env)
 	draw_ceiling_floor(&env->imgs[i], env);
 	draw_walls(&env->imgs[i], &(*env));
 	mlx_put_image_to_window(env->mlx, env->win, env->imgs[i].img, 0, 0);
+	return (1);
 }

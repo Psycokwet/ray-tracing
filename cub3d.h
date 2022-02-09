@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 19:40:23 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:43:38 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 # define MASK_G					0x0000FF00
 # define MASK_B					0x000000FF
 
-# define WIDTH 860
-# define HEIGHT 540
+# define WIDTH 800
+# define HEIGHT 600
 
 # define MAP_ARG				"MAP.cub"
 # define MAP_EXT				".cub"
@@ -73,8 +73,8 @@
 
 # define MAX_DEGREES			360
 # define FOV					90
-# define ROTATE_DIV				50000
-# define RUN_STEP				0.00005F
+# define ROTATE_DIV				1000
+# define RUN_STEP				0.2F
 # define WALL_HIT_BOX			0.3
 # define QUOTIENT_MOVE			1
 
@@ -321,13 +321,14 @@ int		close_window(t_env *env);
 ** ************************************************************************** **
 */
 
-void	print_img(t_env *env);
+int		print_img(t_env *env);
 void	init_actions(t_env *env);
 void	init_imgs(t_env *env);
 void	init_fov(t_env *env);
 int		init_textures(t_env *env);
 void	start_cub_3d(t_env *env);
-void	rotation(t_coordinates *vector, float angle);
+void	rotation(t_env *env, double rotspeed);
+void	calc_dir(t_cartesian_vector *vector, float angle);
 int		rotate_left(void *v_env);
 int		rotate_rigth(void *v_env);
 int		actually_run(void *v_env);

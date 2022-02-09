@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_line_for_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 19:39:00 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/08 12:36:16 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,29 @@
 
 int	id_dir(int x, int y, char c, t_env *env)
 {
+	double			dir_rad;
+	t_coordinates	co;
+	t_coordinates	plane;
+
 	if (env->player_start.is_set == 1)
 		return (-EXIT_FAILURE);
-	env->player_start = (t_start){(t_coordinates){x + 0.5F, y + 0.5F}, 1, c};
+	env->player_start = (t_start){(t_coordinates){y + 0.5F, x + 0.5F}, 1, c};
 	if (c == DIR_WEST)
-		env->direction = (t_coordinates){-1, 0};
+		dir_rad = M_PI;
 	else if (c == DIR_NORTH)
-		env->direction = (t_coordinates){0, -1};
+		dir_rad = M_PI / 2;
 	else if (c == DIR_SOUTH)
-		env->direction = (t_coordinates){0, 1};
+		dir_rad = (3 * M_PI) / 2;
 	else if (c == DIR_EAST)
-		env->direction = (t_coordinates){1, 0};
+		dir_rad = 0;
 	else
 		return (-EXIT_FAILURE);
+	co = env->direction;
+	plane = env->plane;
+	env->direction.x = env->direction.x * cos(-dir_rad) - env->direction.y * sin(-dir_rad);
+	env->direction.y = co.x * sin(-dir_rad) + env->direction.y * cos(-dir_rad);
+	env->plane.x = env->plane.x * cos(-dir_rad) - env->plane.y * sin(-dir_rad);
+	env->plane.y = plane.x * sin(-dir_rad) + env->plane.y * cos(-dir_rad);
 	return (EXIT_SUCCESS);
 }
 
