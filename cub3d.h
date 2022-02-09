@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 10:43:38 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 13:51:40 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@
 # define MAX_DEGREES			360
 # define FOV					90
 # define ROTATE_DIV				1000
-# define RUN_STEP				0.2F
+# define RUN_STEP				0.05F
 # define WALL_HIT_BOX			0.3
 # define QUOTIENT_MOVE			1
 
