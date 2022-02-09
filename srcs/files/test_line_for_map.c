@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_line_for_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/08 12:36:16 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 14:19:38 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	id_mob(int i, int j, char c, t_env *env)
 	return (EXIT_SUCCESS);
 }
 
-static const t_map_parsing	g_map_parsings[3] = {
+# define MAX_MAP_PARSING 2
+static const t_map_parsing	g_map_parsings[MAX_MAP_PARSING] = {
 	(t_map_parsing){AUTHORIZED_ON_MAP, NULL, -1},
-	(t_map_parsing){AUTHORIZED_ON_MAP_MOB, &id_mob, -1},
 	(t_map_parsing){AUTHORIZED_ON_MAP_DIR, &id_dir, '0'},
 };
 

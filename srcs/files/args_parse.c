@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 14:03:37 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 14:30:29 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,6 @@ int	check_map_for_holes(t_env *env)
 			c++;
 		}
 	}
-	return (EXIT_SUCCESS);
-}
-
-int	check_min_dimension(t_env *env)
-{
-	if (env->r.width <= 0)
-		return (-EXIT_FAILURE);
-	if (env->r.height <= 0)
-		return (-EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

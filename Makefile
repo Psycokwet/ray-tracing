@@ -43,7 +43,6 @@ FILES_FILES					=	args_parse.c	\
 								parse_map.c\
 								parse_value.c\
 								set_colors_fc.c\
-								set_resolution.c\
 								set_src_map.c\
 								set_srcs.c\
 								test_line_for_map.c

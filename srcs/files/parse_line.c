@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/07 10:57:16 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 14:33:56 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static const t_parsing	g_parsings[MAX_PARSING] = {
 	(t_parsing){&is_map},
-	(t_parsing){&set_resolution},
 	(t_parsing){&set_colors_fc},
 	(t_parsing){&set_srcs},
 };

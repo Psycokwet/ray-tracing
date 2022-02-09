@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_pictures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/09 13:56:00 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 14:33:04 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	draw_ceiling_floor(t_data *datas, t_env *env)
 {
-	draw_rect(datas, (t_coordinates){0, 0}, (t_coordinates){env->r.width, \
-		env->r.height / 2}, env->g_colors[CODE_CEILING].color);
-	draw_rect(datas, (t_coordinates){0, env->r.height / 2}, (t_coordinates) \
-		{env->r.width, env->r.height}, env->g_colors[CODE_FLOOR].color);
+	draw_rect(datas, (t_coordinates){0, 0}, (t_coordinates){WIDTH, \
+		HEIGHT / 2}, env->g_colors[CODE_CEILING].color);
+	draw_rect(datas, (t_coordinates){0, HEIGHT / 2}, (t_coordinates) \
+		{WIDTH, HEIGHT}, env->g_colors[CODE_FLOOR].color);
 }
 
 int	get_text_x(t_texture *tex, t_env *env, t_ray *ray)
@@ -79,7 +79,7 @@ int	print_img(t_env *env)
 	i = 0;
 	if (env->imgs[i].img != NULL)
 		mlx_destroy_image(env->mlx, env->imgs[i].img);
-	env->imgs[i].img = mlx_new_image(env->mlx, env->r.width, env->r.height);
+	env->imgs[i].img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	env->imgs[i].addr = mlx_get_data_addr(env->imgs[i].img, \
 	&env->imgs[i].bits_per_pixel, &env->imgs[i].line_length, \
 	&env->imgs[i].endian);

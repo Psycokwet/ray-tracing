@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_cub_3d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/08 13:55:32 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 14:30:09 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ int	game_loop(t_env *env)
 	return (0);
 }
 
-void	correct_max_dimension(t_env *env)
-{
-	env->r.width = WIDTH;
-	env->r.height = HEIGHT;
-}
-
 void	start_cub_3d(t_env *env)
 {
 	printf("HELLO \n%f:%f\n", env->player_start.pos.x, env->player_start.pos.y);
@@ -42,7 +36,6 @@ void	start_cub_3d(t_env *env)
 	init_fov(env);
 	env->count = 0;
 	env->mlx = mlx_init();
-	correct_max_dimension(env);
 	if (init_textures(env) != EXIT_SUCCESS)
 	{
 		printf("Error on textures :the files may not exist\n");
@@ -50,7 +43,7 @@ void	start_cub_3d(t_env *env)
 		exit(-EXIT_FAILURE);
 	}
 	env->current_pos = env->player_start.pos;
-	env->win = mlx_new_window(env->mlx, env->r.width, env->r.height, "Cub3D");
+	env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "Cub3D");
 	print_img(env);
 	mlx_hook(env->win, KeyPress, KeyPressMask, key_press, env);
 	mlx_hook(env->win, KeyRelease, KeyReleaseMask, key_release, env);

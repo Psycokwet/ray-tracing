@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 13:59:25 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 14:31:56 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,14 @@
 # define SAVE_ARG				"--save"
 # define USAGE					"Usage : MAP.cub [--save]"
 # define WALL					"1"
-# define INSIDE_MAX_TYPE		6
-# define INSIDE					"02NWES"
+# define INSIDE_MAX_TYPE		5
+# define INSIDE					"0NWES"
 # define AUTHORIZED_ON_MAP		"10 "
 # define AUTHORIZED_ON_MAP_DIR	"NWES"
 # define DIR_NORTH				'N'
 # define DIR_WEST				'W'
 # define DIR_EAST				'E'
 # define DIR_SOUTH				'S'
-# define AUTHORIZED_ON_MAP_MOB	"2"
 
 # define CODE_WE				0
 # define CODE_NO				1
@@ -103,8 +102,7 @@
 # define MAX_ACTIONS	8
 # define MAX_IMGS		7
 # define MAX_TEX		4
-# define MAX_PARSING	4
-# define MAX_MAP_PARSING 3
+# define MAX_PARSING	3
 # define DestroyNotify_FIX 33
 
 typedef struct	s_data {
