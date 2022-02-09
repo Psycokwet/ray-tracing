@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 13:51:40 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 13:59:25 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,16 @@ int		close_window(t_env *env);
 */
 
 int		print_img(t_env *env);
+void	draw_ceiling_floor(t_data *datas, t_env *env);
+void	draw_rect(t_data *datas, t_coordinates start, \
+	t_coordinates end, int color);
+int		get_text_x(t_texture *tex, t_env *env, t_ray *ray);
+void	get_texture(t_env *env, t_texture *text, t_ray *ray);
+void	texturing(t_data *datas, int x, t_env *env, t_ray *ray);
+void	draw_walls(t_data *datas, t_env *env);
+void	stepping(t_env *env, t_ray *ray);
+void	wall_hit(t_env *env, t_ray *ray);
+void	lineheight(t_env *env, t_ray *ray);
 void	init_actions(t_env *env);
 void	init_imgs(t_env *env);
 void	init_fov(t_env *env);

@@ -6,31 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/08 13:24:57 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 13:56:00 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-void	draw_rect(t_data *datas, t_coordinates start, \
-	t_coordinates end, int color)
-{
-	int	x;
-	int	y;
-
-	x = start.x;
-	y = start.y;
-	while (y < end.y)
-	{
-		while (x < end.x)
-		{
-			my_mlx_pixel_put(datas, x, y, color);
-			x++;
-		}
-		x = start.x;
-		y++;
-	}
-}
 
 void	draw_ceiling_floor(t_data *datas, t_env *env)
 {
@@ -38,73 +18,6 @@ void	draw_ceiling_floor(t_data *datas, t_env *env)
 		env->r.height / 2}, env->g_colors[CODE_CEILING].color);
 	draw_rect(datas, (t_coordinates){0, env->r.height / 2}, (t_coordinates) \
 		{env->r.width, env->r.height}, env->g_colors[CODE_FLOOR].color);
-}
-
-double	ft_abs(double nb)
-{
-	if (nb < 0)
-		nb *= -1;
-	return (nb);
-}
-
-void	stepping(t_env *env, t_ray *ray)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)env->current_pos.x;
-	map_y = (int)env->current_pos.y;
-	if (ray->dir.x < 0)
-	{
-		ray->step_X = -1;
-		ray->side_dist.x = (env->current_pos.x - map_x) * ray->delta_dist.x;
-	}
-	else
-	{
-		ray->step_X = 1;
-		ray->side_dist.x = (map_x + 1.0 - env->current_pos.x) * ray->delta_dist.x;
-	}
-	if (ray->dir.y < 0)
-	{
-		ray->step_Y = -1;
-		ray->side_dist.y = (env->current_pos.y - map_y) * ray->delta_dist.y;
-	}
-	else
-	{
-		ray->step_Y = 1;
-		ray->side_dist.y = (map_y + 1.0 - env->current_pos.y) * ray->delta_dist.y;
-	}
-}
-
-void	wall_hit(t_env *env, t_ray *ray)
-{
-	int	hit;
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)env->current_pos.x;
-	map_y = (int)env->current_pos.y;
-	hit = 0;
-	while (hit == 0)
-	{
-		if (ray->side_dist.x < ray->side_dist.y)
-		{
-			ray->side_dist.x += ray->delta_dist.x;
-			map_x += ray->step_X;
-			env->side = 0;
-		}
-		else
-		{
-			ray->side_dist.y += ray->delta_dist.y;
-			map_y += ray->step_Y;
-			env->side = 1;
-		}
-		if (env->map_char[map_y][map_x] == '1')
-			hit = 1;
-	}
-	ray->perp_wall_dist = ray->side_dist.y - ray->delta_dist.y;
-	if (env->side == 0)
-		ray->perp_wall_dist = (ray->side_dist.x - ray->delta_dist.x);
 }
 
 int	get_text_x(t_texture *tex, t_env *env, t_ray *ray)
@@ -117,22 +30,6 @@ int	get_text_x(t_texture *tex, t_env *env, t_ray *ray)
 	if (env->side == 1 && ray->dir.y < 0)
 		text_x = tex->texture->w - text_x - 1;
 	return (text_x);
-}
-
-void	lineheight(t_env *env, t_ray *ray)
-{
-	env->lineheight = (int)(HEIGHT / ray->perp_wall_dist);
-	env->draw_start = -env->lineheight / 2 + HEIGHT / 2;
-	if (env->draw_start < 0)
-		env->draw_start = 0;
-	env->draw_end = env->lineheight / 2 + HEIGHT / 2;
-	if (env->draw_end >= HEIGHT)
-		env->draw_end = HEIGHT - 1;
-	if (env->side == 0)
-		ray->wall_x = env->current_pos.y + ray->perp_wall_dist * ray->dir.y;
-	else
-		ray->wall_x = env->current_pos.x + ray->perp_wall_dist * ray->dir.x;
-	ray->wall_x -= floor(ray->wall_x);
 }
 
 void	get_texture(t_env *env, t_texture *text, t_ray *ray)
@@ -172,34 +69,6 @@ void	texturing(t_data *datas, int x, t_env *env, t_ray *ray)
 		my_mlx_pixel_put(datas, x, y, tex.texture_color);
 		tex.texture_position += step;
 		y++;
-	}
-}
-
-void	draw_walls(t_data *datas, t_env *env)
-{
-	t_coordinates	cam;
-	t_ray			ray;
-	int				x;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		cam.x = 2 * x / (double)WIDTH - 1;
-		ray.dir.x = env->direction.x + env->plane.x * cam.x;
-		ray.dir.y = env->direction.y + env->plane.y * cam.x;
-		if (ray.dir.x == 0)
-			ray.delta_dist.x = 100000000000;
-		else
-			ray.delta_dist.x = fabs(1 / ray.dir.x);
-		if (ray.dir.y == 0)
-			ray.delta_dist.y = 100000000000;
-		else
-			ray.delta_dist.y = fabs(1 / ray.dir.y);
-		stepping(&(*env), &ray);
-		wall_hit(&(*env), &ray);
-		lineheight(&(*env), &ray);
-		texturing(&(*datas), x, &(*env), &ray);
-		x++;
 	}
 }
 

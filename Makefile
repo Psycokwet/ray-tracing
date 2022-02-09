@@ -53,8 +53,8 @@ GAME_FILES					=	start_cub_3d.c \
 								init.c \
 								print_pictures.c \
 								rotations.c \
-								run_calc.c \
-								run.c
+								run.c \
+								raycasting.c
 
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))
@@ -73,7 +73,7 @@ OBJ 		= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 
 CC			=	clang
 
-CFLAGS		+=	-W -Wall -Wextra -g -D BUFFER_SIZE=32 -g3 #-Werror  -pedantic 		## '+=' allow to keep default flags.
+CFLAGS		+=	-W -Wall -Wextra -g -D BUFFER_SIZE=32 -g3 -Werror  -pedantic 		## '+=' allow to keep default flags.
 
 LDFLAGS		=	-L$(addprefix $(LIBSPATH), $(LIBFTPATH)) -lft -L$(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)) -lm -lbsd -lX11 -lXext $(addprefix $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)), $(LIBMLX_AR))
 
