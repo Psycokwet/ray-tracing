@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 15:11:12 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 15:38:02 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,16 @@ void	init_env(t_env *env)
 
 int	open_map(t_env *env)
 {
-	int	fd;
+	int			fd;
 
-	fd = open(env->conf.map_src, O_RDWR);
+	fd = open(env->conf.map_src, __O_DIRECTORY);
+	if (fd > 0)
+	{
+		printf("Argument is a directory\n");
+		close(fd);
+		exit(EXIT_ARGS_FAILURE);
+	}
+	fd = open(env->conf.map_src, O_RDONLY);
 	if (fd < 0)
 	{
 		printf("Failed to open the map for reading\n");
