@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_line_for_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 14:19:38 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:47:35 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,13 @@ int	id_dir(int x, int y, char c, t_env *env)
 	if (env->player_start.is_set == 1)
 		return (-EXIT_FAILURE);
 	env->player_start = (t_start){(t_coordinates){y + 0.5F, x + 0.5F}, 1, c};
-	if (c == DIR_WEST)
-		dir_rad = M_PI;
-	else if (c == DIR_NORTH)
-		dir_rad = M_PI / 2;
-	else if (c == DIR_SOUTH)
-		dir_rad = (3 * M_PI) / 2;
-	else if (c == DIR_EAST)
-		dir_rad = 0;
-	else
+	dir_rad = init_rad(c);
+	if (dir_rad == -1)
 		return (-EXIT_FAILURE);
 	co = env->direction;
 	plane = env->plane;
-	env->direction.x = env->direction.x * cos(-dir_rad) - env->direction.y * sin(-dir_rad);
+	env->direction.x = env->direction.x * cos(-dir_rad) - \
+		env->direction.y * sin(-dir_rad);
 	env->direction.y = co.x * sin(-dir_rad) + env->direction.y * cos(-dir_rad);
 	env->plane.x = env->plane.x * cos(-dir_rad) - env->plane.y * sin(-dir_rad);
 	env->plane.y = plane.x * sin(-dir_rad) + env->plane.y * cos(-dir_rad);
@@ -49,7 +43,8 @@ int	id_mob(int i, int j, char c, t_env *env)
 	return (EXIT_SUCCESS);
 }
 
-# define MAX_MAP_PARSING 2
+#define MAX_MAP_PARSING 2
+
 static const t_map_parsing	g_map_parsings[MAX_MAP_PARSING] = {
 	(t_map_parsing){AUTHORIZED_ON_MAP, NULL, -1},
 	(t_map_parsing){AUTHORIZED_ON_MAP_DIR, &id_dir, '0'},

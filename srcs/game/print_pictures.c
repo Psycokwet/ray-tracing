@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_pictures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/09 14:33:04 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:50:52 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	texturing(t_data *datas, int x, t_env *env, t_ray *ray)
 	get_texture(&(*env), &tex, &(*ray));
 	tex.texture_x = get_text_x(&tex, &(*env), &(*ray));
 	step = 1.0 * tex.texture->h / env->lineheight;
-	tex.texture_position = (env->draw_start - HEIGHT / 2 + env->lineheight / 2) * step;
+	tex.texture_position = (env->draw_start - HEIGHT / 2 \
+		+ env->lineheight / 2) * step;
 	y = env->draw_start;
 	while (y < env->draw_end)
 	{

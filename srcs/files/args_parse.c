@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 14:30:29 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:49:20 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,7 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 		printf("Error, there is not enough arguments.\n%s\n", USAGE);
 		exit(EXIT_ARGS_FAILURE);
 	}
-	set_src_map(env, argv);
-	env->direction.x = 1;
-	env->direction.y = 0;
-	env->plane.x = 0.0;
-	env->plane.y = 0.66;
+	set_src_map(&(*env), argv);
 	if (argc == 3)
 		check_save_arg(env, argv);
 	if (parse_file(env) < RETURN_SUCCES)

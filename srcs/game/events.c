@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:56:02 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/08 13:52:45 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 14:57:32 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	key_press(int keycode, t_env *env)
 	int	i;
 
 	i = -1;
-	printf("KEY PRESS\n");
 	while (i++ < MAX_ACTIONS - 1)
 	{
 		if (keycode == env->actions[i].keycode)

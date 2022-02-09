@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 14:31:56 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:55:38 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,7 @@ void	free_env(t_env *env);
 int		get_colors_from_line(const char *line);
 void	init_colors(t_env *env);
 void	init_srcs(t_env *env);
+double	init_rad(char c);
 int		is_map(t_env *env, const char **params);
 int		parse_file(t_env *env);
 int		parse_line(t_env *datas, char *line);
@@ -328,7 +329,7 @@ void	get_texture(t_env *env, t_texture *text, t_ray *ray);
 void	texturing(t_data *datas, int x, t_env *env, t_ray *ray);
 void	draw_walls(t_data *datas, t_env *env);
 void	stepping(t_env *env, t_ray *ray);
-void	wall_hit(t_env *env, t_ray *ray);
+void	wall_hit(t_env *env, t_ray *ray, int hit);
 void	lineheight(t_env *env, t_ray *ray);
 void	init_actions(t_env *env);
 void	init_imgs(t_env *env);
