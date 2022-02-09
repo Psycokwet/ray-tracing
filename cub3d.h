@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 14:55:38 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 15:05:19 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define MAP_ARG				"MAP.cub"
 # define MAP_EXT				".cub"
 # define SAVE_ARG				"--save"
-# define USAGE					"Usage : MAP.cub [--save]"
+# define USAGE					"Usage : MAP.cub"
 # define WALL					"1"
 # define INSIDE_MAX_TYPE		5
 # define INSIDE					"0NWES"

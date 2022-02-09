@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 14:30:40 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:11:12 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	open_map(t_env *env)
 {
 	int	fd;
 
-	fd = open(env->conf.map_src, O_RDONLY);
+	fd = open(env->conf.map_src, O_RDWR);
 	if (fd < 0)
 	{
-		printf("failed to open the map for reading\n");
+		printf("Failed to open the map for reading\n");
 		exit(EXIT_ARGS_FAILURE);
 	}
 	return (fd);

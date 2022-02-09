@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 15:00:51 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/09 15:02:52 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	init_mlx(t_env *env)
 	if (env->mlx == NULL)
 	{
 		free_env(env);
+		ft_putstr_fd("It seems that env doesn't exit.\n", 2);
 		exit(EXIT_MLX_FAILURE);
 	}
 }
@@ -46,7 +47,7 @@ void	start_cub_3d(t_env *env)
 	init_mlx(&(*env));
 	if (init_textures(env) != EXIT_SUCCESS)
 	{
-		printf("Error on textures :the files may not exist\n");
+		ft_putstr_fd("Error on textures :the files may not exist\n", 2);
 		free_env(env);
 		exit(-EXIT_FAILURE);
 	}
