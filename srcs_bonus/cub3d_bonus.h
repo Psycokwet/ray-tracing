@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 11:08:55 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 14:17:46 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@
 # define MAX_TEX		4
 # define MAX_PARSING	3
 # define DestroyNotify_FIX 33
+
+# define PATHFLOOR "./textures/floor.xpm"
+# define PATHCEIL "./textures/ceil.xpm"
 
 typedef struct	s_data {
 	void	*img;
@@ -222,12 +225,14 @@ typedef struct		s_env
 	t_start			player_start;
 	t_coordinates	try_to_run_dir;
 	t_coordinates	current_pos;
+	t_coordinates	mouse_po;
 	char			**map_char;
 	void			*mlx;
 	void			*win;
 	t_action		actions[MAX_ACTIONS];
 	t_data			imgs[MAX_IMGS];
 	t_data			textures[MAX_TEX];
+	t_data			floor_ceil[3];
 	double			fov_angle;
 	t_coordinates	direction;
 	t_coordinates	plane;
@@ -300,7 +305,7 @@ int		set_colors_fc(t_env *env, char *args[3]);
 void	set_src_map(t_env *env, char const *argv[]);
 int		set_srcs(t_env *env, char *args[3]);
 int		test_line_for_map(char *line, t_env *env, int x);
-
+int		game_loop(t_env *env);
 
 /*
 ** ************************************************************************** **
@@ -346,5 +351,11 @@ int		run_up(void *v_env);
 int		run_down(void *v_env);
 int		run_right(void *v_env);
 int		run_left(void *v_env);
+
+/**
+ * @brief Bonus
+ */
+int		check_srcs_bonus(t_env *env);
+int		mouse_rot(int x, int y, void *v_env);
 
 #endif

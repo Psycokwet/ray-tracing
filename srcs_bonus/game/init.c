@@ -6,15 +6,17 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:54:24 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 11:07:33 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 14:29:13 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 void	init_fov(t_env *env)
 {
 	env->fov_angle = FOV * M_PI / (MAX_DEGREES / 2);
+	env->mouse_po.x = HEIGHT / 2;
+	env->mouse_po.y = WIDTH / 2;
 }
 
 int	init_textures(t_env *env)
@@ -35,7 +37,7 @@ int	init_textures(t_env *env)
 			return (-EXIT_FAILURE);
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (check_srcs_bonus(&(*env)));
 }
 
 void	init_actions(t_env *env)

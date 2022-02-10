@@ -6,11 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:53:46 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 11:07:42 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 13:25:42 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 void	draw_walls(t_data *datas, t_env *env)
 {

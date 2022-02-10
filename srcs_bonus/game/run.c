@@ -6,11 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:58:02 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 11:07:56 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 13:25:30 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 int	run_up(void *v_env)
 {

@@ -6,11 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:56:02 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 11:07:28 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 14:31:22 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 int	key_release(int keycode, t_env *env)
 {
@@ -42,6 +42,20 @@ int	key_press(int keycode, t_env *env)
 		}
 	}
 	return (keycode);
+}
+
+int	mouse_rot(int x, int y, void *v_env)
+{
+	t_env	*env;
+
+	env = (t_env *)v_env;
+	if (x < (int)env->mouse_po.x)
+		rotate_left(env);
+	else if (x > (int)env->mouse_po.x)
+		rotate_rigth(env);
+	game_loop(&(*env));
+	env->mouse_po.x = (double)x;
+	return (0);
 }
 
 int	quit_cub3d(void *v_env)

@@ -68,7 +68,7 @@ GAME_FILES					=	start_cub_3d.c \
 								rotations.c \
 								run.c \
 								raycasting.c
-BONUS_FILES					= \
+BONUS_FILES					= init_bonus_text.c
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))
 SRC_FILES += $(addprefix $(IMG_PATH), $(IMG_FILES))
@@ -81,7 +81,7 @@ SRC_BONUS_FILES += $(addprefix $(IMG_PATH), $(IMG_FILES))
 SRC_BONUS_FILES += $(addprefix $(FILES_PATH), $(FILES_FILES))
 SRC_BONUS_FILES += $(addprefix $(COMMON_PATH), $(COMMON_FILES))
 SRC_BONUS_FILES += $(addprefix $(GAME_PATH), $(GAME_FILES))
-
+SRC_BONUS_FILES += $(addprefix $(GAME_PATH), $(BONUS_FILES))
 
 OBJREGULAR_FILES	= 	$(SRC_FILES:.c=.o)			## get all .o names from .c names
 OBJBONUS_FILES = $(SRC_BONUS_FILES:.c=.o)
@@ -122,7 +122,7 @@ $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(HEADERS_FILES)
 	$(CC) -o $@ -c $< $(CFLAGS)  $(INC)
 
 $(OBJ_BONUS_PATH)%.o	:	$(SRC_BONUS_PATH)%.c
-	$(CC) -o $@ -c $< $(CFLAGS) -I ./srcs_bonus/$(HEADERS_FILES)
+	$(CC) -o $@ -c $< $(CFLAGS) -I ./srcs_bonus/
 
 $(OBJ_PATHS_INIT)	:
 	mkdir -p  $@
@@ -147,6 +147,7 @@ clean			:									## delete all .o
 fclean			:	clean_local							## clean + delete executable
 	$(RM) $(NAMETEST) $(NAME) $(NAME_BONUS)
 	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH)) fclean
+	make -C $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH)) clean
 
 re				:	fclean all							## delete all .o and recompile all. Must use when editing a .h
 

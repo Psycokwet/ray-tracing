@@ -6,11 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 11:05:42 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 13:31:21 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 static int	in(char c)
 {
@@ -95,5 +95,5 @@ void	args_parse(t_env *env, int argc, char const *argv[])
 	if (check_map_for_holes(env) < EXIT_SUCCESS)
 		quit_app(env, "Error, the map contains holes\n", -EXIT_FAILURE);
 	if (make_map_char(&(*env)) < EXIT_SUCCESS)
-		quit_app(env, "Malloc failed.", -EXIT_FAILURE);
+		quit_app(env, "Malloc failed.\n", -EXIT_FAILURE);
 }

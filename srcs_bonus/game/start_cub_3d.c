@@ -6,11 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 11:08:03 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 14:28:50 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 int	game_loop(t_env *env)
 {
@@ -38,6 +38,15 @@ static void	init_mlx(t_env *env)
 	}
 }
 
+void	hooking(t_env *env)
+{
+	mlx_hook(env->win, KeyPress, KeyPressMask, key_press, env);
+	mlx_hook(env->win, KeyRelease, KeyReleaseMask, key_release, env);
+	mlx_hook(env->win, DestroyNotify_FIX, \
+		StructureNotifyMask, close_window, env);
+	mlx_hook(env->win, MotionNotify, PointerMotionMask, mouse_rot, env);
+}
+
 void	start_cub_3d(t_env *env)
 {
 	init_actions(env);
@@ -54,10 +63,7 @@ void	start_cub_3d(t_env *env)
 	env->current_pos = env->player_start.pos;
 	env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "Cub3D");
 	print_img(env);
-	mlx_hook(env->win, KeyPress, KeyPressMask, key_press, env);
-	mlx_hook(env->win, KeyRelease, KeyReleaseMask, key_release, env);
-	mlx_hook(env->win, DestroyNotify_FIX, \
-		StructureNotifyMask, close_window, env);
+	hooking(&(*env));
 	mlx_loop_hook(env->mlx, game_loop, env);
 	mlx_loop(env->mlx);
 	free_env(env);
