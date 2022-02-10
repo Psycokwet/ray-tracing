@@ -1,6 +1,7 @@
 NAME				=	cub3D
 NAME_BONUS			=	cub3D_bonus
 MAKE_LIBFT			=	makelibft
+MAKE_MLX			=	makemlx
 LIBSPATH			=	libs/
 LIBFTPATH			=	libft/
 LIBFT_AR			=	libft.a
@@ -110,9 +111,9 @@ ifeq ($(OS), Linux)
 	CFLAGS	+= -DLINUX
 endif
 
-all					:	$(OBJ_PATHS_INIT) $(MAKE_LIBFT) $(NAME)
+all					:	$(OBJ_PATHS_INIT) $(MAKE_LIBFT) $(MAKE_MLX) $(NAME)
 
-bonus				:	$(OBJ_BONUS_PATHS_INIT) $(MAKE_LIBFT) $(NAME_BONUS)
+bonus				:	$(OBJ_BONUS_PATHS_INIT) $(MAKE_LIBFT) $(MAKE_MLX) $(NAME_BONUS)
 
 $(addprefix $(LIBSPATH), $(LIBFT_PATH))  		:
 	git clone https://github.com/Psycokwet/libft.git $(addprefix $(LIBSPATH), $(LIBFT_PATH))
@@ -120,7 +121,7 @@ $(addprefix $(LIBSPATH), $(LIBFT_PATH))  		:
 $(MAKE_LIBFT)		: $(addprefix $(LIBSPATH), $(LIBFT_PATH))
 	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH))
 
-$(MAKE_LIBFT)		: $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH))
+$(MAKE_MLX)		: $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH))
 	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH))
 
 $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(HEADERS_FILES)

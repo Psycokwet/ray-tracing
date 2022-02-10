@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 12:08:27 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 13:33:25 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 17:29:55 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	check_srcs_bonus(t_env *env)
 
 	path[0] = PATHFLOOR;
 	path[1] = PATHCEIL;
-	printf("Path 0 %s\n", path[0]);
 	i = 0;
 	while (i < 2)
 	{
