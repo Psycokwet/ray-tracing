@@ -1,6 +1,8 @@
 rt
 bin/*
+bin_bonus/*
 cub3D
+cub3D_bonus
 raycaster_textured(1).cpp
 .vscode/launch.json
 .vscode/settings.json
