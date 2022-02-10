@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:53:46 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 13:25:42 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 15:37:29 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,22 +114,3 @@ void	lineheight(t_env *env, t_ray *ray)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-void	draw_rect(t_data *datas, t_coordinates start, \
-	t_coordinates end, int color)
-{
-	int	x;
-	int	y;
-
-	x = start.x;
-	y = start.y;
-	while (y < end.y)
-	{
-		while (x < end.x)
-		{
-			my_mlx_pixel_put(datas, x, y, color);
-			x++;
-		}
-		x = start.x;
-		y++;
-	}
-}

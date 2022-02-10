@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 14:49:53 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 17:25:50 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,12 @@ typedef struct		s_env
 	int				count;
 	int				draw_start;
 	int				draw_end;
+	double			row_dist;
+	double			pos_z;
+	double			floor_step_x;
+	double			floor_step_y;
+	double			floor_x;
+	double			floor_y;
 }					t_env;
 
 typedef struct			s_parsing
@@ -326,9 +332,6 @@ int		close_window(t_env *env);
 */
 
 int		print_img(t_env *env);
-void	draw_ceiling_floor(t_data *datas, t_env *env);
-void	draw_rect(t_data *datas, t_coordinates start, \
-	t_coordinates end, int color);
 int		get_text_x(t_texture *tex, t_env *env, t_ray *ray);
 void	get_texture(t_env *env, t_texture *text, t_ray *ray);
 void	texturing(t_data *datas, int x, t_env *env, t_ray *ray);
@@ -358,5 +361,9 @@ int		run_left(void *v_env);
 int		check_srcs_bonus(t_env *env);
 int		mouse_rot(int x, int y, void *v_env);
 int		mouse_leave(void *v_env);
+void	get_cell_floor_text(t_texture *floor, t_texture *ceil, t_env *env);
+void	stepping_floor(t_ray *ray_1, t_ray *ray_2, t_env *env);
+void	floor_ceil_cast(t_env *env, int y);
+void	draw_ceiling_floor(t_env *env);
 
 #endif

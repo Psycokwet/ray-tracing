@@ -6,19 +6,11 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 13:25:45 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 17:24:41 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
-
-void	draw_ceiling_floor(t_data *datas, t_env *env)
-{
-	draw_rect(datas, (t_coordinates){0, 0}, (t_coordinates){WIDTH, \
-		HEIGHT / 2}, env->g_colors[CODE_CEILING].color);
-	draw_rect(datas, (t_coordinates){0, HEIGHT / 2}, (t_coordinates) \
-		{WIDTH, HEIGHT}, env->g_colors[CODE_FLOOR].color);
-}
 
 int	get_text_x(t_texture *tex, t_env *env, t_ray *ray)
 {
@@ -84,7 +76,7 @@ int	print_img(t_env *env)
 	env->imgs[i].addr = mlx_get_data_addr(env->imgs[i].img, \
 	&env->imgs[i].bits_per_pixel, &env->imgs[i].line_length, \
 	&env->imgs[i].endian);
-	draw_ceiling_floor(&env->imgs[i], env);
+	draw_ceiling_floor(env);
 	draw_walls(&env->imgs[i], &(*env));
 	mlx_put_image_to_window(env->mlx, env->win, env->imgs[i].img, 0, 0);
 	return (1);

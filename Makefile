@@ -69,7 +69,8 @@ GAME_FILES					=	start_cub_3d.c \
 								run.c \
 								raycasting.c
 BONUS_FILES					=	init_bonus_text.c \
-								mousing.c
+								mousing.c \
+								raycasting_floor_ceil.c
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))
 SRC_FILES += $(addprefix $(IMG_PATH), $(IMG_FILES))
