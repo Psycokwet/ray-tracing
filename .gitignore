@@ -1,9 +1,14 @@
 rt
 bin/*
 bin_bonus/*
+libs/minilibx-linux/*.o
 cub3D
 cub3D_bonus
 raycaster_textured(1).cpp
 .vscode/launch.json
 .vscode/settings.json
 .vscode/settings.json
+libs/minilibx-linux/libmlx_Linux.a
+libs/minilibx-linux/libmlx.a
+libs/minilibx-linux/test/main.o
+libs/minilibx-linux/test/mlx-test

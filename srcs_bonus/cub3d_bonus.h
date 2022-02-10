@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 14:17:46 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 14:49:53 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,5 +357,6 @@ int		run_left(void *v_env);
  */
 int		check_srcs_bonus(t_env *env);
 int		mouse_rot(int x, int y, void *v_env);
+int		mouse_leave(void *v_env);
 
 #endif

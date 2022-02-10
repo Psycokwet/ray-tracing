@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 14:28:50 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 14:50:53 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	hooking(t_env *env)
 	mlx_hook(env->win, DestroyNotify_FIX, \
 		StructureNotifyMask, close_window, env);
 	mlx_hook(env->win, MotionNotify, PointerMotionMask, mouse_rot, env);
+	mlx_hook(env->win, LeaveNotify, LeaveWindowMask, mouse_leave, env);
 }
 
 void	start_cub_3d(t_env *env)

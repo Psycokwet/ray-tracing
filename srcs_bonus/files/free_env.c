@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 13:27:20 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/10 14:57:59 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ static void	free_text(t_env *env)
 	{
 		if (env->textures[i].img != NULL)
 			mlx_destroy_image(env->mlx, env->textures[i].img);
+		i++;
+	}
+	i = 0;
+	while (i < 2)
+	{
+		if (env->floor_ceil[i].img != NULL)
+			mlx_destroy_image(env->mlx, env->floor_ceil[i].img);
 		i++;
 	}
 }

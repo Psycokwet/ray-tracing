@@ -68,7 +68,8 @@ GAME_FILES					=	start_cub_3d.c \
 								rotations.c \
 								run.c \
 								raycasting.c
-BONUS_FILES					= init_bonus_text.c
+BONUS_FILES					=	init_bonus_text.c \
+								mousing.c
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))
 SRC_FILES += $(addprefix $(IMG_PATH), $(IMG_FILES))
@@ -117,6 +118,9 @@ $(addprefix $(LIBSPATH), $(LIBFT_PATH))  		:
 
 $(MAKE_LIBFT)		: $(addprefix $(LIBSPATH), $(LIBFT_PATH))
 	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBFT_PATH))
+
+$(MAKE_LIBFT)		: $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH))
+	$(MAKE) -C $(addprefix $(LIBSPATH), $(LIBMLX_UNIX_PATH))
 
 $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(HEADERS_FILES)
 	$(CC) -o $@ -c $< $(CFLAGS)  $(INC)
