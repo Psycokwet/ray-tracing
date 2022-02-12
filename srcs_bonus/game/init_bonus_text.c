@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 12:08:27 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 17:29:55 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 15:08:31 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	check_srcs_bonus(t_env *env)
 		if (!env->floor_ceil[i].img)
 			return (-EXIT_FAILURE);
 		env->floor_ceil[i].addr = mlx_get_data_addr(env->floor_ceil[i].img, \
-			&env->floor_ceil[i].bits_per_pixel, &env->floor_ceil[i].line_length, \
-			&env->floor_ceil[i].endian);
+			&env->floor_ceil[i].bits_per_pixel, &env->floor_ceil[i] \
+			.line_length, &env->floor_ceil[i].endian);
 		if (!env->floor_ceil[i].img)
 			return (-EXIT_FAILURE);
 		i++;

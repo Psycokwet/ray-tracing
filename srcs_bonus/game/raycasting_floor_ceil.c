@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   racasting_floor_ceil.c                             :+:      :+:    :+:   */
+/*   raycasting_floor_ceil.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 17:20:49 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 17:23:40 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 15:08:06 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	stepping_floor(t_ray *ray_1, t_ray *ray_2, t_env *env)
 {
 	env->floor_step_x = env->row_dist * (ray_2->dir.x - ray_1->dir.x) / WIDTH;
-	env->floor_step_y= env->row_dist * (ray_2->dir.y - ray_1->dir.y) / WIDTH;
+	env->floor_step_y = env->row_dist * (ray_2->dir.y - ray_1->dir.y) / WIDTH;
 	env->floor_x = env->current_pos.x + env->row_dist * ray_1->dir.x;
 	env->floor_y = env->current_pos.y + env->row_dist * ray_1->dir.y;
 }

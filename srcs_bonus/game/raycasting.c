@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:53:46 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/10 15:37:29 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 15:08:45 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,3 @@ void	lineheight(t_env *env, t_ray *ray)
 		ray->wall_x = env->current_pos.x + ray->perp_wall_dist * ray->dir.x;
 	ray->wall_x -= floor(ray->wall_x);
 }
-

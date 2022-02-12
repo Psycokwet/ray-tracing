@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 12:31:32 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/12 14:46:06 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 15:07:20 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,19 @@ static int	get_size_col(char **str)
 
 static void	draw_asset(t_env *env, t_data *data, int x_start, int y_start)
 {
-	int				color;
-	int y = 0;
+	int	color;
+	int	y;
 	int	x;
 
+	y = 0;
 	while (y < 8)
 	{
 		x = 0;
 		while (x < 8)
 		{
 			color = my_mlx_pixel_get(&(*data), x, y);
-			my_mlx_pixel_put(&env->imgs[0], (int)(x + x_start),
-					(int)(y + y_start), color);
+			my_mlx_pixel_put(&env->imgs[0], (int)(x + x_start), \
+				(int)(y + y_start), color);
 			x++;
 		}
 		y++;
@@ -45,7 +46,7 @@ static void	draw_asset(t_env *env, t_data *data, int x_start, int y_start)
 static bool	is_fit(t_env *env, int layer)
 {
 	return ((int)env->current_pos.y + layer >= 0
-			&& (int)env->current_pos.y + layer < get_size_col(env->map_char));
+		&& (int)env->current_pos.y + layer < get_size_col(env->map_char));
 }
 
 static char	**make_minimap_char(t_env *env)

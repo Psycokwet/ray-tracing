@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:04:44 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 15:09:16 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@
 # define XK_d							0x0064
 # define GO_RIGTH_D_ID					4
 # define XK_s							0x0073
-# define GO_BACK_S_ID					5/
+# define GO_BACK_S_ID					5
 # define XK_w							0x0077
 # define GO_FRONT_W_ID					6
 # define ACTUALLY_RUN					7
