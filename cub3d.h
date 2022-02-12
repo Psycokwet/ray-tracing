@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:11:38 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:36:05 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stddef.h>
 # include <stdbool.h>
 
-#define BLANK_CHARS " \t\r\v\f"
+# define BLANK_CHARS " \t\r\v\f"
 # define RETURN_SUCCES			0
 # define RETURN_FAILURE			1
 
@@ -122,9 +122,9 @@
 # define MAX_IMGS		7
 # define MAX_TEX		4
 # define MAX_PARSING	3
-# define DESTROY_NOTIFY_FIX 33
+# define DESTROY_NOTIFY_FIX	33
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -134,37 +134,37 @@ typedef struct	s_data {
 	int		h;
 }				t_data;
 
-typedef struct		s_conf
+typedef struct s_conf
 {
 	int				save;
 	const char		*map_src;
 }					t_conf;
 
-typedef struct			s_srcs
+typedef struct s_srcs
 {
-	char*				code;
+	char				*code;
 	unsigned int		size;
-	char*				src;
+	char				*src;
 }						t_srcs;
 
-typedef struct			s_colors
+typedef struct s_colors
 {
-	char*				code;
+	char				*code;
 	unsigned int		size;
 	int					color;
 	int					is_set;
 }						t_colors;
 
-typedef struct			s_resolution
+typedef struct s_resolution
 {
-	char*				code;
+	char				*code;
 	unsigned int		size;
 	int					width;
 	int					height;
 	int					is_set;
 }						t_resolution;
 
-typedef struct			s_texture
+typedef struct s_texture
 {
 	int					texture_x;
 	int					texture_y;
@@ -173,64 +173,62 @@ typedef struct			s_texture
 	t_data				*texture;
 }						t_texture;
 
-
-typedef struct			s_coordinates
+typedef struct s_coordinates
 {
 	double				x;
 	double				y;
 }						t_coordinates;
 
-typedef struct			s_cartesian_vector
+typedef struct s_cartesian_vector
 {
 	t_coordinates		dir;
 }						t_cartesian_vector;
 
-typedef struct			s_ray
+typedef struct s_ray
 {
 	t_coordinates		dir;
 	t_coordinates		side_dist;
 	t_coordinates		delta_dist;
 	double				perp_wall_dist;
 	double				wall_x;
-	int					step_X;
-	int					step_Y;
+	int					step_x;
+	int					step_y;
 
 }						t_ray;
 
-typedef struct			s_polar_vector
+typedef struct s_polar_vector
 {
 	double				angle;
 	double				size;
 }						t_polar_vector;
 
-
-typedef struct			s_start
+typedef struct s_start
 {
 	t_coordinates		pos;
 	int					is_set;
 	char				dir;
 }						t_start;
 
-typedef struct			s_map_line
+typedef struct s_map_line
 {
 	char				*line;
 	int					size;
 }						t_map_line;
 
-typedef struct			s_map_array
+typedef struct s_map_array
 {
 	t_map_line			**lines;
 	int					size;
 }						t_map_array;
 
-typedef struct			s_actions
+typedef struct s_actions
 {
 	int					is_asked;
 	int					keycode;
 	int					(*fun)(void *);
 }						t_action;
 
-typedef struct		s_env
+typedef struct s_env
 {
 	t_conf			conf;
 	t_srcs			g_srcs[MAX_SRCS];
@@ -256,7 +254,7 @@ typedef struct		s_env
 	int				draw_end;
 }					t_env;
 
-typedef struct			s_parsing
+typedef struct s_parsing
 {
 	int					(*parser)(t_env *, char *[3]);
 }						t_parsing;
@@ -267,9 +265,9 @@ typedef struct			s_parsing
 ** ************************************************************************** **
 */
 
-int	add_shade(double dist, int trgb);
-int	get_opposite(int trgb);
-int	create_trgb(int t, int r, int g, int b);
+int		add_shade(double dist, int trgb);
+int		get_opposite(int trgb);
+int		create_trgb(int t, int r, int g, int b);
 
 /*
 ** ************************************************************************** **
@@ -285,14 +283,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 ** ************************************************************************** **
 */
 
-typedef struct			s_map_parsing
+typedef struct s_map_parsing
 {
 	char const			*authorized_chars;
 	int					(*parser)(int i, int j, char c, t_env *);
 	int					replace;
 }						t_map_parsing;
 
-typedef struct			s_map_rec_datas
+typedef struct s_map_rec_datas
 {
 	int					fd;
 	char				*line;
@@ -318,7 +316,6 @@ int		set_colors_fc(t_env *env, char *args[3]);
 void	set_src_map(t_env *env, char const *argv[]);
 int		set_srcs(t_env *env, char *args[3]);
 int		test_line_for_map(char *line, t_env *env, int x);
-
 
 /*
 ** ************************************************************************** **

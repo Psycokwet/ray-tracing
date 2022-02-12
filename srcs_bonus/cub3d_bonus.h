@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:14:54 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:35:07 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,8 +195,8 @@ typedef struct s_ray
 	t_coordinates		delta_dist;
 	double				perp_wall_dist;
 	double				wall_x;
-	int					step_X;
-	int					step_Y;
+	int					step_x;
+	int					step_y;
 
 }						t_ray;
 
