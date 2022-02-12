@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:35:07 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:38:07 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,14 +146,14 @@ typedef struct s_conf
 
 typedef struct s_srcs
 {
-	char*				code;
+	char				*code;
 	unsigned int		size;
-	char*				src;
+	char				*src;
 }						t_srcs;
 
 typedef struct s_colors
 {
-	char*				code;
+	char				*code;
 	unsigned int		size;
 	int					color;
 	int					is_set;
@@ -161,7 +161,7 @@ typedef struct s_colors
 
 typedef struct s_resolution
 {
-	char*				code;
+	char				*code;
 	unsigned int		size;
 	int					width;
 	int					height;
@@ -205,7 +205,6 @@ typedef struct s_polar_vector
 	double				angle;
 	double				size;
 }						t_polar_vector;
-
 
 typedef struct s_start
 {
@@ -279,9 +278,9 @@ typedef struct s_parsing
 ** ************************************************************************** **
 */
 
-int	add_shade(double dist, int trgb);
-int	get_opposite(int trgb);
-int	create_trgb(int t, int r, int g, int b);
+int		add_shade(double dist, int trgb);
+int		get_opposite(int trgb);
+int		create_trgb(int t, int r, int g, int b);
 
 /*
 ** ************************************************************************** **
@@ -297,14 +296,14 @@ int		my_mlx_pixel_get(t_data *datas, int x, int y);
 ** ************************************************************************** **
 */
 
-typedef struct			s_map_parsing
+typedef struct s_map_parsing
 {
 	char const			*authorized_chars;
 	int					(*parser)(int i, int j, char c, t_env *);
 	int					replace;
 }						t_map_parsing;
 
-typedef struct			s_map_rec_datas
+typedef struct s_map_rec_datas
 {
 	int					fd;
 	char				*line;
