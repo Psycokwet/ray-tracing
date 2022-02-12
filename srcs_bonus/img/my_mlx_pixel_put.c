@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 13:25:32 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 14:41:20 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+int	my_mlx_pixel_get(t_data *datas, int x, int y)
+{
+	return (*(int *)(datas->addr + (y * datas->line_length + x
+			* (datas->bits_per_pixel / 8))));
 }

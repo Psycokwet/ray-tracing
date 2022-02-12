@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 17:25:50 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 14:45:43 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ typedef struct		s_env
 	double			floor_step_y;
 	double			floor_x;
 	double			floor_y;
+	int				y_minmap;
 }					t_env;
 
 typedef struct			s_parsing
@@ -271,7 +272,7 @@ int	create_trgb(int t, int r, int g, int b);
 */
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
+int		my_mlx_pixel_get(t_data *datas, int x, int y);
 /*
 ** ************************************************************************** **
 ** 									FILES                                     **
@@ -365,5 +366,5 @@ void	get_cell_floor_text(t_texture *floor, t_texture *ceil, t_env *env);
 void	stepping_floor(t_ray *ray_1, t_ray *ray_2, t_env *env);
 void	floor_ceil_cast(t_env *env, int y);
 void	draw_ceiling_floor(t_env *env);
-
+void	make_map(t_env *env);
 #endif

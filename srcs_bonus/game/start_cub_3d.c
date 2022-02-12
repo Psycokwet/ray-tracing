@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 14:50:53 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/11 16:20:52 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ void	start_cub_3d(t_env *env)
 	if (init_textures(env) != EXIT_SUCCESS)
 	{
 		ft_putstr_fd("Error on textures :the files may not exist\n", 2);
+		free_env(env);
+		exit(-EXIT_FAILURE);
+	}
+	if (env->player_start.is_set == false)
+	{
+		ft_putstr_fd("Player is not set\n", 2);
 		free_env(env);
 		exit(-EXIT_FAILURE);
 	}
