@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:09:16 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 15:14:54 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,38 @@
 #  define M_PI					3.14159265358979323846
 # endif
 
-# define XK_Escape						0xff1b
+# define XK_ESCAPE						0xff1b
 # define ESCAPE_ID						0
-# define XK_Left						0xff51
+
+/* Move left, left arrow */
+# define XK_LEFT						0xff51
+
+/* Move left, left arrow */
 # define ROTATE_LEFT_ID					1
-# define XK_Right						0xff53
-# define ROTATE_RIGHT_ID					2
-# define XK_a							0x0061
+
+/* Move right, right arrow */
+# define XK_RIGHT						0xff53
+
+/* Move right, right arrow */
+# define ROTATE_RIGHT_ID				2
+
+/* U+0061 LATIN SMALL LETTER A */
+# define XK_LOW_A						0x0061
+
 # define GO_LEFT_A_ID					3
-# define XK_d							0x0064
+
+/* U+0064 LATIN SMALL LETTER D */
+# define XK_LOW_D						0x0064
 # define GO_RIGTH_D_ID					4
-# define XK_s							0x0073
+
+/* U+0073 LATIN SMALL LETTER S */
+# define XK_LOW_S						0x0073
 # define GO_BACK_S_ID					5
-# define XK_w							0x0077
+
+/* U+0077 LATIN SMALL LETTER W */
+# define XK_LOW_W						0x0077
 # define GO_FRONT_W_ID					6
+
 # define ACTUALLY_RUN					7
 
 # define MAX_SRCS		5
@@ -104,7 +122,7 @@
 # define MAX_IMGS		7
 # define MAX_TEX		4
 # define MAX_PARSING	3
-# define DestroyNotify_FIX 33
+# define DESTROY_NOTIFY_FIX 33
 
 # define PATHFLOOR "./textures/floor.xpm"
 # define PATHCEIL "./textures/ceil.xpm"

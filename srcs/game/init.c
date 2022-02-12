@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:54:24 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/09 14:00:47 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 15:12:54 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	init_textures(t_env *env)
 
 void	init_actions(t_env *env)
 {
-	env->actions[ESCAPE_ID] = (t_action){0, XK_Escape, &quit_cub3d};
-	env->actions[ROTATE_LEFT_ID] = (t_action){0, XK_Left, &rotate_left};
-	env->actions[ROTATE_RIGHT_ID] = (t_action){0, XK_Right, &rotate_rigth};
-	env->actions[GO_LEFT_A_ID] = (t_action){0, XK_a, &run_left};
-	env->actions[GO_RIGTH_D_ID] = (t_action){0, XK_d, &run_right};
-	env->actions[GO_BACK_S_ID] = (t_action){0, XK_s, &run_down};
-	env->actions[GO_FRONT_W_ID] = (t_action){0, XK_w, &run_up};
+	env->actions[ESCAPE_ID] = (t_action){0, XK_ESCAPE, &quit_cub3d};
+	env->actions[ROTATE_LEFT_ID] = (t_action){0, XK_LEFT, &rotate_left};
+	env->actions[ROTATE_RIGHT_ID] = (t_action){0, XK_RIGHT, &rotate_rigth};
+	env->actions[GO_LEFT_A_ID] = (t_action){0, XK_LOW_A, &run_left};
+	env->actions[GO_RIGTH_D_ID] = (t_action){0, XK_LOW_D, &run_right};
+	env->actions[GO_BACK_S_ID] = (t_action){0, XK_LOW_S, &run_down};
+	env->actions[GO_FRONT_W_ID] = (t_action){0, XK_LOW_W, &run_up};
 }
 
 void	init_imgs(t_env *env)

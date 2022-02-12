@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_cub_3d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 15:02:52 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/12 15:11:38 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	start_cub_3d(t_env *env)
 	print_img(env);
 	mlx_hook(env->win, KeyPress, KeyPressMask, key_press, env);
 	mlx_hook(env->win, KeyRelease, KeyReleaseMask, key_release, env);
-	mlx_hook(env->win, DestroyNotify_FIX, \
+	mlx_hook(env->win, DESTROY_NOTIFY_FIX, \
 		StructureNotifyMask, close_window, env);
 	mlx_loop_hook(env->mlx, game_loop, env);
 	mlx_loop(env->mlx);
