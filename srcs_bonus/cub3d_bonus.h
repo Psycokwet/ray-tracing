@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:38:07 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:40:13 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@
 # define SAVE_ARG				"--save"
 # define USAGE					"Usage : MAP.cub"
 # define WALL					"1"
-# define INSIDE_MAX_TYPE		5
-# define INSIDE					"0NWES"
-# define AUTHORIZED_ON_MAP		"10 "
+# define INSIDE_MAX_TYPE		6
+# define INSIDE					"02NWES"
+# define AUTHORIZED_ON_MAP		"120 "
 # define AUTHORIZED_ON_MAP_DIR	"NWES"
 # define DIR_NORTH				'N'
 # define DIR_WEST				'W'
