@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:53:46 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/12 15:35:07 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/14 11:04:32 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,33 @@ void	stepping(t_env *env, t_ray *ray)
 	}
 }
 
+static bool	is_hit(t_env *env, int x, int y)
+{
+	return (env->map_char[y][x] == '1' || env->map_char[y][x] == '2'
+		|| env->map_char[y][x] == 'N' || env->map_char[y][x] == 'S'
+		|| env->map_char[y][x] == 'E' || env->map_char[y][x] == 'W');
+}
+
+
 void	wall_hit(t_env *env, t_ray *ray, int hit)
 {
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)env->current_pos.x;
-	map_y = (int)env->current_pos.y;
+	env->map_x = (int)env->current_pos.x;
+	env->map_y = (int)env->current_pos.y;
 	while (hit == 0)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
 			ray->side_dist.x += ray->delta_dist.x;
-			map_x += ray->step_x;
+			env->map_x += ray->step_x;
 			env->side = 0;
 		}
 		else
 		{
 			ray->side_dist.y += ray->delta_dist.y;
-			map_y += ray->step_y;
+			env->map_y += ray->step_y;
 			env->side = 1;
 		}
-		if (env->map_char[map_y][map_x] == '1')
+		if (is_hit(&(*env), env->map_x, env->map_y))
 			hit = 1;
 	}
 	ray->perp_wall_dist = ray->side_dist.y - ray->delta_dist.y;

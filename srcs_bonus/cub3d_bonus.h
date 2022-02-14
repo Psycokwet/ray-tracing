@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:40:13 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 11:55:02 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@
 # define SAVE_ARG				"--save"
 # define USAGE					"Usage : MAP.cub"
 # define WALL					"1"
-# define INSIDE_MAX_TYPE		6
-# define INSIDE					"02NWES"
-# define AUTHORIZED_ON_MAP		"120 "
+# define INSIDE_MAX_TYPE		7
+# define INSIDE					"023NWES"
+# define AUTHORIZED_ON_MAP		"1230 "
 # define AUTHORIZED_ON_MAP_DIR	"NWES"
 # define DIR_NORTH				'N'
 # define DIR_WEST				'W'
@@ -116,16 +116,21 @@
 
 # define ACTUALLY_RUN					7
 
+# define XK_LOW_E						0x0065
+# define E_KEY							8
+
 # define MAX_SRCS		5
 # define MAX_COLORS		2
-# define MAX_ACTIONS	8
+# define MAX_ACTIONS	9
 # define MAX_IMGS		7
 # define MAX_TEX		4
 # define MAX_PARSING	3
 # define DESTROY_NOTIFY_FIX 33
 
-# define PATHFLOOR "./textures/floor.xpm"
-# define PATHCEIL "./textures/ceil.xpm"
+# define PATHFLOOR "/home/batche/Documents/cub3D/textures/floor.xpm"
+# define PATHCEIL "/home/batche/Documents/cub3D/textures/ceil.xpm"
+# define PATHDOOROPEN "/home/batche/Documents/cub3D/textures/door_open.xpm"
+# define PATHDOORCLOSE "/home/batche/Documents/cub3D/textures/door_close.xpm"
 
 typedef struct s_data
 {
@@ -250,6 +255,7 @@ typedef struct s_env
 	t_data			imgs[MAX_IMGS];
 	t_data			textures[MAX_TEX];
 	t_data			floor_ceil[3];
+	t_data			door[2];
 	double			fov_angle;
 	t_coordinates	direction;
 	t_coordinates	plane;
@@ -260,6 +266,8 @@ typedef struct s_env
 	int				draw_end;
 	double			row_dist;
 	double			pos_z;
+	int				map_x;
+	int				map_y;
 	double			floor_step_x;
 	double			floor_step_y;
 	double			floor_x;
@@ -384,4 +392,13 @@ void	stepping_floor(t_ray *ray_1, t_ray *ray_2, t_env *env);
 void	floor_ceil_cast(t_env *env, int y);
 void	draw_ceiling_floor(t_env *env);
 void	make_map(t_env *env);
+int		check_door_bonus(t_env *env);
+int		open_door(void *v_env);
+int		could_open_x(t_env *env, int x, int y);
+int		could_open_y(t_env *env, int x, int y);
+void	could_close_x_1(t_env *env, int x, int y);
+void	could_close_x_2(t_env *env, int x, int y);
+void	could_close_y_1(t_env *env, int x, int y);
+void	could_close_y_2(t_env *env, int x, int y);
+
 #endif

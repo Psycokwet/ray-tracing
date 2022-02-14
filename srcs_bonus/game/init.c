@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:54:24 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/12 15:13:58 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:34:33 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	init_actions(t_env *env)
 	env->actions[GO_RIGTH_D_ID] = (t_action){0, XK_LOW_D, &run_right};
 	env->actions[GO_BACK_S_ID] = (t_action){0, XK_LOW_S, &run_down};
 	env->actions[GO_FRONT_W_ID] = (t_action){0, XK_LOW_W, &run_up};
+	env->actions[E_KEY] = (t_action){0, XK_LOW_E, &open_door};
 }
 
 void	init_imgs(t_env *env)

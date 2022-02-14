@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/11 16:12:35 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 11:15:46 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,28 @@ int	get_text_x(t_texture *tex, t_env *env, t_ray *ray)
 
 void	get_texture(t_env *env, t_texture *text, t_ray *ray)
 {
-	if (env->side == 1)
+	if (env->map_char[env->map_y][env->map_x] == '2')
+		text->texture = &env->door[1];
+	else if (env->side == 1)
 	{
-		if (ray->dir.y > 0)
+		if (ray->dir.y > 0 && env->map_char[env->map_y][env->map_x] == 'N')
+			text->texture =  &env->door[1];
+		else if (ray->dir.y > 0)
 			text->texture = &env->textures[CODE_NO];
-		if (ray->dir.y < 0)
+		if (ray->dir.y < 0 && env->map_char[env->map_y][env->map_x] == 'S')
+			text->texture =  &env->door[1];
+		else if (ray->dir.y < 0)
 			text->texture = &env->textures[CODE_SO];
 	}
 	else if (env->side == 0)
 	{
-		if (ray->dir.x > 0)
+		if (ray->dir.x > 0 && env->map_char[env->map_y][env->map_x] == 'E')
+			text->texture = &env->door[1];
+		else if (ray->dir.x > 0)
 			text->texture = &env->textures[CODE_EA];
-		if (ray->dir.x < 0)
+		if (ray->dir.x < 0 && env->map_char[env->map_y][env->map_x] == 'W')
+			text->texture = &env->door[1];
+		else if (ray->dir.x < 0)
 			text->texture = &env->textures[CODE_WE];
 	}
 }

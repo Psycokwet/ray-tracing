@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_cub_3d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:11:38 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:15:53 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ void	start_cub_3d(t_env *env)
 		free_env(env);
 		exit(-EXIT_FAILURE);
 	}
+	int i = 0;
+	while (env->map_char[i])
+		printf("%s\n", env->map_char[i++]);
 	env->current_pos = env->player_start.pos;
 	env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "Cub3D");
 	print_img(env);
