@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 09:54:24 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/12 16:34:33 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 15:06:44 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_actions(t_env *env)
 	env->actions[GO_BACK_S_ID] = (t_action){0, XK_LOW_S, &run_down};
 	env->actions[GO_FRONT_W_ID] = (t_action){0, XK_LOW_W, &run_up};
 	env->actions[E_KEY] = (t_action){0, XK_LOW_E, &open_door};
+	env->actions[9] = (t_action){0, 24, &fire};
 }
 
 void	init_imgs(t_env *env)

@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 11:15:46 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 13:49:38 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	print_img(t_env *env)
 	draw_ceiling_floor(env);
 	draw_walls(&env->imgs[i], &(*env));
 	make_map(&(*env));
+	draw_gun(&(*env), env->img_gun);
 	mlx_put_image_to_window(env->mlx, env->win, env->imgs[i].img, 0, 0);
 	return (1);
 }

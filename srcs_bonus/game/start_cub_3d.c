@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 16:15:53 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 14:43:30 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	hooking(t_env *env)
 	mlx_hook(env->win, DESTROY_NOTIFY_FIX, \
 		StructureNotifyMask, close_window, env);
 	mlx_hook(env->win, MotionNotify, PointerMotionMask, mouse_rot, env);
+	mlx_hook(env->win, ButtonRelease, ButtonReleaseMask, fire_realase, env);
+	mlx_hook(env->win, ButtonPress, ButtonPressMask, fire_push, env);
 	mlx_hook(env->win, LeaveNotify, LeaveWindowMask, mouse_leave, env);
 }
 
@@ -67,13 +69,12 @@ void	start_cub_3d(t_env *env)
 		free_env(env);
 		exit(-EXIT_FAILURE);
 	}
-	int i = 0;
-	while (env->map_char[i])
-		printf("%s\n", env->map_char[i++]);
+	env->img_gun = 0;
 	env->current_pos = env->player_start.pos;
 	env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "Cub3D");
 	print_img(env);
 	hooking(&(*env));
+	mlx_loop_hook(env->mlx, fire_push, env);
 	mlx_loop_hook(env->mlx, game_loop, env);
 	mlx_loop(env->mlx);
 	free_env(env);

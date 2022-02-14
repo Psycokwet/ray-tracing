@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/14 11:55:02 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 14:59:21 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,17 +121,26 @@
 
 # define MAX_SRCS		5
 # define MAX_COLORS		2
-# define MAX_ACTIONS	9
+# define MAX_ACTIONS	10
 # define MAX_IMGS		7
 # define MAX_TEX		4
 # define MAX_PARSING	3
 # define DESTROY_NOTIFY_FIX 33
 
-# define PATHFLOOR "/home/batche/Documents/cub3D/textures/floor.xpm"
-# define PATHCEIL "/home/batche/Documents/cub3D/textures/ceil.xpm"
-# define PATHDOOROPEN "/home/batche/Documents/cub3D/textures/door_open.xpm"
-# define PATHDOORCLOSE "/home/batche/Documents/cub3D/textures/door_close.xpm"
+// # define PATHFLOOR "/home/batche/Documents/cub3D/textures/floor.xpm"
+// # define PATHCEIL "/home/batche/Documents/cub3D/textures/ceil.xpm"
+// # define PATHDOOROPEN "/home/batche/Documents/cub3D/textures/door_open.xpm"
+// # define PATHDOORCLOSE "/home/batche/Documents/cub3D/textures/door_close.xpm"
 
+# define PATHFLOOR "./textures/floor.xpm"
+# define PATHCEIL "./textures/ceil.xpm"
+# define PATHDOOROPEN "./textures/door_open.xpm"
+# define PATHDOORCLOSE "./textures/door_close.xpm"
+# define GUN0 "./textures/GUN_0.xpm"
+# define GUN1 "./textures/GUN_1.xpm"
+# define GUN2 "./textures/GUN_2.xpm"
+# define GUN3 "./textures/GUN_3.xpm"
+# define GUN4 "./textures/GUN_4.xpm"
 typedef struct s_data
 {
 	void	*img;
@@ -255,6 +264,7 @@ typedef struct s_env
 	t_data			imgs[MAX_IMGS];
 	t_data			textures[MAX_TEX];
 	t_data			floor_ceil[3];
+	t_data			gun[5];
 	t_data			door[2];
 	double			fov_angle;
 	t_coordinates	direction;
@@ -273,6 +283,8 @@ typedef struct s_env
 	double			floor_x;
 	double			floor_y;
 	int				y_minmap;
+	int				img_gun;
+	int				mouse_click;
 }					t_env;
 
 typedef struct s_parsing
@@ -400,5 +412,8 @@ void	could_close_x_1(t_env *env, int x, int y);
 void	could_close_x_2(t_env *env, int x, int y);
 void	could_close_y_1(t_env *env, int x, int y);
 void	could_close_y_2(t_env *env, int x, int y);
-
+void	draw_gun(t_env *env, int img_gun);
+int		fire_push(int button, int x, int y, void *v_env);
+int		fire_realase(int button, int x, int y, void *v_env);
+int		fire(void *v_env);
 #endif
