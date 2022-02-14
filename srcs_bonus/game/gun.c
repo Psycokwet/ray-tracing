@@ -6,11 +6,50 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 13:20:44 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 14:17:58 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 15:19:03 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
+
+int	fire_realase(int button, int x, int y, void *v_env)
+{
+	t_env	*env;
+
+	env = (t_env *)v_env;
+	(void)x;
+	(void)y;
+	if (button == 1)
+	{
+		env->img_gun = 0;
+		key_release(24, &(*env));
+	}
+	return (1);
+}
+
+int	fire(void *v_env)
+{
+	t_env		*env;
+	static int	i = 0;
+
+	env = (t_env *)v_env;
+	env->img_gun = i++;
+	if (i == 5)
+		i = 0;
+	return (1);
+}
+
+int	fire_push(int button, int x, int y, void *v_env)
+{
+	t_env	*env;
+
+	env = (t_env *)v_env;
+	(void)x;
+	(void)y;
+	if (button == 1)
+		key_press(24, &(*env));
+	return (1);
+}
 
 static void	my_mlx_pixel_gun_put(t_data *data, int x, int y, int color)
 {

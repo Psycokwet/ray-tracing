@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/14 14:59:21 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 15:19:15 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -416,4 +416,5 @@ void	draw_gun(t_env *env, int img_gun);
 int		fire_push(int button, int x, int y, void *v_env);
 int		fire_realase(int button, int x, int y, void *v_env);
 int		fire(void *v_env);
+
 #endif
