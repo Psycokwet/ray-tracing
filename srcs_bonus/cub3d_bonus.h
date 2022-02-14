@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/14 15:19:15 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 15:45:41 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,6 @@
 # define MAX_PARSING	3
 # define DESTROY_NOTIFY_FIX 33
 
-// # define PATHFLOOR "/home/batche/Documents/cub3D/textures/floor.xpm"
-// # define PATHCEIL "/home/batche/Documents/cub3D/textures/ceil.xpm"
-// # define PATHDOOROPEN "/home/batche/Documents/cub3D/textures/door_open.xpm"
-// # define PATHDOORCLOSE "/home/batche/Documents/cub3D/textures/door_close.xpm"
-
 # define PATHFLOOR "./textures/floor.xpm"
 # define PATHCEIL "./textures/ceil.xpm"
 # define PATHDOOROPEN "./textures/door_open.xpm"
@@ -141,6 +136,7 @@
 # define GUN2 "./textures/GUN_2.xpm"
 # define GUN3 "./textures/GUN_3.xpm"
 # define GUN4 "./textures/GUN_4.xpm"
+
 typedef struct s_data
 {
 	void	*img;
