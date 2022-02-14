@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:47:50 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 17:07:35 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 18:19:02 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	mouse_rotate_left(void *v_env, double factor)
 	t_env	*env;
 	double	rad;
 
-	rad = (4 + factor) * M_PI / 180;
+	rad = (2 + factor) * M_PI / 180;
 	env = (t_env *)v_env;
 	rotation(&(*env), -rad);
 	return (EXIT_SUCCESS);
@@ -28,7 +28,7 @@ static int	mouse_rotate_right(void *v_env, double factor)
 	t_env	*env;
 	double	rad;
 
-	rad = (4 + factor) * M_PI / 180;
+	rad = (2 + factor) * M_PI / 180;
 	env = (t_env *)v_env;
 	rotation(&(*env), rad);
 	return (EXIT_SUCCESS);
@@ -61,7 +61,7 @@ int	mouse_leave(void *v_env)
 	t_env	*env;
 
 	env = (t_env *)v_env;
-	mlx_mouse_move(env->mlx, env->win, WIDTH / 2, HEIGHT / 2);
 	env->mouse_po.x = WIDTH / 2;
+	mlx_mouse_move(env->mlx, env->win, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }
