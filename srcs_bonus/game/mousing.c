@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:47:50 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 16:46:40 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 17:07:35 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	mouse_rot(int x, int y, void *v_env)
 	(void)y;
 	if (x + 2 < (int)env->mouse_po.x)
 	{
-		mouse_rotate_left(env, (env->mouse_po.x - x) / 10);
+		mouse_rotate_left(env, (env->mouse_po.x - x) / 5);
 		env->mouse_po.x = (double)x + 2;
 		game_loop(&(*env));
 	}
 	else if (x - 2 > (int)env->mouse_po.x)
 	{
-		mouse_rotate_right(env, (x - env->mouse_po.x) / 10);
+		mouse_rotate_right(env, (x - env->mouse_po.x) / 5);
 		env->mouse_po.x = (double)x - 2;
 		game_loop(&(*env));
 	}
@@ -61,15 +61,7 @@ int	mouse_leave(void *v_env)
 	t_env	*env;
 
 	env = (t_env *)v_env;
-	if (env->mouse_po.x < WIDTH / 2)
-	{
-		mlx_mouse_move(env->mlx, env->win, WIDTH, HEIGHT / 2);
-		mouse_rotate_left(env, 0);
-	}
-	if (env->mouse_po.x > WIDTH / 2)
-	{
-		mlx_mouse_move(env->mlx, env->win, 0, HEIGHT / 2);
-		mouse_rotate_right(env, 0);
-	}
+	mlx_mouse_move(env->mlx, env->win, WIDTH / 2, HEIGHT / 2);
+	env->mouse_po.x = WIDTH / 2;
 	return (0);
 }
