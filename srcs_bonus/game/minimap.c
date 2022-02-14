@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 12:31:32 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/12 15:07:20 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 17:30:29 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ void	make_map(t_env *env)
 					draw_asset(env, &env->textures[0], x * 8, y * 8);
 				else if (str[y][x] == '0')
 					draw_asset(env, &env->floor_ceil[0], x * 8, y * 8);
-				else if (str[y][x] == '1')
+				else if (is_map_wall(str[y][x]))
 					draw_asset(env, &env->floor_ceil[1], x * 8, y * 8);
-				else if (str[y][x] == ' ')
-					draw_asset(env, &env->textures[1], x * 8, y * 8);
+				else if (str[y][x] == '2')
+					draw_asset(env, &env->door[1], x * 8, y * 8);
 			}
 		}
 	}

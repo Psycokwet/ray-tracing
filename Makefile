@@ -75,6 +75,7 @@ BONUS_FILES					=	init_bonus_text.c \
 								open_door.c \
 								open_door_2.c \
 								gun.c \
+								minimap_2.c \
 								minimap.c
 
 SRC_FILES += $(addprefix $(COLORS_PATH), $(COLORS_FILES))

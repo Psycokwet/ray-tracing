@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/14 15:52:56 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 17:26:54 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,6 +400,7 @@ void	stepping_floor(t_ray *ray_1, t_ray *ray_2, t_env *env);
 void	floor_ceil_cast(t_env *env, int y);
 void	draw_ceiling_floor(t_env *env);
 void	make_map(t_env *env);
+bool	is_map_wall(char c);
 int		check_door_bonus(t_env *env);
 int		open_door(void *v_env);
 int		could_open_x(t_env *env, int x, int y);
