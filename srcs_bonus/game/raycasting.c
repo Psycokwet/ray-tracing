@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:53:46 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 11:04:32 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 16:47:15 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static bool	is_hit(t_env *env, int x, int y)
 		|| env->map_char[y][x] == 'N' || env->map_char[y][x] == 'S'
 		|| env->map_char[y][x] == 'E' || env->map_char[y][x] == 'W');
 }
-
 
 void	wall_hit(t_env *env, t_ray *ray, int hit)
 {

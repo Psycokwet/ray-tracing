@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:47:50 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 16:40:27 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 16:46:40 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	mouse_leave(void *v_env)
 	env = (t_env *)v_env;
 	if (env->mouse_po.x < WIDTH / 2)
 	{
-		mlx_mouse_move(env->mlx, env->win, WIDTH , HEIGHT / 2);
+		mlx_mouse_move(env->mlx, env->win, WIDTH, HEIGHT / 2);
 		mouse_rotate_left(env, 0);
 	}
 	if (env->mouse_po.x > WIDTH / 2)

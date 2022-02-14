@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 13:49:38 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/14 16:46:57 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	get_texture(t_env *env, t_texture *text, t_ray *ray)
 	else if (env->side == 1)
 	{
 		if (ray->dir.y > 0 && env->map_char[env->map_y][env->map_x] == 'N')
-			text->texture =  &env->door[1];
+			text->texture = &env->door[1];
 		else if (ray->dir.y > 0)
 			text->texture = &env->textures[CODE_NO];
 		if (ray->dir.y < 0 && env->map_char[env->map_y][env->map_x] == 'S')
-			text->texture =  &env->door[1];
+			text->texture = &env->door[1];
 		else if (ray->dir.y < 0)
 			text->texture = &env->textures[CODE_SO];
 	}
