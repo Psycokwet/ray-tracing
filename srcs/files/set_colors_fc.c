@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/09 17:21:28 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:18:17 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	set_colors_fc(t_env *env, char *args[3])
 			&& ft_strlen(code) == env->g_colors[i].size)
 		{
 			color = get_colors_from_line(args[1]);
-			if (env->g_colors[i].is_set == 1 || color < 0)
+			if (env->g_colors[i].is_set == true || color < 0)
 				return (-EXIT_FAILURE);
 			env->g_colors[i].color = color;
-			env->g_colors[i].is_set = 1;
+			env->g_colors[i].is_set = true;
 			ret = EXIT_CODE_FOUND;
 			break ;
 		}

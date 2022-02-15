@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/12 15:36:05 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:33:35 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@
 # define CODE_NO				1
 # define CODE_EA				2
 # define CODE_SO				3
-# define CODE_S					4
 
 # define CODE_FLOOR				1
 # define CODE_CEILING			0
@@ -116,7 +115,7 @@
 
 # define ACTUALLY_RUN					7
 
-# define MAX_SRCS		5
+# define MAX_SRCS		4
 # define MAX_COLORS		2
 # define MAX_ACTIONS	8
 # define MAX_IMGS		7
