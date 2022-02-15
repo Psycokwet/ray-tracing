@@ -46,7 +46,9 @@ COLORS_FILES				=	get_opposite.c 	\
 								create_trgb.c
 IMG_FILES					=	my_mlx_pixel_put.c
 FILES_FILES					=	args_parse.c	\
+								check_holes.c \
 								check_save_arg.c \
+								checks.c \
 								free_array.c\
 								free_env.c\
 								get_colors_from_line.c\

@@ -6,7 +6,7 @@
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/14 15:33:35 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:30:37 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,6 +297,9 @@ typedef struct s_map_rec_datas
 	int					ret_gnl;
 }						t_map_rec_datas;
 
+int		check_map_for_holes(t_env *env);
+int		check_color(t_env *env);
+int		check_texs(t_env *env);
 void	args_parse(t_env *env, int argc, char const *argv[]);
 void	check_save_arg(t_env *env, char const *argv[]);
 void	free_array(char **splitted);

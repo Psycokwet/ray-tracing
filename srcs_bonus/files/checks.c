@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_colors_fc.c                                    :+:      :+:    :+:   */
+/*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/15 15:35:13 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:38:20 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
 
-int	set_colors_fc(t_env *env, char *args[3])
+int	check_color(t_env *env)
 {
-	int		i;
-	int		color;
-	int		ret;
-	char	*code;
+	int	i;
 
-	code = args[0];
-	ret = EXIT_CODE_NOT_FOUND;
-	i = MAX_COLORS;
-	if (!args[0] || !args[1])
-		return (EXIT_CODE_NOT_FOUND);
-	while (--i >= 0)
+	i = 0;
+	while (i < MAX_COLORS)
 	{
-		if (ft_strncmp(code, env->g_colors[i].code, env->g_colors[i].size) == 0 \
-			&& ft_strlen(code) == env->g_colors[i].size)
-		{
-			color = get_colors_from_line(args[1]);
-			if (env->g_colors[i].is_set == true || color < 0)
-				return (-EXIT_FAILURE);
-			env->g_colors[i].color = color;
-			env->g_colors[i].is_set = true;
-			ret = EXIT_CODE_FOUND;
-			break ;
-		}
+		if (env->g_colors[i].is_set == false)
+			return (-EXIT_FAILURE);
+		i++;
 	}
-	return (ret);
+	return (EXIT_SUCCESS);
+}
+
+int	check_texs(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (i < MAX_SRCS)
+	{
+		if (env->g_srcs[i].src == NULL)
+			return (-EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
 }

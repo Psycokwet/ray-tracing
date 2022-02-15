@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/14 17:26:54 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/15 19:49:28 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@
 # define CODE_NO				1
 # define CODE_EA				2
 # define CODE_SO				3
-# define CODE_S					4
 
 # define CODE_FLOOR				1
 # define CODE_CEILING			0
@@ -119,7 +118,7 @@
 # define XK_LOW_E						0x0065
 # define E_KEY							8
 
-# define MAX_SRCS		5
+# define MAX_SRCS		4
 # define MAX_COLORS		2
 # define MAX_ACTIONS	10
 # define MAX_IMGS		7
@@ -327,6 +326,9 @@ typedef struct s_map_rec_datas
 	int					ret_gnl;
 }						t_map_rec_datas;
 
+int		check_map_for_holes(t_env *env);
+int		check_color(t_env *env);
+int		check_texs(t_env *env);
 void	args_parse(t_env *env, int argc, char const *argv[]);
 void	check_save_arg(t_env *env, char const *argv[]);
 void	free_array(char **splitted);
