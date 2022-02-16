@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 13:27:14 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/16 12:11:32 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	fill_rgb(int *result, char **splitted)
 			return (-EXIT_FAILURE);
 		rgb[i] = parse_value(trimmed);
 		free(trimmed);
-		if (rgb[i] < 0)
+		if (rgb[i] < 0 || rgb[i] > 255)
 			return (-EXIT_FAILURE);
 		i++;
 	}
