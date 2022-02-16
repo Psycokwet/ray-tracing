@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/10 13:26:41 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/16 11:30:40 by scarboni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,30 @@ static const t_parsing	g_parsings[MAX_PARSING] = {
 
 #define EXIT_PROCEED 6
 
+int	free_and_return(char *s, int code)
+{
+	if (s)
+		free(s);
+	return (code);
+}
+
 int	cut_line(char *line, char *args[3])
 {
 	char	*cut;
 
+	line = ft_strtrim(line, BLANK_CHARS);
+	if (!line)
+		return (-EXIT_FAILURE);
 	cut = ft_strchr(line, ' ');
 	if (!cut)
-		return (EXIT_CODE_NOT_FOUND);
+		return (free_and_return(line, EXIT_CODE_NOT_FOUND));
 	args[1] = ft_strtrim(cut, BLANK_CHARS);
 	if (!args[1])
-		return (-EXIT_FAILURE);
+		return (free_and_return(line, -EXIT_FAILURE));
 	args[0] = ft_substr(line, 0, (int)(cut - line));
+	free(line);
 	if (!args[0])
-	{
-		free(args[1]);
-		return (-EXIT_FAILURE);
-	}
+		return (free_and_return(args[1], -EXIT_FAILURE));
 	args[2] = NULL;
 	return (EXIT_PROCEED);
 }
