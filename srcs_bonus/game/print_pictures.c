@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 10:00:07 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 16:46:57 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/16 10:39:16 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,16 @@ void	texturing(t_data *datas, int x, t_env *env, t_ray *ray)
 
 int	print_img(t_env *env)
 {
-	int	i;
-
-	i = 0;
-	if (env->imgs[i].img != NULL)
-		mlx_destroy_image(env->mlx, env->imgs[i].img);
-	env->imgs[i].img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
-	env->imgs[i].addr = mlx_get_data_addr(env->imgs[i].img, \
-	&env->imgs[i].bits_per_pixel, &env->imgs[i].line_length, \
-	&env->imgs[i].endian);
-	draw_ceiling_floor(env);
-	draw_walls(&env->imgs[i], &(*env));
+	if (env->imgs[0].img != NULL)
+		mlx_destroy_image(env->mlx, env->imgs[0].img);
+	env->imgs[0].img = mlx_new_image(env->mlx, WIDTH, HEIGHT);
+	env->imgs[0].addr = mlx_get_data_addr(env->imgs[0].img, \
+	&env->imgs[0].bits_per_pixel, &env->imgs[0].line_length, \
+	&env->imgs[0].endian);
+	draw_ceiling_floor(&env->imgs[0], env);
+	draw_walls(&env->imgs[0], &(*env));
 	make_map(&(*env));
 	draw_gun(&(*env), env->img_gun);
-	mlx_put_image_to_window(env->mlx, env->win, env->imgs[i].img, 0, 0);
+	mlx_put_image_to_window(env->mlx, env->win, env->imgs[0].img, 0, 0);
 	return (1);
 }

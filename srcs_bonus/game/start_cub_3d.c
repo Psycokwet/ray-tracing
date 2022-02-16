@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_cub_3d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/14 16:32:06 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/16 10:35:03 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	hooking(t_env *env)
 		StructureNotifyMask, close_window, env);
 	mlx_hook(env->win, ButtonRelease, ButtonReleaseMask, fire_realase, env);
 	mlx_hook(env->win, ButtonPress, ButtonPressMask, fire_push, env);
-	mlx_hook(env->win, LeaveNotify, LeaveWindowMask, mouse_leave, env);
 }
 
 void	start_cub_3d(t_env *env)

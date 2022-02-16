@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scarboni <scarboni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 18:54:29 by scarboni          #+#    #+#             */
-/*   Updated: 2022/02/15 19:49:28 by scarboni         ###   ########.fr       */
+/*   Updated: 2022/02/16 10:36:00 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,6 @@
 # define MAX_PARSING	3
 # define DESTROY_NOTIFY_FIX 33
 
-# define PATHFLOOR "./textures/floor.xpm"
-# define PATHCEIL "./textures/ceil.xpm"
 # define PATHDOOROPEN "./textures/door_open.xpm"
 # define PATHDOORCLOSE "./textures/door_close.xpm"
 # define GUN0 "./textures/GUN_0.xpm"
@@ -258,7 +256,6 @@ typedef struct s_env
 	t_action		actions[MAX_ACTIONS];
 	t_data			imgs[MAX_IMGS];
 	t_data			textures[MAX_TEX];
-	t_data			floor_ceil[3];
 	t_data			gun[5];
 	t_data			door[2];
 	double			fov_angle;
@@ -396,14 +393,11 @@ int		run_left(void *v_env);
  */
 int		check_srcs_bonus(t_env *env);
 int		mouse_rot(int x, int y, void *v_env);
-int		mouse_leave(void *v_env);
-void	get_cell_floor_text(t_texture *floor, t_texture *ceil, t_env *env);
-void	stepping_floor(t_ray *ray_1, t_ray *ray_2, t_env *env);
-void	floor_ceil_cast(t_env *env, int y);
-void	draw_ceiling_floor(t_env *env);
+void	draw_ceiling_floor(t_data *datas, t_env *env);
+void	draw_rect(t_data *datas, t_coordinates start, \
+	t_coordinates end, int color);
 void	make_map(t_env *env);
 bool	is_map_wall(char c);
-int		check_door_bonus(t_env *env);
 int		open_door(void *v_env);
 int		could_open_x(t_env *env, int x, int y);
 int		could_open_y(t_env *env, int x, int y);

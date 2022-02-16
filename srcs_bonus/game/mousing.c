@@ -6,7 +6,7 @@
 /*   By: chbadad <chbadad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:47:50 by chbadad           #+#    #+#             */
-/*   Updated: 2022/02/14 18:19:02 by chbadad          ###   ########.fr       */
+/*   Updated: 2022/02/16 10:35:11 by chbadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,5 @@ int	mouse_rot(int x, int y, void *v_env)
 		env->mouse_po.x = (double)x - 2;
 		game_loop(&(*env));
 	}
-	env->mouse_po.x = (double)x;
-	return (0);
-}
-
-int	mouse_leave(void *v_env)
-{
-	t_env	*env;
-
-	env = (t_env *)v_env;
-	env->mouse_po.x = WIDTH / 2;
-	mlx_mouse_move(env->mlx, env->win, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }
